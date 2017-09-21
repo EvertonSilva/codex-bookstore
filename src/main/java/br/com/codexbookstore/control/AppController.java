@@ -15,7 +15,7 @@ import java.io.IOException;
  *
  * see http://www.oracle.com/technetwork/java/frontcontroller-135648.html
  */
-@WebServlet("/**")
+@WebServlet("/*")
 public class AppController extends HttpServlet {
 
     public void init(ServletConfig config) throws ServletException {
@@ -33,6 +33,7 @@ public class AppController extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        String path = request.getPathInfo();
+        response.getWriter().print("Hello World: " + path);
     }
 }
