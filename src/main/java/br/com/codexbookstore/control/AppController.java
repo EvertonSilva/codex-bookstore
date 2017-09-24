@@ -1,7 +1,6 @@
 package br.com.codexbookstore.control;
 
 import br.com.codexbookstore.control.operationfactory.AbstractOperationFactory;
-import br.com.codexbookstore.control.operationfactory.IOperation;
 import br.com.codexbookstore.control.operationfactory.OperationBuilder;
 import br.com.codexbookstore.control.operationfactory.OperationRetrieveFactory;
 
@@ -19,10 +18,11 @@ import java.io.IOException;
  *
  * see http://www.oracle.com/technetwork/java/frontcontroller-135648.html
  */
-@WebServlet("/*")
+@WebServlet("/")
 public class AppController extends HttpServlet {
     private OperationBuilder builder;
     private AbstractOperationFactory operationFactory;
+    private String basePath;
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -34,15 +34,16 @@ public class AppController extends HttpServlet {
 
     public AppController() {
         this.builder = new OperationBuilder();
+        this.basePath = "/codex-bookstore";
     }
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (request.getPathInfo().equals("/list")) {
-            operationFactory = new OperationRetrieveFactory();
-        }
 
-        builder.buildOperation(operationFactory);
+//        request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
+        if(request.getRequestURI().equals(basePath)) {
+            request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
+        }
     }
 }
