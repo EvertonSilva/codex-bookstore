@@ -5,18 +5,4 @@ package br.com.codexbookstore.control.operationfactory;
  */
 public class InsertOperation implements IOperation {
 
-    @Override
-    public void operationCmd() {
-
-    }
-
-    @Override
-    public void operationVh() {
-
-    }
-
-    @Override
-    public void operationRules() {
-
-    }
 }
