@@ -1,7 +1,5 @@
 package br.com.codexbookstore.control;
 
-import br.com.codexbookstore.control.operationfactory.*;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,8 +16,6 @@ import java.io.IOException;
  */
 @WebServlet("/")
 public class AppController extends HttpServlet {
-    private OperationBuilder builder;
-    private AbstractOperationFactory operationFactory;
     private String basePath;
 
     public void init(ServletConfig config) throws ServletException {
@@ -31,8 +27,7 @@ public class AppController extends HttpServlet {
     }
 
     public AppController() {
-        this.builder = new OperationBuilder();
-        this.basePath = "/codex-bookstore";
+
     }
 
     @Override
@@ -42,8 +37,7 @@ public class AppController extends HttpServlet {
         if(request.getRequestURI().equals(basePath)) {
             request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
         } else if(request.getRequestURI().contains("new")) {
-            operationFactory = new InsertOperationFactory();
-            builder.buildOperation(operationFactory);
+            //request.getRequestDispatcher("/WEB-INF/views/books/new.jsp").forward(request, response);
         }
     }
 }
