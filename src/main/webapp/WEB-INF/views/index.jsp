@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
         <!-- Milligram CSS minified -->
         <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+        <base href="codex-bookstore/">
     </head>
     <body>
         <div class="main-wrapper">
@@ -20,6 +21,7 @@
                 </nav>
             </div>
             <div class="main-content container">
+                <h1>Codex bookstore</h1>
                 <div class="row">
                     <div class="column">
                         <h3>Actions</h3>
@@ -29,8 +31,8 @@
                         </ul>
                     </div>
                     <div class="column column-80">
-                        <h1>Dashboard</h1>
-                        <p>comming soon...</p>
+                        <h2>Dashboard</h2>
+                        <p>coming soon...</p>
                     </div>
                 </div>
             </div>
