@@ -3,7 +3,7 @@ package br.com.codexbookstore.domain;
 /**
  * Created by everton on 24/09/17.
  */
-public class PriceGroup {
+public class PriceGroup extends Entity {
     private double markup;
 
     public double getMarkup() {

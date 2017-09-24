@@ -3,7 +3,7 @@ package br.com.codexbookstore.domain;
 /**
  * Created by everton on 24/09/17.
  */
-public class Dimensions {
+public class Dimensions extends Entity {
     private double depth;
     private double height;
     private double weight;
