@@ -1,8 +1,6 @@
 package br.com.codexbookstore.control;
 
-import br.com.codexbookstore.control.operationfactory.AbstractOperationFactory;
-import br.com.codexbookstore.control.operationfactory.OperationBuilder;
-import br.com.codexbookstore.control.operationfactory.OperationRetrieveFactory;
+import br.com.codexbookstore.control.operationfactory.*;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -43,6 +41,9 @@ public class AppController extends HttpServlet {
 
         if(request.getRequestURI().equals(basePath)) {
             request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
+        } else if(request.getRequestURI().contains("new")) {
+            operationFactory = new InsertOperationFactory();
+            builder.buildOperation(operationFactory);
         }
     }
 }
