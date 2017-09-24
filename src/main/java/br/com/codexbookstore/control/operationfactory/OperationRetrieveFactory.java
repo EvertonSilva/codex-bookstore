@@ -6,6 +6,7 @@ package br.com.codexbookstore.control.operationfactory;
 public class OperationRetrieveFactory implements AbstractOperationFactory {
     @Override
     public IOperation createOperation() {
-        return new RetrieveOperation();
+        IOperation operation = new RetrieveOperation();
+        return operation;
     }
 }
