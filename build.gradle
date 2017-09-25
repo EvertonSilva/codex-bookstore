@@ -1,7 +1,14 @@
+buildscript {
+    dependencies {
+        classpath 'com.h2database:h2:1.4.191'
+    }
+}
+
 plugins {
 	id 'java'
 	id 'war'
 	id 'org.akhikhl.gretty' version '1.4.2'
+    id "org.flywaydb.flyway" version "4.2.0"
 }
 
 repositories {
@@ -16,6 +23,11 @@ dependencies {
 
 gretty {
     managedClassReload = true
+}
+
+flyway {
+    url = 'jdbc:h2:file:./src/main/resources/data/codex'
+    user = 'sa'
 }
 
 
