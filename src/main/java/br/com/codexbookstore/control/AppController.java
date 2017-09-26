@@ -1,6 +1,9 @@
 package br.com.codexbookstore.control;
 
+import br.com.codexbookstore.control.abstractFactory.AbstractOperationFactory;
+import br.com.codexbookstore.control.abstractFactory.FormInsertOperationFactory;
 import br.com.codexbookstore.control.operations.AbstractOperation;
+import br.com.codexbookstore.control.operations.IOperation;
 import br.com.codexbookstore.control.viewHelpers.IViewHelper;
 
 import javax.servlet.ServletConfig;
@@ -21,7 +24,8 @@ import java.io.IOException;
 public class AppController extends HttpServlet {
     private String basePath;
     private String viewsFolderPath;
-    private AbstractOperation cmd;
+    private AbstractOperationFactory operationFactory;
+    private IOperation op;
     private IViewHelper vh;
 
     public void init(ServletConfig config) throws ServletException {
@@ -33,6 +37,7 @@ public class AppController extends HttpServlet {
     }
 
     public AppController() {
+        operationFactory = null;
         basePath = "/codex-bookstore";
         viewsFolderPath = "/WEB-INF/views/";
     }
@@ -42,27 +47,16 @@ public class AppController extends HttpServlet {
             throws ServletException, IOException {
         String uri = request.getRequestURI();
 
-        if(uri.equals(basePath)) {
+        if(uri.equals(basePath) || uri.equals(basePath.concat("/"))) {
             request.getRequestDispatcher(viewsFolderPath.concat("index.jsp")).forward(request, response);
         } else if(uri.contains("new")) {
-            /*String[] reqPath = uri.split("/");
-            StringBuilder view = new StringBuilder(viewsFolderPath);
-            view.append(reqPath[2]);
-            view.append("/new.jsp");
-
-            request.getRequestDispatcher(view.toString()).forward(request, response);*/
+            operationFactory = new FormInsertOperationFactory();
+            op = operationFactory.defineOperation();
+            vh = operationFactory.defineViewHelper();
         }
+
+        Result result = op.execute(vh.getEntity(request));
+        vh.setView(result, request, response);
     }
 
-//    @Override
-//    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-//            throws ServletException, IOException {
-//
-//    }
-//
-//    @Override
-//    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-//            throws ServletException, IOException {
-//
-//    }
 }

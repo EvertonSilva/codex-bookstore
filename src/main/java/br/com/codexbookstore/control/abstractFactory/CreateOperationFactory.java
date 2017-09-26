@@ -1,4 +1,4 @@
-package br.com.codexbookstore.control.AbstractFactory;
+package br.com.codexbookstore.control.abstractFactory;
 
 import br.com.codexbookstore.control.operations.AbstractOperation;
 import br.com.codexbookstore.control.operations.CreateOperation;
