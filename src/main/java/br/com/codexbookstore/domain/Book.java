@@ -26,7 +26,6 @@ public class Book extends Entity {
         authors = new ArrayList<>();
         categories = new ArrayList<>();
     }
-
     public String getTitle() {
         return title;
     }
