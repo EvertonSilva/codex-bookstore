@@ -11,4 +11,5 @@ public interface ICrudService {
     Result retrieve(Entity entity);
     Result update(Entity entity);
     Result delete(Entity entity);
+    Result insertForm(Entity entity);
 }

@@ -9,6 +9,6 @@ import br.com.codexbookstore.domain.Entity;
 public class FormInsertOperation extends AbstractOperation {
     @Override
     public Result execute(Entity entity) {
-        return null;
+        return crudService.insertForm(entity);
     }
 }
