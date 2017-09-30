@@ -15,9 +15,7 @@
         <div class="main-wrapper">
             <div class="container">
                 <nav class="navigation">
-                    <a href="#" class="navigation-link">Menu item 1</a>
-                    <a href="#" class="navigation-link">Menu item 2</a>
-                    <a href="#" class="navigation-link">Menu item 3</a>
+                    <a href="/" class="navigation-link">Home</a>
                 </nav>
             </div>
             <div class="main-content container">

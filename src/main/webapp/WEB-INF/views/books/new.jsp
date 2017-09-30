@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id="result" class="br.com.codexbookstore.control.Result" scope="request" />
 <html>
 <head>
     <title>Codex Bookstore - Home</title>
@@ -24,9 +25,7 @@
 <div class="main-wrapper">
     <div class="container">
         <nav class="navigation">
-            <a href="#" class="navigation-link">Menu item 1</a>
-            <a href="#" class="navigation-link">Menu item 2</a>
-            <a href="#" class="navigation-link">Menu item 3</a>
+            <a href="/" class="navigation-link">Home</a>
         </nav>
     </div>
     <div class="main-content container">
@@ -56,10 +55,10 @@
                         <div>
                             <label for="book-category">Category</label>
                             <select name="book-category" id="book-category" multiple>
-                                <option value="1">Romance</option>
-                                <option value="2">Mistery & Suspense</option>
-                                <option value="3">Terror</option>
-                                <option value="4">Sci-FI & Fantasy</option>
+                               <c:forEach var="category" items="${categories}">
+                                   <option value="${category.id}">${category.name}</option>
+                               </c:forEach>
+
                             </select>
                         </div>
                         <div>
