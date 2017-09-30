@@ -3,11 +3,10 @@ package br.com.codexbookstore.control.crudService;
 import br.com.codexbookstore.business.IStrategy;
 import br.com.codexbookstore.business.book.views.RetrieveBookCategories;
 import br.com.codexbookstore.control.Result;
-import br.com.codexbookstore.domain.Book;
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.book.Book;
+import br.com.codexbookstore.domain.book.Entity;
 import br.com.codexbookstore.persistence.dao.IDao;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;

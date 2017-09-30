@@ -1,7 +1,7 @@
 package br.com.codexbookstore.business;
 
 import br.com.codexbookstore.control.Result;
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.book.Entity;
 
 /**
  * Created by everton on 27/09/17.

@@ -1,7 +1,7 @@
 package br.com.codexbookstore.control.crudService;
 
 import br.com.codexbookstore.control.Result;
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.book.Entity;
 
 /**
  * Created by everton on 24/09/17.

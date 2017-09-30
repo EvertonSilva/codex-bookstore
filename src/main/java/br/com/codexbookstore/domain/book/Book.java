@@ -1,4 +1,4 @@
-package br.com.codexbookstore.domain;
+package br.com.codexbookstore.domain.book;
 
 import java.util.ArrayList;
 import java.util.List;

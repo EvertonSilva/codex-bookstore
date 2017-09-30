@@ -1,7 +1,7 @@
 package br.com.codexbookstore.persistence.dao.book;
 
-import br.com.codexbookstore.domain.Category;
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.book.Category;
+import br.com.codexbookstore.domain.book.Entity;
 import br.com.codexbookstore.persistence.dao.IDao;
 
 import java.util.ArrayList;
