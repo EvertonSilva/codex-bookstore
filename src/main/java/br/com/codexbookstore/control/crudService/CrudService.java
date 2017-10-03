@@ -2,15 +2,16 @@ package br.com.codexbookstore.control.crudService;
 
 import br.com.codexbookstore.business.IStrategy;
 import br.com.codexbookstore.business.book.views.RetrieveBookCategories;
+import br.com.codexbookstore.business.customer.ListCities;
+import br.com.codexbookstore.business.customer.ListCountries;
+import br.com.codexbookstore.business.customer.ListStates;
 import br.com.codexbookstore.control.Result;
 import br.com.codexbookstore.domain.book.Book;
 import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.customer.Customer;
 import br.com.codexbookstore.persistence.dao.IDao;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by everton on 24/09/17.
@@ -33,19 +34,27 @@ public class CrudService implements ICrudService {
 
         // # Entities
         String bookEntity = Book.class.getSimpleName();
+        String customerEntity = Customer.class.getSimpleName();
 
         // # Validations and Business rules
         // ## Combo box for views
         IStrategy retrieveBookCategories = new RetrieveBookCategories();
-        List<IStrategy> insertFormValidations = Arrays.asList(retrieveBookCategories);
+        List<IStrategy> newBookValidations = Arrays.asList(retrieveBookCategories);
+
+        // ## Customer validations
+        List<IStrategy> newCustomerValidations = Arrays.asList(new ListCountries(), new ListStates(), new ListCities());
 
         // # context validations
         Map<String, List<IStrategy>> bookValidations = new HashMap<>();
-        bookValidations.put(INSERTFORM, insertFormValidations);
+        bookValidations.put(INSERTFORM, newBookValidations);
+
+        Map<String, List<IStrategy>> customerValidations = new HashMap<>();
+        customerValidations.put(INSERTFORM, newCustomerValidations);
 
         // # all requirements
         requirements = new HashMap<>();
         requirements.put(bookEntity, bookValidations);
+        requirements.put(customerEntity, customerValidations);
     }
 
     @Override

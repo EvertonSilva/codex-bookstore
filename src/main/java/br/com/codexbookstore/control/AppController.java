@@ -2,9 +2,9 @@ package br.com.codexbookstore.control;
 
 import br.com.codexbookstore.control.abstractFactory.AbstractOperationFactory;
 import br.com.codexbookstore.control.abstractFactory.FormInsertOperationFactory;
-import br.com.codexbookstore.control.operations.AbstractOperation;
-import br.com.codexbookstore.control.operations.IOperation;
+import br.com.codexbookstore.control.operations.*;
 import br.com.codexbookstore.control.viewHelpers.IViewHelper;
+import br.com.codexbookstore.control.viewHelpers.customer.InsertCustomerFormVh;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * Application entry point, implementation of
@@ -27,6 +28,8 @@ public class AppController extends HttpServlet {
     private AbstractOperationFactory operationFactory;
     private IOperation op;
     private IViewHelper vh;
+    private HashMap<String, IViewHelper> viewHelpers;
+    private HashMap<String, IOperation> commands;
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -40,6 +43,15 @@ public class AppController extends HttpServlet {
         operationFactory = null;
         basePath = "/codex-bookstore";
         viewsFolderPath = "/WEB-INF/views/";
+        viewHelpers = new HashMap<>();
+        commands = new HashMap<>();
+
+        viewHelpers.put(basePath.concat("/customers/new"), new InsertCustomerFormVh());
+        commands.put("NEW", new FormInsertOperation());
+        commands.put("CREATE", new CreateOperation());
+        commands.put("RETRIEVE", new RetrieveOperation());
+        commands.put("UPDATE", new UpdateOperation());
+
     }
 
     @Override
@@ -49,10 +61,13 @@ public class AppController extends HttpServlet {
 
         if(uri.equals(basePath) || uri.equals(basePath.concat("/"))) {
             request.getRequestDispatcher(viewsFolderPath.concat("index.jsp")).forward(request, response);
-        } else if(uri.contains("new")) {
+        } else if(uri.contains("books/new")) {
             operationFactory = new FormInsertOperationFactory();
             op = operationFactory.defineOperation();
             vh = operationFactory.defineViewHelper();
+        } else {
+            vh = viewHelpers.get(uri);
+            op = commands.get(request.getParameter("operation").toUpperCase());
         }
 
         Result result = op.execute(vh.getEntity(request));
