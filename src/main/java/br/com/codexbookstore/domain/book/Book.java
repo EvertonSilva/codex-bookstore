@@ -1,5 +1,7 @@
 package br.com.codexbookstore.domain.book;
 
+import br.com.codexbookstore.domain.Entity;
+
 import java.util.ArrayList;
 import java.util.List;
 

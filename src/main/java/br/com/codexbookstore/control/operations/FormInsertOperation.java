@@ -1,7 +1,7 @@
 package br.com.codexbookstore.control.operations;
 
 import br.com.codexbookstore.control.Result;
-import br.com.codexbookstore.domain.book.Entity;
+import br.com.codexbookstore.domain.Entity;
 
 /**
  * Operation to get data for

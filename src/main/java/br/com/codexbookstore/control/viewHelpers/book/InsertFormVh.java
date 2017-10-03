@@ -3,7 +3,7 @@ package br.com.codexbookstore.control.viewHelpers.book;
 import br.com.codexbookstore.control.Result;
 import br.com.codexbookstore.control.viewHelpers.IViewHelper;
 import br.com.codexbookstore.domain.book.Book;
-import br.com.codexbookstore.domain.book.Entity;
+import br.com.codexbookstore.domain.Entity;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

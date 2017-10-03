@@ -1,4 +1,4 @@
-package br.com.codexbookstore.domain.book;
+package br.com.codexbookstore.domain;
 
 /**
  * Created by everton on 24/09/17.

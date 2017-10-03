@@ -1,5 +1,7 @@
 package br.com.codexbookstore.domain.book;
 
+import br.com.codexbookstore.domain.Entity;
+
 /**
  * Created by everton on 24/09/17.
  */
