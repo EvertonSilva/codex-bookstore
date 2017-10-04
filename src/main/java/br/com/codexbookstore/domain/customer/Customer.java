@@ -50,4 +50,12 @@ public class Customer extends Entity {
     public void setGender(Gender gender) {
         this.gender = gender;
     }
+
+    public Phone getPhone() {
+        return phone;
+    }
+
+    public void setPhone(Phone phone) {
+        this.phone = phone;
+    }
 }
