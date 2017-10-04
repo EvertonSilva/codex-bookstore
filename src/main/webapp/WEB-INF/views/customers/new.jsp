@@ -99,14 +99,17 @@
                             <label for="country">Country:</label>
                             <select name="country" id="country">
                                 <option value="">select...</option>
+                                <option value="1">Brazil</option>
                             </select>
                             <label for="state">State:</label>
                             <select name="state" id="state">
                                 <option value="">select...</option>
+                                <option value="1">São Paulo</option>
                             </select>
                             <label for="city">City:</label>
                             <select name="city" id="city">
                                 <option value="">select...</option>
+                                <option value="1">Suzano</option>
                             </select>
 
                             <label for="note">Note:</label>

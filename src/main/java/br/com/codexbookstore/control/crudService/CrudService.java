@@ -2,9 +2,7 @@ package br.com.codexbookstore.control.crudService;
 
 import br.com.codexbookstore.business.IStrategy;
 import br.com.codexbookstore.business.book.views.RetrieveBookCategories;
-import br.com.codexbookstore.business.customer.ListCities;
-import br.com.codexbookstore.business.customer.ListCountries;
-import br.com.codexbookstore.business.customer.ListStates;
+import br.com.codexbookstore.business.customer.*;
 import br.com.codexbookstore.control.Result;
 import br.com.codexbookstore.domain.book.Book;
 import br.com.codexbookstore.domain.Entity;
@@ -38,18 +36,21 @@ public class CrudService implements ICrudService {
 
         // # Validations and Business rules
         // ## Combo box for views
-        IStrategy retrieveBookCategories = new RetrieveBookCategories();
-        List<IStrategy> newBookValidations = Arrays.asList(retrieveBookCategories);
+        List<IStrategy> booksComboBoxes = Arrays.asList(new RetrieveBookCategories());
+        List<IStrategy> customerComboBoxes = Arrays.asList(new ListCountries(), new ListStates(), new ListCities());
 
-        // ## Customer validations
-        List<IStrategy> newCustomerValidations = Arrays.asList(new ListCountries(), new ListStates(), new ListCities());
+        // ## Book validations and rules
+
+        // ## Customer validations and rules
+        List<IStrategy> createCustomerValidations = Arrays.asList(new CustomerNotBlank(), new CreditCardValidation(), new PasswordValitation());
 
         // # context validations
         Map<String, List<IStrategy>> bookValidations = new HashMap<>();
-        bookValidations.put(INSERTFORM, newBookValidations);
+        bookValidations.put(INSERTFORM, booksComboBoxes);
 
         Map<String, List<IStrategy>> customerValidations = new HashMap<>();
-        customerValidations.put(INSERTFORM, newCustomerValidations);
+        customerValidations.put(INSERTFORM, customerComboBoxes);
+        customerValidations.put(CREATE, createCustomerValidations);
 
         // # all requirements
         requirements = new HashMap<>();
@@ -59,7 +60,21 @@ public class CrudService implements ICrudService {
 
     @Override
     public Result create(Entity entity) {
-        return null;
+        String klass = entity.getClass().getSimpleName();
+        result = new Result();
+        IDao dao = daos.get(klass);
+        Map<String, List<IStrategy>> rules = requirements.get(klass);
+        List<IStrategy> validations = rules.get(CREATE);
+
+        result = executeValidations(entity, validations);
+
+        if(!result.hasErrors()) { // break any validations?
+            if(!dao.create(entity)) { // persistence errors?
+                result.addErrorMsg("Error!!!");
+            }
+        }
+
+        return result;
     }
 
     @Override

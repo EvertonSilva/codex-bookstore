@@ -7,7 +7,6 @@ import br.com.codexbookstore.domain.Phone;
 import br.com.codexbookstore.domain.User;
 import br.com.codexbookstore.domain.customer.CreditCard;
 import br.com.codexbookstore.domain.customer.Customer;
-import br.com.codexbookstore.domain.customer.DeliveryAddress;
 import br.com.codexbookstore.domain.customer.Gender;
 import br.com.codexbookstore.domain.location.Address;
 import br.com.codexbookstore.domain.location.Country;
@@ -21,9 +20,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by everton on 03/10/17.
- */
 public class CreateCustomerVh implements IViewHelper {
     @Override
     public Entity getEntity(HttpServletRequest request) {
@@ -70,7 +66,7 @@ public class CreateCustomerVh implements IViewHelper {
 
             StringBuilder cardExpiration = new StringBuilder(request.getParameter("expire-month"));
             cardExpiration.append("/");
-            cardExpiration.append(request.getParameter("expiration-year"));
+            cardExpiration.append(request.getParameter("expire-year"));
             creditCard.setExpirationDate(cardExpiration.toString());
 
             customer.setCreditCard(creditCard);

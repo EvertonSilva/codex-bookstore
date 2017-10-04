@@ -5,6 +5,7 @@ import br.com.codexbookstore.domain.Phone;
 import br.com.codexbookstore.domain.User;
 import br.com.codexbookstore.domain.location.Address;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class Customer extends Entity {
     private Phone phone;
     private Gender gender;
     private CreditCard creditCard;
-    private List<Address> deliveryAddressList;
+    private List<Address> deliveryAddressList = new ArrayList<>();
     private Address chargeAddress;
     private User user;
 

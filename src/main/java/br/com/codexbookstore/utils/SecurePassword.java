@@ -7,16 +7,12 @@ import java.security.SecureRandom;
 import static java.security.MessageDigest.*;
 
 public final class SecurePassword {
-    private static MessageDigest md;
-
-    public SecurePassword() throws NoSuchAlgorithmException {
-        md = getInstance("SHA-256");
-    }
 
     public static String hashPassword(String plainText) {
         String hashedPassword = null;
         try {
-            md.update(getSalt());
+            MessageDigest md = getInstance("SHA-256");
+            md.update(SecurePassword.getSalt());
             byte[] bytes = md.digest(plainText.getBytes());
             StringBuilder sb = new StringBuilder();
 
