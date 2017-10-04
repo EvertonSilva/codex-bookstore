@@ -82,13 +82,13 @@
                             <label for="home-type">Housing type:</label>
                             <input id="home-type" name="home-type" type="text" placeholder="house, apartment...">
                             
-                            <label for="address">Address:</label>
+                            <label for="public-place">Address:</label>
                             <select name="address-type" id="address-type">
                                 <option value="">select...</option>
-                                <option value="1">Street</option>
-                                <option value="2">Avenue</option>
+                                <option value="street">Street</option>
+                                <option value="avenue">Avenue</option>
                             </select>
-                            <input id="address" name="address" type="text" placeholder="5th Ave">
+                            <input id="public-place" name="public-place" type="text" placeholder="5th Ave">
 
                             <label for="number">Number:</label>
                             <input id="number" name="number" type="number">

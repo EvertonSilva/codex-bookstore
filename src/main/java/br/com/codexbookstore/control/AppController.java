@@ -4,6 +4,7 @@ import br.com.codexbookstore.control.abstractFactory.AbstractOperationFactory;
 import br.com.codexbookstore.control.abstractFactory.FormInsertOperationFactory;
 import br.com.codexbookstore.control.operations.*;
 import br.com.codexbookstore.control.viewHelpers.IViewHelper;
+import br.com.codexbookstore.control.viewHelpers.customer.CreateCustomerVh;
 import br.com.codexbookstore.control.viewHelpers.customer.InsertCustomerFormVh;
 
 import javax.servlet.ServletConfig;
@@ -47,6 +48,8 @@ public class AppController extends HttpServlet {
         commands = new HashMap<>();
 
         viewHelpers.put(basePath.concat("/customers/new"), new InsertCustomerFormVh());
+        viewHelpers.put(basePath.concat("/customers/create"), new CreateCustomerVh());
+
         commands.put("NEW", new FormInsertOperation());
         commands.put("CREATE", new CreateOperation());
         commands.put("RETRIEVE", new RetrieveOperation());
