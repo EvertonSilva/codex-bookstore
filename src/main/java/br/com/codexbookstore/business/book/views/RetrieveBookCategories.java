@@ -3,8 +3,8 @@ package br.com.codexbookstore.business.book.views;
 import br.com.codexbookstore.business.IStrategy;
 import br.com.codexbookstore.control.Result;
 import br.com.codexbookstore.domain.Entity;
-import br.com.codexbookstore.persistence.dao.IDao;
-import br.com.codexbookstore.persistence.dao.book.CategoryDao;
+import br.com.codexbookstore.persistence.dao.IDAO;
+import br.com.codexbookstore.persistence.dao.book.CategoryDAO;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
 public class RetrieveBookCategories implements IStrategy {
     @Override
     public Result process(Entity entity, Result result) {
-        IDao dao = new CategoryDao();
+        IDAO dao = new CategoryDAO();
         List<Entity> categories = dao.retrieve(entity);
         result.putEntities(categories);
         return result;

@@ -47,8 +47,8 @@
                             <input id="name" name="name" type="text">
                         </div>
                         <div>
-                            <label for="registry">Registry:</label>
-                            <input id="registry" name="registry" type="text">
+                            <label for="identificationDoc">Registry:</label>
+                            <input id="identificationDoc" name="identificationDoc" type="text">
                         </div>
                         <div>
                             <label for="dob">Date of Birthday:</label>

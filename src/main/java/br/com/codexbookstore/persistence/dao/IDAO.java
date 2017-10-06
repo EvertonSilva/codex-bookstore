@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by everton on 27/09/17.
  */
-public interface IDao {
+public interface IDAO {
     boolean create(Entity entity);
     List<Entity> retrieve(Entity entity);
     boolean update(Entity entity);

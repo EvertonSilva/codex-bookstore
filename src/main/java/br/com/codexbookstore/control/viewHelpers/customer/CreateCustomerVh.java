@@ -38,7 +38,7 @@ public class CreateCustomerVh implements IViewHelper {
             dob = dtFormat.parse(request.getParameter("dob"));
             customer.setDob(dob);
             customer.setName(request.getParameter("name"));
-            customer.setRegistry(request.getParameter("registry"));
+            customer.setIdentificationDoc(request.getParameter("registry"));
             customer.setGender(gender);
 
             // contact info
@@ -69,7 +69,7 @@ public class CreateCustomerVh implements IViewHelper {
             cardExpiration.append(request.getParameter("expire-year"));
             creditCard.setExpirationDate(cardExpiration.toString());
 
-            customer.setCreditCard(creditCard);
+            customer.addCreditCard(creditCard);
 
             // authentication
             String passwd = SecurePassword.hashPassword(request.getParameter("password"));

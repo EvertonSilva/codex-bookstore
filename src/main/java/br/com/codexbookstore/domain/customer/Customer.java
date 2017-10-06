@@ -10,12 +10,12 @@ import java.util.Date;
 import java.util.List;
 
 public class Customer extends Entity {
-    private String registry;
+    private String identificationDoc;
     private String name;
     private Date dob;
     private Phone phone;
     private Gender gender;
-    private CreditCard creditCard;
+    private List<CreditCard> creditCardList = new ArrayList<>();
     private List<Address> deliveryAddressList = new ArrayList<>();
     private Address chargeAddress;
     private User user;
@@ -31,12 +31,12 @@ public class Customer extends Entity {
         this.name = name;
     }
 
-    public String getRegistry() {
-        return registry;
+    public String getIdentificationDoc() {
+        return identificationDoc;
     }
 
-    public void setRegistry(String registry) {
-        this.registry = registry;
+    public void setIdentificationDoc(String identificationDoc) {
+        this.identificationDoc = identificationDoc;
     }
 
     public Date getDob() {
@@ -75,12 +75,8 @@ public class Customer extends Entity {
         this.deliveryAddressList.add(address);
     }
 
-    public CreditCard getCreditCard() {
-        return creditCard;
-    }
-
-    public void setCreditCard(CreditCard creditCard) {
-        this.creditCard = creditCard;
+    public void addCreditCard(CreditCard card) {
+        this.creditCardList.add(card);
     }
 
     public User getUser() {

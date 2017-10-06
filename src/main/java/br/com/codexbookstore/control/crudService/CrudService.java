@@ -7,7 +7,7 @@ import br.com.codexbookstore.control.Result;
 import br.com.codexbookstore.domain.book.Book;
 import br.com.codexbookstore.domain.Entity;
 import br.com.codexbookstore.domain.customer.Customer;
-import br.com.codexbookstore.persistence.dao.IDao;
+import br.com.codexbookstore.persistence.dao.IDAO;
 
 import java.util.*;
 
@@ -18,7 +18,7 @@ public class CrudService implements ICrudService {
 
     // { entity: { rules: [IStrategy, IStrategy] } }
     private Map<String, Map<String, List<IStrategy>>> requirements;
-    private Map<String, IDao> daos;
+    private Map<String, IDAO> daos;
     private Result result;
 
     private static final String CREATE = "CREATE";
@@ -62,7 +62,7 @@ public class CrudService implements ICrudService {
     public Result create(Entity entity) {
         String klass = entity.getClass().getSimpleName();
         result = new Result();
-        IDao dao = daos.get(klass);
+        IDAO dao = daos.get(klass);
         Map<String, List<IStrategy>> rules = requirements.get(klass);
         List<IStrategy> validations = rules.get(CREATE);
 
