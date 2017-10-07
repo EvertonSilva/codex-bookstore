@@ -1,12 +1,16 @@
-package br.com.codexbookstore.domain.book;
+package br.com.codexbookstore.domain.location;
 
 import br.com.codexbookstore.domain.Entity;
 
-/**
- * Created by everton on 24/09/17.
- */
-public class Author extends Entity {
+public class State extends Entity {
     private String name;
+
+    public State() {
+    }
+
+    public State(Long id) {
+        super.setId(id);
+    }
 
     public String getName() {
         return name;

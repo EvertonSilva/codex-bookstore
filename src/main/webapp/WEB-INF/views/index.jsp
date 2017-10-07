@@ -9,13 +9,12 @@
         <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
         <!-- Milligram CSS minified -->
         <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
-        <base href="codex-bookstore/">
     </head>
     <body>
         <div class="main-wrapper">
             <div class="container">
                 <nav class="navigation">
-                    <a href="/" class="navigation-link">Home</a>
+                    <a href="/codex-bookstore" class="navigation-link">Home</a>
                 </nav>
             </div>
             <div class="main-content container">
@@ -23,10 +22,19 @@
                 <div class="row">
                     <div class="column">
                         <h3>Actions</h3>
-                        <ul>
-                            <li><a href="books/find">Find a book</a></li>
-                            <li><a href="books/new">Insert a new book</a></li>
-                        </ul>
+                        <div>
+                            <h4>Books</h4>
+                            <ul>
+                                <li><a href="books/find">Find a book</a></li>
+                                <li><a href="books/new">Insert a new book</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Customers</h4>
+                            <ul>
+                                <li><a href="customers/new?operation=new">New</a></li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="column column-80">
                         <h2>Dashboard</h2>

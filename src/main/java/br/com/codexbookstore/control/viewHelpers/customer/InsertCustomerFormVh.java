@@ -1,9 +1,8 @@
-package br.com.codexbookstore.control.viewHelpers.book;
+package br.com.codexbookstore.control.viewHelpers.customer;
 
 import br.com.codexbookstore.control.Result;
-import br.com.codexbookstore.control.viewHelpers.IViewHelper;
-import br.com.codexbookstore.domain.book.Book;
 import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.customer.Customer;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -11,20 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by everton on 24/09/17.
+ * Created by everton on 02/10/17.
  */
-public class InsertFormVh implements IViewHelper {
+public class InsertCustomerFormVh implements br.com.codexbookstore.control.viewHelpers.IViewHelper {
     @Override
     public Entity getEntity(HttpServletRequest request) {
-        return new Book();
+        return new Customer();
     }
 
     @Override
     public void setView(Result result, HttpServletRequest request, HttpServletResponse response) {
         try {
-            request.setAttribute("result", result);
-            request.setAttribute("categories", result.getEntities("Category"));
-            request.getRequestDispatcher("/WEB-INF/views/books/new.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/customers/new.jsp").forward(request, response);
         } catch (ServletException | IOException e) {
             e.printStackTrace();
         }

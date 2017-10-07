@@ -2,10 +2,10 @@ package br.com.codexbookstore.control;
 
 import br.com.codexbookstore.testHelpers.BookHtmlForm;
 import br.com.codexbookstore.testHelpers.CodexHomePage;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 import org.openqa.selenium.By;
@@ -19,7 +19,6 @@ import java.util.concurrent.TimeUnit;
 public class AppControllerTestSuite {
     private WebDriver driver;
     private String baseUrl;
-    private StringBuffer errors = new StringBuffer();
 
     public AppControllerTestSuite() {
         System.setProperty("webdriver.gecko.driver", "/home/everton/Applications/geckodriver");

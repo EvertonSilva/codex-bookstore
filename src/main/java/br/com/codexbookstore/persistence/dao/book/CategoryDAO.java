@@ -1,8 +1,9 @@
 package br.com.codexbookstore.persistence.dao.book;
 
 import br.com.codexbookstore.domain.book.Category;
-import br.com.codexbookstore.domain.book.Entity;
-import br.com.codexbookstore.persistence.dao.IDao;
+import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.persistence.dao.AbstractDAO;
+import br.com.codexbookstore.persistence.dao.IDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 /**
  * Created by everton on 27/09/17.
  */
-public class CategoryDao implements IDao {
+public class CategoryDAO extends AbstractDAO {
     @Override
     public boolean create(Entity entity) {
         return false;

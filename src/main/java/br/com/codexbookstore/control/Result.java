@@ -1,6 +1,6 @@
 package br.com.codexbookstore.control;
 
-import br.com.codexbookstore.domain.book.Entity;
+import br.com.codexbookstore.domain.Entity;
 
 import java.util.*;
 

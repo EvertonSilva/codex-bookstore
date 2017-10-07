@@ -13,12 +13,19 @@ plugins {
 
 repositories {
 	jcenter()
+    mavenCentral()
+    mavenLocal()
 }
 
+ext.seleniumVersion = '3.6.0'
+
 dependencies {
-    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
 	providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
 	testCompile 'junit:junit:4.12'
+    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-firefox-driver', version:seleniumVersion
+    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-api', version:seleniumVersion
+    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version:seleniumVersion
 }
 
 gretty {
@@ -29,5 +36,3 @@ flyway {
     url = 'jdbc:h2:file:./src/main/resources/data/codex'
     user = 'sa'
 }
-
-

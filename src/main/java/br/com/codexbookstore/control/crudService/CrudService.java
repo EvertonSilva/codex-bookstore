@@ -2,15 +2,14 @@ package br.com.codexbookstore.control.crudService;
 
 import br.com.codexbookstore.business.IStrategy;
 import br.com.codexbookstore.business.book.views.RetrieveBookCategories;
+import br.com.codexbookstore.business.customer.*;
 import br.com.codexbookstore.control.Result;
 import br.com.codexbookstore.domain.book.Book;
-import br.com.codexbookstore.domain.book.Entity;
-import br.com.codexbookstore.persistence.dao.IDao;
+import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.customer.Customer;
+import br.com.codexbookstore.persistence.dao.IDAO;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by everton on 24/09/17.
@@ -19,7 +18,7 @@ public class CrudService implements ICrudService {
 
     // { entity: { rules: [IStrategy, IStrategy] } }
     private Map<String, Map<String, List<IStrategy>>> requirements;
-    private Map<String, IDao> daos;
+    private Map<String, IDAO> daos;
     private Result result;
 
     private static final String CREATE = "CREATE";
@@ -33,24 +32,49 @@ public class CrudService implements ICrudService {
 
         // # Entities
         String bookEntity = Book.class.getSimpleName();
+        String customerEntity = Customer.class.getSimpleName();
 
         // # Validations and Business rules
         // ## Combo box for views
-        IStrategy retrieveBookCategories = new RetrieveBookCategories();
-        List<IStrategy> insertFormValidations = Arrays.asList(retrieveBookCategories);
+        List<IStrategy> booksComboBoxes = Arrays.asList(new RetrieveBookCategories());
+        List<IStrategy> customerComboBoxes = Arrays.asList(new ListCountries(), new ListStates(), new ListCities());
+
+        // ## Book validations and rules
+
+        // ## Customer validations and rules
+        List<IStrategy> createCustomerValidations = Arrays.asList(new CustomerNotBlank(), new CreditCardValidation(), new PasswordValitation());
 
         // # context validations
         Map<String, List<IStrategy>> bookValidations = new HashMap<>();
-        bookValidations.put(INSERTFORM, insertFormValidations);
+        bookValidations.put(INSERTFORM, booksComboBoxes);
+
+        Map<String, List<IStrategy>> customerValidations = new HashMap<>();
+        customerValidations.put(INSERTFORM, customerComboBoxes);
+        customerValidations.put(CREATE, createCustomerValidations);
 
         // # all requirements
         requirements = new HashMap<>();
         requirements.put(bookEntity, bookValidations);
+        requirements.put(customerEntity, customerValidations);
     }
 
     @Override
     public Result create(Entity entity) {
-        return null;
+        String klass = entity.getClass().getSimpleName();
+        result = new Result();
+        IDAO dao = daos.get(klass);
+        Map<String, List<IStrategy>> rules = requirements.get(klass);
+        List<IStrategy> validations = rules.get(CREATE);
+
+        result = executeValidations(entity, validations);
+
+        if(!result.hasErrors()) { // break any validations?
+            if(!dao.create(entity)) { // persistence errors?
+                result.addErrorMsg("Error!!!");
+            }
+        }
+
+        return result;
     }
 
     @Override
