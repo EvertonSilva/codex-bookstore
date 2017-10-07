@@ -3,7 +3,7 @@
 <jsp:useBean id="result" class="br.com.codexbookstore.control.Result" scope="request" />
 <html>
 <head>
-    <title>Codex Bookstore - Home</title>
+    <title>Codex Bookstore - New Book</title>
     <!-- Google Fonts -->
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
     <!-- CSS Reset -->
@@ -91,7 +91,7 @@
                         </div>
                         <div>
                             <label for="book-width">Width</label>
-                            <input name="book-width" id="book-width" type="text">
+                            <input name="book-width" id="book-width" type="number">
                         </div>
                         <div>
                             <label for="book-weight">Weigth</label>
@@ -99,7 +99,7 @@
                         </div>
                         <div>
                             <label for="book-depth">Depth</label>
-                            <input name="book-depth" id="book-depth" type="text">
+                            <input name="book-depth" id="book-depth" type="number">
                         </div>
                     </fieldset>
                     <fieldset>
@@ -132,14 +132,14 @@
                             <input name="book-sales-min-number" id="book-sales-min-number" type="number" min="1">
                         </div>
                         <div>
-                            <label for="book-sales-value">Period</label>
-                            <input name="book-sales-value" id="book-sales-value" type="number" min="1">
+                            <label for="book-sales-period">Period</label>
+                            <input name="book-sales-value" id="book-sales-period" type="number" min="1">
                             <select name="book-sales-period-unit" id="book-sales-period-unit">
-                                <option value="">Minutes</option>
-                                <option value="">Hours</option>
-                                <option value="">Days</option>
-                                <option value="">Months</option>
-                                <option value="">Years</option>
+                                <option value="min">Minutes</option>
+                                <option value="hour">Hours</option>
+                                <option value="day">Days</option>
+                                <option value="month">Months</option>
+                                <option value="year">Years</option>
                             </select>
                         </div>
                     </fieldset>

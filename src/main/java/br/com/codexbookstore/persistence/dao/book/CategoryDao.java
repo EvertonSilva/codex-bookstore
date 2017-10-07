@@ -19,10 +19,10 @@ public class CategoryDao implements IDao {
     @Override
     public List<Entity> retrieve(Entity entity) {
         List<Entity> categories = new ArrayList<>();
-        categories.add(new Category("Romance", "Lorem ipsum"));
-        categories.add(new Category("Mistery & Suspense", "Lorem ipsum"));
-        categories.add(new Category("Terror", "Lorem ipsum"));
-        categories.add(new Category("Sci-FI & Fantasy", "Lorem ipsum"));
+        categories.add(new Category(1L, "Romance", "Lorem ipsum"));
+        categories.add(new Category(2L, "Mistery & Suspense", "Lorem ipsum"));
+        categories.add(new Category(3L, "Terror", "Lorem ipsum"));
+        categories.add(new Category(4L, "Sci-FI & Fantasy", "Lorem ipsum"));
         return categories;
     }
 
