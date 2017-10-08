@@ -16,18 +16,24 @@ CREATE TABLE `books` (
   `sales_paremeters_id` INT NOT NULL,
   `price_group_id` INT NOT NULL,
   `publisher_id` INT NOT NULL,
+  `created_at` TIMESTAMP NOT NULL,
+  `update_at` TIMESTAMP NOT NULL,
   PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `authors` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
+  `created_at` TIMESTAMP NOT NULL,
+  `updated_at` TIMESTAMP NOT NULL,
   PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `publishers` (
   `id` BINARY NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
+  `created_at` TIMESTAMP NOT NULL,
+  `updated_at` TIMESTAMP NOT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -35,6 +41,8 @@ CREATE TABLE `categories` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `description` VARCHAR(255) NOT NULL,
+  `created_at` TIMESTAMP NOT NULL,
+  `updated_at` TIMESTAMP NOT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -48,6 +56,9 @@ CREATE TABLE `sales_parametrization` (
 
 CREATE TABLE `price_group` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `markup` DECIMAL NOT NULL,
+  `created_at` TIMESTAMP NOT NULL,
+  `updated_at` TIMESTAMP NOT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -55,6 +66,8 @@ CREATE TABLE `books_categoiries` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `book_id` INT NOT NULL,
   `categoy_id` INT NOT NULL,
+  `created_at` TIMESTAMP NOT NULL,
+  `updated_at` TIMESTAMP NOT NULL,
   PRIMARY KEY (`id`)
 );
 

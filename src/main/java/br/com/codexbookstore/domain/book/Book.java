@@ -18,14 +18,13 @@ public class Book extends Entity {
     private int numberOfPages;
     private PriceGroup priceGroup;
     private Dimensions dimensions;
-    private List<Author> authors;
+    private Author author;
     private Publisher publisher;
     private SaleParameterization saleParameterization;
     private List<Category> categories;
     private ChangeStatus changeStatus;
 
     public Book() {
-        authors = new ArrayList<>();
         categories = new ArrayList<>();
     }
     public String getTitle() {
@@ -100,20 +99,12 @@ public class Book extends Entity {
         this.dimensions = dimensions;
     }
 
-    public List<Author> getAuthors() {
-        return authors.subList(0, authors.size());
+    public Author getAuthor() {
+        return author;
     }
 
-    public Author getAuthorByIndex(int index) {
-        return authors.get(index);
-    }
-
-    public void setAuthors(List<Author> authors) {
-        this.authors = authors;
-    }
-
-    public void addAuthor(Author author) {
-        authors.add(author);
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     public Publisher getPublisher() {

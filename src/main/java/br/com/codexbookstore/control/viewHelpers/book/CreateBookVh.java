@@ -37,7 +37,7 @@ public class CreateBookVh implements IViewHelper {
 
             // author
             author = new Author(Long.valueOf(request.getParameter("book-author")));
-            book.setAuthors(Arrays.asList(author));
+            book.setAuthor(author);
 
             // categories
             String[] catList = request.getParameterValues("book-category");
