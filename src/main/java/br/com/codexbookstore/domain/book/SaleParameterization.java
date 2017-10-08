@@ -8,6 +8,7 @@ import br.com.codexbookstore.domain.Entity;
 public class SaleParameterization extends Entity {
     private int minSaleLimit;
     private int periodicity;
+    private String periodicityUnit;
 
     public int getMinSaleLimit() {
         return minSaleLimit;
@@ -23,5 +24,13 @@ public class SaleParameterization extends Entity {
 
     public void setPeriodicity(int periodicity) {
         this.periodicity = periodicity;
+    }
+
+    public String getPeriodicityUnit() {
+        return periodicityUnit;
+    }
+
+    public void setPeriodicityUnit(String periodicityUnit) {
+        this.periodicityUnit = periodicityUnit;
     }
 }

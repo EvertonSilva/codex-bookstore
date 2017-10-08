@@ -25,7 +25,7 @@
 <div class="main-wrapper">
     <div class="container">
         <nav class="navigation">
-            <a href="/" class="navigation-link">Home</a>
+            <a href="/codex-bookstore" class="navigation-link">Home</a>
         </nav>
     </div>
     <div class="main-content container">
@@ -36,7 +36,8 @@
             </div>
             <div class="column column-80">
                 <h2>New Book</h2>
-                <form action="#" method="POST">
+                <form action="/codex-bookstore/books/create" method="POST">
+                    <input type="hidden" name="operation" value="create">
                     <fieldset>
                         <legend>Basic</legend>
                         <div>
@@ -72,15 +73,19 @@
                         </div>
                         <div>
                             <label for="book-edition">Edition</label>
-                            <input name="book-edtion" id="book-edition" type="text">
+                            <input name="book-edition" id="book-edition" type="text">
                         </div>
                         <div>
-                            <label for="book-year">Publication Year</label>
+                            <label for="book-year">Publish Year</label>
                             <input name="book-year" id="book-year" type="number" min="1889" max="2017">
                         </div>
                         <div>
                             <label for="book-pages-number">Pages number</label>
                             <input name="book-pages-number" id="book-pages-number" type="number">
+                        </div>
+                        <div>
+                            <label for="book-synopsis">Synopsis</label>
+                            <textarea name="book-synopsis" id="book-synopsis" cols="30" rows="10"></textarea>
                         </div>
                     </fieldset>
                     <fieldset>

@@ -4,6 +4,7 @@ import br.com.codexbookstore.control.abstractFactory.AbstractOperationFactory;
 import br.com.codexbookstore.control.abstractFactory.FormInsertOperationFactory;
 import br.com.codexbookstore.control.operations.*;
 import br.com.codexbookstore.control.viewHelpers.IViewHelper;
+import br.com.codexbookstore.control.viewHelpers.book.CreateBookVh;
 import br.com.codexbookstore.control.viewHelpers.customer.CreateCustomerVh;
 import br.com.codexbookstore.control.viewHelpers.customer.InsertCustomerFormVh;
 
@@ -47,6 +48,9 @@ public class AppController extends HttpServlet {
         viewHelpers = new HashMap<>();
         commands = new HashMap<>();
 
+        // book ViewHelpers
+        viewHelpers.put(basePath.concat("/books/create"), new CreateBookVh());
+        // customer ViewHelpers
         viewHelpers.put(basePath.concat("/customers/new"), new InsertCustomerFormVh());
         viewHelpers.put(basePath.concat("/customers/create"), new CreateCustomerVh());
 

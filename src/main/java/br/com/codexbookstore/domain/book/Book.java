@@ -14,7 +14,7 @@ public class Book extends Entity {
     private String synopsis;
     private String isbn;
     private String barcode;
-    private int publicationYear;
+    private String publishYear;
     private int numberOfPages;
     private PriceGroup priceGroup;
     private Dimensions dimensions;
@@ -68,12 +68,12 @@ public class Book extends Entity {
         this.barcode = barcode;
     }
 
-    public int getPublicationYear() {
-        return publicationYear;
+    public String getPublishYear() {
+        return publishYear;
     }
 
-    public void setPublicationYear(int publicationYear) {
-        this.publicationYear = publicationYear;
+    public void setPublishYear(String publishYear) {
+        this.publishYear = publishYear;
     }
 
     public int getNumberOfPages() {

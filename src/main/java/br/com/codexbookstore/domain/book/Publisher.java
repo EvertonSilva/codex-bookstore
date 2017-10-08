@@ -8,6 +8,17 @@ import br.com.codexbookstore.domain.Entity;
 public class Publisher extends Entity {
     private String name;
 
+    public Publisher() {
+    }
+
+    public Publisher(Long id) {
+        super.setId(id);
+    }
+
+    public Publisher(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

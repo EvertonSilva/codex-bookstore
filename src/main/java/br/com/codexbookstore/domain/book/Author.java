@@ -8,6 +8,14 @@ import br.com.codexbookstore.domain.Entity;
 public class Author extends Entity {
     private String name;
 
+    public Author(Long id) {
+        super.setId(id);
+    }
+
+    public Author(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

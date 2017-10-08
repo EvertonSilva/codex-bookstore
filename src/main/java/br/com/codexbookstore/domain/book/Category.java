@@ -10,6 +10,10 @@ public class Category extends AbstractCategory {
     public Category() {
     }
 
+    public Category(Long id) {
+        super.setId(id);
+    }
+
     public Category(Long id, String name, String description) {
         super.setId(id);
         this.name = name;
