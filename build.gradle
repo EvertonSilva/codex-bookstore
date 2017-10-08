@@ -1,4 +1,7 @@
 buildscript {
+    repositories {
+        mavenCentral()
+    }
     dependencies {
         classpath 'com.h2database:h2:1.4.191'
     }
@@ -13,8 +16,6 @@ plugins {
 
 repositories {
 	jcenter()
-    mavenCentral()
-    mavenLocal()
 }
 
 ext.seleniumVersion = '3.6.0'
@@ -22,6 +23,7 @@ ext.seleniumVersion = '3.6.0'
 dependencies {
 	providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
     compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+    compile group: 'com.h2database', name: 'h2', version: '1.4.191'
 	testCompile 'junit:junit:4.12'
     testCompile group: 'org.seleniumhq.selenium', name: 'selenium-firefox-driver', version:seleniumVersion
     testCompile group: 'org.seleniumhq.selenium', name: 'selenium-api', version:seleniumVersion
