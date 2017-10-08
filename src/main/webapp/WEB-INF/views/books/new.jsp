@@ -47,8 +47,7 @@
                         <div>
                             <label for="book-author">Author</label>
                             <select name="book-author" id="book-author">
-                                <option value="">select...</option>
-                                <option value="1">DOSTOIEVSKI, Fiodor</option>
+                                <option value="1" selected>DOSTOIEVSKI, Fiodor</option>
                                 <option value="2">GOGÓL, Nikolai</option>
                                 <option value="3">TOLSTÓI, Liev</option>
                             </select>
@@ -65,10 +64,9 @@
                         <div>
                             <label for="book-publisher">Publisher</label>
                             <select name="book-publisher" id="book-publisher">
-                                <option value="">select...</option>
-                                <option value="1">Editora 34</option>
+                                <option value="1" selected>Editora 34</option>
                                 <option value="2">Novatec</option>
-                                <option value="3">Cada do código</option>
+                                <option value="3">Casa do código</option>
                             </select>
                         </div>
                         <div>
@@ -123,10 +121,9 @@
                         <div>
                             <label for="book-price-group">Group</label>
                             <select name="book-price-group" id="book-price-group">
-                                <option value="">select...</option>
-                                <option value="1">P1</option>
-                                <option value="2">P2</option>
-                                <option value="3">P3</option>
+                                <option value="1" selected>5%</option>
+                                <option value="2">7.5%</option>
+                                <option value="3">10%</option>
                             </select>
                         </div>
                     </fieldset>
@@ -142,7 +139,7 @@
                             <select name="book-sales-period-unit" id="book-sales-period-unit">
                                 <option value="min">Minutes</option>
                                 <option value="hour">Hours</option>
-                                <option value="day">Days</option>
+                                <option value="day" selected>Days</option>
                                 <option value="month">Months</option>
                                 <option value="year">Years</option>
                             </select>
