@@ -5,8 +5,10 @@ import br.com.codexbookstore.control.viewHelpers.IViewHelper;
 import br.com.codexbookstore.domain.Entity;
 import br.com.codexbookstore.domain.book.*;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -74,6 +76,11 @@ public class CreateBookVh implements IViewHelper {
 
     @Override
     public void setView(Result result, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            response.sendRedirect(request.getContextPath().concat("/books/list"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }

@@ -10,9 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by everton on 24/09/17.
- */
 public class InsertFormVh implements IViewHelper {
     @Override
     public Entity getEntity(HttpServletRequest request) {

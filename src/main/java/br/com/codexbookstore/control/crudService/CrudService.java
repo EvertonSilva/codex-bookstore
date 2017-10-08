@@ -1,6 +1,7 @@
 package br.com.codexbookstore.control.crudService;
 
 import br.com.codexbookstore.business.IStrategy;
+import br.com.codexbookstore.business.book.BookNotBlank;
 import br.com.codexbookstore.business.book.views.RetrieveBookCategories;
 import br.com.codexbookstore.business.customer.*;
 import br.com.codexbookstore.control.Result;
@@ -8,6 +9,7 @@ import br.com.codexbookstore.domain.book.Book;
 import br.com.codexbookstore.domain.Entity;
 import br.com.codexbookstore.domain.customer.Customer;
 import br.com.codexbookstore.persistence.dao.IDAO;
+import br.com.codexbookstore.persistence.dao.book.BookDAO;
 
 import java.util.*;
 
@@ -40,17 +42,23 @@ public class CrudService implements ICrudService {
         List<IStrategy> customerComboBoxes = Arrays.asList(new ListCountries(), new ListStates(), new ListCities());
 
         // ## Book validations and rules
+        List<IStrategy> createBookValidations = Arrays.asList(new BookNotBlank());
 
         // ## Customer validations and rules
         List<IStrategy> createCustomerValidations = Arrays.asList(new CustomerNotBlank(), new CreditCardValidation(), new PasswordValitation());
 
-        // # context validations
+        // # set validations by context
         Map<String, List<IStrategy>> bookValidations = new HashMap<>();
         bookValidations.put(INSERTFORM, booksComboBoxes);
+        bookValidations.put(CREATE, createBookValidations);
 
         Map<String, List<IStrategy>> customerValidations = new HashMap<>();
         customerValidations.put(INSERTFORM, customerComboBoxes);
         customerValidations.put(CREATE, createCustomerValidations);
+
+        // # persistence layer
+        daos = new HashMap<>();
+        daos.put(bookEntity, new BookDAO());
 
         // # all requirements
         requirements = new HashMap<>();
