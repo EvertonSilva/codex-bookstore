@@ -55,7 +55,7 @@ public class AppControllerTestSuite {
         WebElement submitBtn = driver.findElement(By.cssSelector(BookHtmlForm.LOC_BTN_BOOK_SAVE));
         submitBtn.click();
 
-        assertEquals(baseUrl + "/books/list", driver.getCurrentUrl());
+        assertEquals(baseUrl + "/books/list?operation=retrieve", driver.getCurrentUrl());
     }
 
     private void fillNewBookForm() {
@@ -67,6 +67,7 @@ public class AppControllerTestSuite {
         WebElement bookEdition = driver.findElement(By.cssSelector(BookHtmlForm.LOC_TXT_BOOK_EDITION));
         WebElement bookYear = driver.findElement(By.cssSelector(BookHtmlForm.LOC_TXT_BOOK_YEAR));
         WebElement bookPages = driver.findElement(By.cssSelector(BookHtmlForm.LOC_TXT_BOOK_PAGES_NUM));
+        WebElement bookSynposis = driver.findElement(By.cssSelector(BookHtmlForm.LOC_TXT_BOOK_SYNOPSIS));
         WebElement bookHeight = driver.findElement(By.cssSelector(BookHtmlForm.LOC_TXT_BOOK_HEIGHT));
         WebElement bookWidth = driver.findElement(By.cssSelector(BookHtmlForm.LOC_TXT_BOOK_WIDTH));
         WebElement bookWeight = driver.findElement(By.cssSelector(BookHtmlForm.LOC_TXT_BOOK_WEIGTH));
@@ -89,6 +90,7 @@ public class AppControllerTestSuite {
         bookEdition.sendKeys("1st edition");
         bookYear.sendKeys("2000");
         bookPages.sendKeys("152");
+        bookSynposis.sendKeys("Lorem ipsum dolor sit amet");
         bookHeight.sendKeys("21");
         bookWidth.sendKeys("14");
         bookDepth.sendKeys("5");

@@ -51,6 +51,7 @@ public class CrudService implements ICrudService {
         Map<String, List<IStrategy>> bookValidations = new HashMap<>();
         bookValidations.put(INSERTFORM, booksComboBoxes);
         bookValidations.put(CREATE, createBookValidations);
+        bookValidations.put(RETRIEVE, new ArrayList<>()); // mock validations
 
         Map<String, List<IStrategy>> customerValidations = new HashMap<>();
         customerValidations.put(INSERTFORM, customerComboBoxes);

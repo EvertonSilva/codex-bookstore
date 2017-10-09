@@ -77,7 +77,7 @@ public class CreateBookVh implements IViewHelper {
     @Override
     public void setView(Result result, HttpServletRequest request, HttpServletResponse response) {
         try {
-            response.sendRedirect(request.getContextPath().concat("/books/list"));
+            response.sendRedirect(request.getContextPath().concat("/books/list?operation=retrieve"));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -12,7 +12,7 @@ public class CustomerDAO extends AbstractDAO {
     }
 
     @Override
-    public List<Entity> retrieve(Entity entity) {
+    public List<Entity> retrieve() {
         return null;
     }
 

@@ -13,6 +13,7 @@ public class BookHtmlForm {
     public static final String LOC_TXT_BOOK_EDITION = "#book-edition";
     public static final String LOC_TXT_BOOK_YEAR = "#book-year";
     public static final String LOC_TXT_BOOK_PAGES_NUM = "#book-pages-number";
+    public static final String LOC_TXT_BOOK_SYNOPSIS = "#book-synopsis";
     public static final String LOC_TXT_BOOK_HEIGHT = "#book-height";
     public static final String LOC_TXT_BOOK_WIDTH = "#book-width";
     public static final String LOC_TXT_BOOK_WEIGTH = "#book-weight";

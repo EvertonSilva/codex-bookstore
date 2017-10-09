@@ -3,7 +3,6 @@ package br.com.codexbookstore.persistence.dao.book;
 import br.com.codexbookstore.domain.book.Category;
 import br.com.codexbookstore.domain.Entity;
 import br.com.codexbookstore.persistence.dao.AbstractDAO;
-import br.com.codexbookstore.persistence.dao.IDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,7 @@ public class CategoryDAO extends AbstractDAO {
     }
 
     @Override
-    public List<Entity> retrieve(Entity entity) {
+    public List<Entity> retrieve() {
         List<Entity> categories = new ArrayList<>();
         categories.add(new Category(1L, "Romance", "Lorem ipsum"));
         categories.add(new Category(2L, "Mistery & Suspense", "Lorem ipsum"));

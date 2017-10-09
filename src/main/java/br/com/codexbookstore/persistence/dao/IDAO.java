@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface IDAO {
     boolean create(Entity entity);
-    List<Entity> retrieve(Entity entity);
+    List<Entity> retrieve();
     boolean update(Entity entity);
     boolean delete(Entity entity);
 }

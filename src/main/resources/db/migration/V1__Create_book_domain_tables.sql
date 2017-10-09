@@ -30,7 +30,7 @@ CREATE TABLE `authors` (
 );
 
 CREATE TABLE `publishers` (
-  `id` BINARY NOT NULL AUTO_INCREMENT,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `created_at` TIMESTAMP NOT NULL,
   `updated_at` TIMESTAMP NOT NULL,
@@ -51,6 +51,8 @@ CREATE TABLE `sales_parametrization` (
   `min_sale_limit` INT NOT NULL,
   `periodicity` INT NOT NULL,
   `periodicity_unit` VARCHAR(255) NOT NULL,
+  `created_at` TIMESTAMP NOT NULL,
+  `updated_at` TIMESTAMP NOT NULL,
   PRIMARY KEY (`id`)
 );
 
