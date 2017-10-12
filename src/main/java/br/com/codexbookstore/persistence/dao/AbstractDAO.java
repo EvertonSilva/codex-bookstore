@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 public abstract class AbstractDAO implements IDAO {
 
-    protected Connection conn;
+    protected Connection conn = null;
 
     protected void openConnection() {
         conn = new ConnectionFactory().getConnection();

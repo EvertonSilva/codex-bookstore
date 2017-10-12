@@ -7,7 +7,9 @@ import br.com.codexbookstore.domain.book.SaleParameterization;
 import br.com.codexbookstore.persistence.dao.AbstractDAO;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +18,7 @@ public class BookDAO extends AbstractDAO {
     private CategoryDAO categoryDAO;
 
     public BookDAO() {
-        salesParamsDAO = new SalesParamsDAO();
+        salesParamsDAO = new SalesParamsDAO(true);
         categoryDAO = new CategoryDAO();
     }
 
@@ -24,31 +26,25 @@ public class BookDAO extends AbstractDAO {
     public boolean create(Entity entity) {
         openConnection();
 
+        boolean result = false;
+
         Book book = (Book) entity;
         SaleParameterization saleParams = book.getSaleParameterization();
 
         String query = "INSERT INTO " +
-                "books(enabled, title, edition, synopsis, isbn, barcode, publishYear, numberOfPages," +
-                "height, width, depth, weight, author_id, sales_paremeters_id, price_group_id, publisher_id," +
+                "books(enabled, title, edition, synopsis, isbn, barcode, publishYear, numberOfPages, " +
+                "height, width, depth, weight, author_id, sales_paremeters_id, price_group_id, publisher_id, " +
                 "created_at, update_at)" +
                 "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-        String querySalesParam = "INSERT INTO sales_parametrization (min_sale_limit, periodicity, periodicity_unit, created_at, updated_at)" +
-                "VALUES (?,?,?,?,?)";
-
         try {
             conn.setAutoCommit(false);
-            PreparedStatement stmt = conn.prepareStatement(query);
-            PreparedStatement stmtSalesParams = conn.prepareCall(querySalesParam);
+            ResultSet rs = null;
+            PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
-            stmtSalesParams.setInt(1, saleParams.getMinSaleLimit());
-            stmtSalesParams.setInt(2, saleParams.getPeriodicity());
-            stmtSalesParams.setString(3, saleParams.getPeriodicityUnit());
-            stmtSalesParams.setTimestamp(4, new java.sql.Timestamp(new java.util.Date().getTime()));
-            stmtSalesParams.setTimestamp(5, new java.sql.Timestamp(new java.util.Date().getTime()));
-
-            stmtSalesParams.execute();
-            book.getSaleParameterization().setId(getLastInsertID());
+            salesParamsDAO.create(saleParams);
+            Long salesPrmsId = saleParams.getId();
+            book.getSaleParameterization().setId(salesPrmsId);
 
             stmt.setBoolean(1, false);
             stmt.setString(2, book.getTitle());
@@ -70,11 +66,15 @@ public class BookDAO extends AbstractDAO {
             stmt.setTimestamp(18, new java.sql.Timestamp(new java.util.Date().getTime()));
 
             stmt.execute();
+            rs = stmt.getGeneratedKeys();
 
-            Long bookId = getLastInsertID();
-            insertCategoryAssociation(bookId, book.getCategories());
+            if(rs.next()) {
+                Long bookId = rs.getLong(1);
+                insertCategoryAssociation(bookId, book.getCategories());
+            }
 
             conn.commit();
+            result = true;
         } catch (SQLException e) {
             try {
                 conn.rollback();
@@ -89,7 +89,7 @@ public class BookDAO extends AbstractDAO {
             }
             closeConnection();
         }
-        return true;
+        return result;
     }
 
     @Override
