@@ -2,6 +2,8 @@ package br.com.codexbookstore.persistence.dao.book;
 
 import br.com.codexbookstore.domain.Entity;
 import br.com.codexbookstore.domain.book.Book;
+import br.com.codexbookstore.domain.book.Category;
+import br.com.codexbookstore.domain.book.SaleParameterization;
 import br.com.codexbookstore.persistence.dao.AbstractDAO;
 
 import java.sql.PreparedStatement;
@@ -10,29 +12,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookDAO extends AbstractDAO {
+    private SalesParamsDAO salesParamsDAO;
+    private CategoryDAO categoryDAO;
+
+    public BookDAO() {
+        salesParamsDAO = new SalesParamsDAO();
+        categoryDAO = new CategoryDAO();
+    }
+
     @Override
     public boolean create(Entity entity) {
         openConnection();
-        SalesParamsDAO spDao = new SalesParamsDAO();
 
         Book book = (Book) entity;
+        SaleParameterization saleParams = book.getSaleParameterization();
+
         String query = "INSERT INTO " +
                 "books(enabled, title, edition, synopsis, isbn, barcode, publishYear, numberOfPages," +
                 "height, width, depth, weight, author_id, sales_paremeters_id, price_group_id, publisher_id," +
                 "created_at, update_at)" +
                 "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-        // save sales parameters before save the book
-        if(spDao.create(book.getSaleParameterization())) {
-            // retrieve last ID inserted
-            // the method 'getLastInsertID' is defined at AbstractDAO class
-            Long salesParamsId = getLastInsertID();
-            salesParamsId = salesParamsId == 0 ? 1 : salesParamsId;
-            book.getSaleParameterization().setId(salesParamsId);
-        }
+        String querySalesParam = "INSERT INTO sales_parametrization (min_sale_limit, periodicity, periodicity_unit, created_at, updated_at)" +
+                "VALUES (?,?,?,?,?)";
 
         try {
+            conn.setAutoCommit(false);
             PreparedStatement stmt = conn.prepareStatement(query);
+            PreparedStatement stmtSalesParams = conn.prepareCall(querySalesParam);
+
+            stmtSalesParams.setInt(1, saleParams.getMinSaleLimit());
+            stmtSalesParams.setInt(2, saleParams.getPeriodicity());
+            stmtSalesParams.setString(3, saleParams.getPeriodicityUnit());
+            stmtSalesParams.setTimestamp(4, new java.sql.Timestamp(new java.util.Date().getTime()));
+            stmtSalesParams.setTimestamp(5, new java.sql.Timestamp(new java.util.Date().getTime()));
+
+            stmtSalesParams.execute();
+            book.getSaleParameterization().setId(getLastInsertID());
 
             stmt.setBoolean(1, false);
             stmt.setString(2, book.getTitle());
@@ -54,10 +70,23 @@ public class BookDAO extends AbstractDAO {
             stmt.setTimestamp(18, new java.sql.Timestamp(new java.util.Date().getTime()));
 
             stmt.execute();
-            stmt.close();
+
+            Long bookId = getLastInsertID();
+            insertCategoryAssociation(bookId, book.getCategories());
+
+            conn.commit();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            try {
+                conn.rollback();
+            } catch (SQLException excep) {
+                throw new RuntimeException(excep);
+            }
         } finally {
+            try {
+                conn.setAutoCommit(true);
+            } catch (SQLException e) {
+               throw new RuntimeException();
+            }
             closeConnection();
         }
         return true;
@@ -88,5 +117,21 @@ public class BookDAO extends AbstractDAO {
     @Override
     public boolean delete(Entity entity) {
         return false;
+    }
+
+    private boolean insertCategoryAssociation(Long bookId, List<Category> categories) throws SQLException {
+        String insertAssoc = "INSERT INTO books_categories (book_id, category_id, created_at, updated_at)" +
+                       "VALUES (?,?,?,?)";
+        PreparedStatement statement = conn.prepareStatement(insertAssoc);
+
+        for(Category c : categories) {
+            statement.setLong(1, bookId);
+            statement.setLong(2, c.getId());
+            statement.setTimestamp(3, new java.sql.Timestamp(new java.util.Date().getTime()));
+            statement.setTimestamp(4, new java.sql.Timestamp(new java.util.Date().getTime()));
+
+            statement.execute();
+        }
+        return true;
     }
 }

@@ -2,6 +2,7 @@ package br.com.codexbookstore.persistence.dao;
 
 import br.com.codexbookstore.domain.Entity;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**

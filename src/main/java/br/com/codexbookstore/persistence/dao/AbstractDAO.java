@@ -27,19 +27,21 @@ public abstract class AbstractDAO implements IDAO {
      * Method to retrieve the last ID inserted on
      * any insert operation
      */
-    public Long getLastInsertID() {
+    public Long getLastInsertID() throws SQLException {
         String query = "SELECT LAST_INSERT_ID() as last_id";
         Long lastId;
         try {
             ResultSet rs;
             Statement stmt = conn.createStatement();
+
             rs = stmt.executeQuery(query);
             rs.next();
             lastId = rs.getLong("last_id");
+
             stmt.close();
+
             return lastId;
         } catch (SQLException e) {
-            closeConnection();
             throw new RuntimeException(e);
         }
     }

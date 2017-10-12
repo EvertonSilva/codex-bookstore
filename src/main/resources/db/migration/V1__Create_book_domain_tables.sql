@@ -64,10 +64,10 @@ CREATE TABLE `price_group` (
   PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `books_categoiries` (
+CREATE TABLE `books_categories` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `book_id` INT NOT NULL,
-  `categoy_id` INT NOT NULL,
+  `category_id` INT NOT NULL,
   `created_at` TIMESTAMP NOT NULL,
   `updated_at` TIMESTAMP NOT NULL,
   PRIMARY KEY (`id`)
@@ -81,7 +81,7 @@ ALTER TABLE `books` ADD CONSTRAINT `books_fk2` FOREIGN KEY (`price_group_id`) RE
 
 ALTER TABLE `books` ADD CONSTRAINT `books_fk3` FOREIGN KEY (`publisher_id`) REFERENCES `publishers`(`id`);
 
-ALTER TABLE `books_categoiries` ADD CONSTRAINT `books_categoiries_fk0` FOREIGN KEY (`book_id`) REFERENCES `books`(`id`);
+ALTER TABLE `books_categories` ADD CONSTRAINT `books_categories_fk0` FOREIGN KEY (`book_id`) REFERENCES `books`(`id`);
 
-ALTER TABLE `books_categoiries` ADD CONSTRAINT `books_categoiries_fk1` FOREIGN KEY (`categoy_id`) REFERENCES `categories`(`id`);
+ALTER TABLE `books_categories` ADD CONSTRAINT `books_categoriess_fk1` FOREIGN KEY (`category_id`) REFERENCES `categories`(`id`);
 

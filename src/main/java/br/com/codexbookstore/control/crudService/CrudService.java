@@ -11,6 +11,7 @@ import br.com.codexbookstore.domain.customer.Customer;
 import br.com.codexbookstore.persistence.dao.IDAO;
 import br.com.codexbookstore.persistence.dao.book.BookDAO;
 
+import java.sql.SQLException;
 import java.util.*;
 
 /**
