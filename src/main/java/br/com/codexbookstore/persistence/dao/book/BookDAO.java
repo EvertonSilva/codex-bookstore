@@ -5,6 +5,7 @@ import br.com.codexbookstore.domain.book.Book;
 import br.com.codexbookstore.domain.book.Category;
 import br.com.codexbookstore.domain.book.SaleParameterization;
 import br.com.codexbookstore.persistence.dao.AbstractDAO;
+import com.sun.media.jfxmedia.logging.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -39,6 +40,8 @@ public class BookDAO extends AbstractDAO {
 
         try {
             conn.setAutoCommit(false);
+            super.setTransaction(conn);
+
             ResultSet rs = null;
             PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
@@ -75,7 +78,7 @@ public class BookDAO extends AbstractDAO {
 
             conn.commit();
             result = true;
-        } catch (SQLException e) {
+        } catch (Exception e) {
             try {
                 conn.rollback();
             } catch (SQLException excep) {

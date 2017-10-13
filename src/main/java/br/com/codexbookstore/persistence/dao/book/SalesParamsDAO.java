@@ -19,7 +19,11 @@ public class SalesParamsDAO extends AbstractDAO {
 
     @Override
     public boolean create(Entity entity) {
-        openConnection();
+        if(isTransational) {
+            conn = super.getTransaction();
+        } else {
+            openConnection();
+        }
 
         SaleParameterization saleParams = (SaleParameterization) entity;
         String query = "INSERT INTO sales_parametrization (min_sale_limit, periodicity, periodicity_unit, created_at, updated_at)" +

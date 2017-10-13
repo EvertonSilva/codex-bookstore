@@ -10,6 +10,7 @@ import java.sql.Statement;
 public abstract class AbstractDAO implements IDAO {
 
     protected Connection conn = null;
+    private static Connection transaction = null;
 
     protected void openConnection() {
         conn = new ConnectionFactory().getConnection();
@@ -23,26 +24,11 @@ public abstract class AbstractDAO implements IDAO {
         }
     }
 
-    /**
-     * Method to retrieve the last ID inserted on
-     * any insert operation
-     */
-    public Long getLastInsertID() throws SQLException {
-        String query = "SELECT LAST_INSERT_ID() as last_id";
-        Long lastId;
-        try {
-            ResultSet rs;
-            Statement stmt = conn.createStatement();
+    public Connection getTransaction() {
+        return transaction;
+    }
 
-            rs = stmt.executeQuery(query);
-            rs.next();
-            lastId = rs.getLong("last_id");
-
-            stmt.close();
-
-            return lastId;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public void setTransaction(Connection connection) {
+        transaction = connection;
     }
 }

@@ -11,8 +11,6 @@ public class ConnectionFactory {
     private String dbPass = "letter4thepeople";
     private String dbMode = "AUTO_SERVER=TRUE";
     private final StringBuilder DBURL = new StringBuilder("jdbc:h2:file:");
-//    private final String DBURL = "jdbc:h2:file:/home/everton/Projetos/les/codex-bookstore/src/main/resources/data/codex";
-
 
     public ConnectionFactory() {
         DBURL.append(dbPath);
