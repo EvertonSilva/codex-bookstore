@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="result" class="br.com.codexbookstore.control.Result" scope="request" />
 <html>
     <head>
@@ -29,20 +30,35 @@
                         <h2>Book list</h2>
                         <table>
                             <tr>
-                                <th>Código</th>
-                                <th>Titulo</th>
-                                <th>Adicionado em</th>
+                                <th>Code</th>
+                                <th>Title</th>
+                                <th>Status</th>
+                                <th>Actions</th>
                             </tr>
-                            <tr></tr>
-                            <tr>
-                                <th>Código</th>
-                                <th>Titulo</th>
-                                <th>Adicionado em</th>
-                            </tr>
+                            <c:forEach var="book" items="${books}">
+                                <tr>
+                                    <td>
+                                        <fmt:formatNumber
+                                            pattern="0000" type="number" value="${book.id}" />
+                                    </td>
+                                    <td>${book.title}</td>
+                                    <td>${book.status}</td>
+                                    <td></td>
+                                </tr>
+                            </c:forEach>
                         </table>
+                        <button id="newBook">New Book</button>
                     </div>
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+            (function () {
+              var btn = document.querySelector("#newBook");
+              btn.onclick = function () {
+                  window.location = "http://localhost:8080/codex-bookstore/books/new";
+              }
+            }());
+        </script>
     </body>
 </html>

@@ -115,6 +115,7 @@ public class BookDAO extends AbstractDAO {
                 Book book = new Book();
 
                 book.setEnabled(rs.getBoolean("books.enabled"));
+                book.setId(rs.getLong("books.id"));
                 book.setTitle(rs.getString("books.title"));
                 book.setEdition(rs.getString("books.edition"));
                 book.setSynopsis(rs.getString("books.synopsis"));

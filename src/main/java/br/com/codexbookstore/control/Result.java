@@ -4,9 +4,6 @@ import br.com.codexbookstore.domain.Entity;
 
 import java.util.*;
 
-/**
- * Created by everton on 24/09/17.
- */
 public class Result {
 
     private Map<String, List<Entity>> entities;

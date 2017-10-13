@@ -25,7 +25,7 @@
                         <div>
                             <h4>Books</h4>
                             <ul>
-                                <li><a href="books/find">Find a book</a></li>
+                                <li><a href="books/list?operation=retrieve">Find a book</a></li>
                                 <li><a href="books/new">Insert a new book</a></li>
                             </ul>
                         </div>

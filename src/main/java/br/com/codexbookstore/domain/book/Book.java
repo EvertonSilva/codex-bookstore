@@ -143,4 +143,8 @@ public class Book extends Entity {
     public void setChangeStatus(ChangeStatus changeStatus) {
         this.changeStatus = changeStatus;
     }
+
+    public String getStatus() {
+        return isEnabled() ? "enabled" : "disabled";
+    }
 }
