@@ -11,7 +11,9 @@
         <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
         <!-- Milligram CSS minified -->
         <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
-        <base href="codex-bookstore/">
+        <link rel="stylesheet" href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css"
+              integrity="sha384-dNpIIXE8U05kAbPhy3G1cz+yZmTzA6CY8Vg/u2L9xRnHjJiAK76m2BIEaSEV+/aU"
+              crossorigin="anonymous">
     </head>
     <body>
         <div class="main-wrapper">
@@ -32,6 +34,7 @@
                             <tr>
                                 <th>Code</th>
                                 <th>Title</th>
+                                <th>Author</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -42,8 +45,24 @@
                                             pattern="0000" type="number" value="${book.id}" />
                                     </td>
                                     <td>${book.title}</td>
+                                    <td>${book.author.name}</td>
                                     <td>${book.status}</td>
-                                    <td></td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${book.enabled}">
+                                                <a href="#" title="disable book">
+                                                    <i class="fa fa-ban" aria-hidden="true"></i>
+                                                </a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a href="#" title="enable book">
+                                                    <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                                </a>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <%--<i class="fa fa-edit" aria-hidden="true"></i>--%>
+                                        <%--<i class="fa fa-remove" aria-hidden="true"></i>--%>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </table>
