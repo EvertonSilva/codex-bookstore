@@ -47,9 +47,9 @@
                         <div>
                             <label for="book-author">Author</label>
                             <select name="book-author" id="book-author">
-                                <option value="1" selected>DOSTOIEVSKI, Fiodor</option>
-                                <option value="2">GOGÓL, Nikolai</option>
-                                <option value="3">TOLSTÓI, Liev</option>
+                                <c:forEach var="author" items="${authors}">
+                                    <option value="${author.id}">${author.name}</option>
+                                </c:forEach>
                             </select>
                         </div>
                         <div>

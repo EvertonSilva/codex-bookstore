@@ -12,7 +12,8 @@ public class Author extends Entity {
         super.setId(id);
     }
 
-    public Author(String name) {
+    public Author(Long id, String name) {
+        super.setId(id);
         this.name = name;
     }
 

@@ -2,6 +2,7 @@ package br.com.codexbookstore.control.crudService;
 
 import br.com.codexbookstore.business.IStrategy;
 import br.com.codexbookstore.business.book.BookNotBlank;
+import br.com.codexbookstore.business.book.views.RetrieveAuthors;
 import br.com.codexbookstore.business.book.views.RetrieveBookCategories;
 import br.com.codexbookstore.business.customer.*;
 import br.com.codexbookstore.control.Result;
@@ -39,7 +40,7 @@ public class CrudService implements ICrudService {
 
         // # Validations and Business rules
         // ## Combo box for views
-        List<IStrategy> booksComboBoxes = Arrays.asList(new RetrieveBookCategories());
+        List<IStrategy> booksComboBoxes = Arrays.asList(new RetrieveBookCategories(), new RetrieveAuthors());
         List<IStrategy> customerComboBoxes = Arrays.asList(new ListCountries(), new ListStates(), new ListCities());
 
         // ## Book validations and rules

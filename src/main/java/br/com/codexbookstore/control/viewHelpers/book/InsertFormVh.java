@@ -21,6 +21,7 @@ public class InsertFormVh implements IViewHelper {
         try {
             request.setAttribute("result", result);
             request.setAttribute("categories", result.getEntities("Category"));
+            request.setAttribute("authors", result.getEntities("Author"));
             request.getRequestDispatcher("/WEB-INF/views/books/new.jsp").forward(request, response);
         } catch (ServletException | IOException e) {
             e.printStackTrace();
