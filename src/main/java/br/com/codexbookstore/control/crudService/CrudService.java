@@ -90,7 +90,23 @@ public class CrudService implements ICrudService {
 
     @Override
     public Result retrieve(Entity entity) {
-        return null;
+        String entityName = entity.getClass().getSimpleName();
+        result = new Result();
+        IDAO dao = daos.get(entityName);
+        Map<String, List<IStrategy>> rules = requirements.get(entityName);
+        List<IStrategy> validations = rules.get(RETRIEVE);
+
+        result = executeValidations(entity, validations);
+
+        if(!result.hasErrors()) {
+            try {
+                result.putEntities(dao.retrieve());
+            } catch(RuntimeException e) {
+                result.addErrorMsg(e.getMessage());
+            }
+        }
+
+        return result;
     }
 
     @Override
