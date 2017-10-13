@@ -1,5 +1,6 @@
 package br.com.codexbookstore.persistence.dao;
 
+import br.com.codexbookstore.domain.Entity;
 import br.com.codexbookstore.domain.book.*;
 import br.com.codexbookstore.persistence.dao.book.BookDAO;
 import org.junit.After;
@@ -27,15 +28,25 @@ public class BookDAOTest {
     }
 
     @Test
-    public void testValidInsert() {
+    public void testValidInsert() throws Exception {
         validBook();
         assertTrue(dao.create(book));
     }
 
     @Test
-    public void testInvalidInsert() {
+    public void testInvalidInsert() throws Exception {
         invalidBook();
         assertFalse(dao.create(book));
+    }
+
+    @Test
+    public void testRetrieveBooks() throws Exception {
+        validBook();
+        List<Entity> books;
+        books = dao.retrieve();
+
+        // TODO: change this weak assert
+        assertEquals(3, books.size());
     }
 
     private void validBook() {

@@ -1,9 +1,7 @@
 package br.com.codexbookstore.persistence.dao.book;
 
 import br.com.codexbookstore.domain.Entity;
-import br.com.codexbookstore.domain.book.Book;
-import br.com.codexbookstore.domain.book.Category;
-import br.com.codexbookstore.domain.book.SaleParameterization;
+import br.com.codexbookstore.domain.book.*;
 import br.com.codexbookstore.persistence.dao.AbstractDAO;
 import com.sun.media.jfxmedia.logging.Logger;
 
@@ -12,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BookDAO extends AbstractDAO {
@@ -99,16 +98,45 @@ public class BookDAO extends AbstractDAO {
     public List<Entity> retrieve() {
         openConnection();
 
+        AuthorDAO authorDAO = new AuthorDAO();
         List<Entity> books = new ArrayList<>();
-        /*String query = "SELECT * FROM books b " +
-                "JOIN authors a ON (b.author_id = a.id)" +
-                "JOIN books_categories bc ON (b.id = bc.book_id) " +
-                "JOIN categories c ON (bc.category_id = c.id) " +
-                "JOIN price_group pg ON (b.price_group_id = pg.id)" +
-                "JOIN publishers p ON (b.publishser_id = p.id)" +
-                "JOIN sales_parametrization sp (b.sales_parameters_id = sp.id)";*/
+        StringBuilder q = new StringBuilder();
+        q.append("SELECT b.*, a.name, GROUP_CONCAT(c.NAME SEPARATOR ', ') as categories ");
+        q.append("FROM BOOKS b JOIN BOOKS_CATEGORIES bc ON (b.id = bc.BOOK_ID) ");
+        q.append("JOIN CATEGORIES c ON (c.id = bc.CATEGORY_ID) ");
+        q.append("JOIN AUTHORS a ON (b.AUTHOR_ID = a.ID) ");
+        q.append("GROUP BY b.ID");
 
-        // mockup query just to get create operation functional
+        try {
+            ResultSet rs = null;
+            PreparedStatement stmt = conn.prepareStatement(q.toString());
+            rs = stmt.executeQuery();
+            while(rs.next()) {
+                Book book = new Book();
+
+                book.setEnabled(rs.getBoolean("books.enabled"));
+                book.setTitle(rs.getString("books.title"));
+                book.setEdition(rs.getString("books.edition"));
+                book.setSynopsis(rs.getString("books.synopsis"));
+                book.setIsbn(rs.getString("books.isbn"));
+                book.setBarcode(rs.getString("books.barcode"));
+                book.setPublishYear(rs.getString("books.publishyear"));
+                book.setNumberOfPages(rs.getInt("books.numberofpages"));
+
+                Author author = new Author(rs.getLong("books.author_id"),
+                                            rs.getString("name"));
+                book.setAuthor(author);
+                book.setPublisher(new Publisher(rs.getLong("books.publisher_id")));
+
+                Arrays.stream(rs.getString("categories").split(", "))
+                        .forEach( c -> book.addCategory(new Category(null, c, null)));
+
+                books.add(book);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         return books;
     }
 
