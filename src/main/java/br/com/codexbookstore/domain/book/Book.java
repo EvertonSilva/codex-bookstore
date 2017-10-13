@@ -5,9 +5,6 @@ import br.com.codexbookstore.domain.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by everton on 24/09/17.
- */
 public class Book extends Entity {
     private String title;
     private String edition;
