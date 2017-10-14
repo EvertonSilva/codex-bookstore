@@ -49,6 +49,23 @@ public class BookDAOTest {
         assertEquals(3, books.size());
     }
 
+    @Test
+    public void testUpdateBook() throws Exception {
+        // get the first book at database
+        Book book = (Book) dao.retrieve().get(0);
+
+        // change some data
+        book.setTitle("White Nights");
+
+        // update database record
+        dao.update(book);
+
+        // retrieve data after update
+        String newTitle = ((Book) dao.retrieve().get(0)).getTitle();
+
+        assertEquals("White Nights", newTitle);
+    }
+
     private void validBook() {
         book.setTitle("Notes from Underground");
         book.setEdition("4th");
