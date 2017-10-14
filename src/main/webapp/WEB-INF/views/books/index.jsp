@@ -35,6 +35,7 @@
                                 <th>Code</th>
                                 <th>Title</th>
                                 <th>Author</th>
+                                <th>Categories</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -46,6 +47,11 @@
                                     </td>
                                     <td>${book.title}</td>
                                     <td>${book.author.name}</td>
+                                    <td>
+                                        <c:forEach var="category" items="${book.categories}">
+                                            ${category.name},&nbsp;
+                                        </c:forEach>
+                                    </td>
                                     <td>${book.status}</td>
                                     <td>
                                         <c:choose>
