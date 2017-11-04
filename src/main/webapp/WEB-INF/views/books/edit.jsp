@@ -38,6 +38,7 @@
                 <h2>New Book</h2>
                 <form action="/codex-bookstore/books/update" method="POST">
                     <input type="hidden" name="operation" value="update">
+                    <input type="hidden" name="book_id" value="${book.id}">
                     <fieldset>
                         <legend>Basic</legend>
                         <div>
@@ -153,6 +154,7 @@
                                 <option value="year">Years</option>
                             </select>
                         </div>
+                        <input type="hidden" name="salesParameters_id" value="${book.salesParameters.id}" />
                     </fieldset>
                     <button type="submit">Update book!</button>
                 </form>

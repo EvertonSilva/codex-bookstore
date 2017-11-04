@@ -56,7 +56,7 @@ public class AppController extends HttpServlet {
         viewHelpers.put(basePath.concat("/books/list"), new ListBookVh());
         viewHelpers.put(basePath.concat("/books/create"), new CreateBookVh());
         viewHelpers.put(basePath.concat("/books/edit"), new BookEditFormVh());
-        viewHelpers.put(basePath.concat("/books/update"), new CreateBookVh());
+        viewHelpers.put(basePath.concat("/books/update"), new UpdateBookVh());
 
         // customer ViewHelpers
         viewHelpers.put(basePath.concat("/customers/new"), new InsertCustomerFormVh());

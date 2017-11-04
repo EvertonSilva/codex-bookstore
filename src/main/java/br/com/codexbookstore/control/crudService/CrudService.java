@@ -52,7 +52,8 @@ public class CrudService implements ICrudService {
         bookValidations.put(INSERTFORM, booksComboBoxes);
         bookValidations.put(EDITFORM, booksComboBoxes);
         bookValidations.put(CREATE, createBookValidations);
-        bookValidations.put(RETRIEVE, new ArrayList<>()); // mock validations
+        bookValidations.put(RETRIEVE, new ArrayList<>());
+        bookValidations.put(UPDATE, createBookValidations);
 
         Map<String, List<IStrategy>> customerValidations = new HashMap<>();
         customerValidations.put(INSERTFORM, customerComboBoxes);
@@ -110,7 +111,21 @@ public class CrudService implements ICrudService {
 
     @Override
     public Result update(Entity entity) {
-        return null;
+        String entityName = entity.getClass().getSimpleName();
+        result = new Result();
+        IDAO dao = daos.get(entityName);
+        Map<String, List<IStrategy>> rules = requirements.get(entityName);
+        List<IStrategy> validations = rules.get(UPDATE);
+
+        result = executeValidations(entity, validations);
+
+        if(!result.hasErrors()) {
+            if(!dao.update(entity)) {
+                result.addErrorMsg("Error!!!");
+            }
+        }
+
+        return result;
     }
 
     @Override
