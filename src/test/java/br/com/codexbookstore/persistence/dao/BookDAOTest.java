@@ -43,7 +43,7 @@ public class BookDAOTest {
     public void testRetrieveBooks() throws Exception {
         validBook();
         List<Entity> books;
-        books = dao.retrieve();
+        books = dao.retrieve("");
 
         // TODO: change this weak assert
         assertEquals(3, books.size());
@@ -52,7 +52,7 @@ public class BookDAOTest {
     @Test
     public void testUpdateBook() throws Exception {
         // get the first book at database
-        Book book = (Book) dao.retrieve().get(0);
+        Book book = (Book) dao.retrieve("").get(0);
 
         // change some data
         book.setTitle("White Nights");
@@ -61,7 +61,7 @@ public class BookDAOTest {
         dao.update(book);
 
         // retrieve data after update
-        String newTitle = ((Book) dao.retrieve().get(0)).getTitle();
+        String newTitle = ((Book) dao.retrieve("").get(0)).getTitle();
 
         assertEquals("White Nights", newTitle);
     }
@@ -90,11 +90,11 @@ public class BookDAOTest {
         List<Category> categories = Arrays.asList(new Category(1L), new Category(2L));
         book.setCategories(categories);
 
-        SaleParameterization sp = new SaleParameterization();
+        SalesParameters sp = new SalesParameters();
         sp.setMinSaleLimit(10);
         sp.setPeriodicity(7);
         sp.setPeriodicityUnit("day");
-        book.setSaleParameterization(sp);
+        book.setSalesParameters(sp);
 
         book.setEnabled(false);
 
@@ -123,11 +123,11 @@ public class BookDAOTest {
         List<Category> categories = Arrays.asList(new Category(1L), new Category(2L));
         book.setCategories(categories);
 
-        SaleParameterization sp = new SaleParameterization();
+        SalesParameters sp = new SalesParameters();
         sp.setMinSaleLimit(1);
         sp.setPeriodicity(15);
         sp.setPeriodicityUnit("day");
-        book.setSaleParameterization(sp);
+        book.setSalesParameters(sp);
 
         book.setEnabled(false);
     }

@@ -12,7 +12,7 @@ public class CustomerDAO extends AbstractDAO {
     }
 
     @Override
-    public List<Entity> retrieve() {
+    public List<Entity> retrieve(String queryModifiers) {
         return null;
     }
 

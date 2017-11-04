@@ -1,7 +1,7 @@
 package br.com.codexbookstore.persistence.dao.book;
 
 import br.com.codexbookstore.domain.Entity;
-import br.com.codexbookstore.domain.book.SaleParameterization;
+import br.com.codexbookstore.domain.book.SalesParameters;
 import br.com.codexbookstore.persistence.dao.AbstractDAO;
 
 import java.sql.PreparedStatement;
@@ -25,7 +25,7 @@ public class SalesParamsDAO extends AbstractDAO {
             openConnection();
         }
 
-        SaleParameterization saleParams = (SaleParameterization) entity;
+        SalesParameters saleParams = (SalesParameters) entity;
         String query = "INSERT INTO sales_parametrization (min_sale_limit, periodicity, periodicity_unit, created_at, updated_at)" +
                 "VALUES (?,?,?,?,?)";
 
@@ -59,7 +59,7 @@ public class SalesParamsDAO extends AbstractDAO {
     }
 
     @Override
-    public List<Entity> retrieve() {
+    public List<Entity> retrieve(String queryModifiers) {
         return null;
     }
 

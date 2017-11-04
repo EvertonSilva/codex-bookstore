@@ -12,7 +12,7 @@ public class RetrieveAuthors implements IStrategy {
     @Override
     public Result process(Entity entity, Result result) {
         IDAO dao = new AuthorDAO();
-        List<Entity> authors = dao.retrieve();
+        List<Entity> authors = dao.retrieve("");
         result.putEntities(authors);
         return result;
     }

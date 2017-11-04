@@ -28,7 +28,7 @@ public class BookDAO extends AbstractDAO {
         boolean result = false;
 
         Book book = (Book) entity;
-        SaleParameterization saleParams = book.getSaleParameterization();
+        SalesParameters saleParams = book.getSalesParameters();
 
         String query = "INSERT INTO " +
                 "books(enabled, title, edition, synopsis, isbn, barcode, publishYear, numberOfPages, " +
@@ -45,7 +45,7 @@ public class BookDAO extends AbstractDAO {
 
             salesParamsDAO.create(saleParams);
             Long salesPrmsId = saleParams.getId();
-            book.getSaleParameterization().setId(salesPrmsId);
+            book.getSalesParameters().setId(salesPrmsId);
 
             stmt.setBoolean(1, false);
             stmt.setString(2, book.getTitle());
@@ -60,7 +60,7 @@ public class BookDAO extends AbstractDAO {
             stmt.setDouble(11, book.getDimensions().getDepth());
             stmt.setDouble(12, book.getDimensions().getWeight());
             stmt.setLong(13, book.getAuthor().getId());
-            stmt.setLong(14, book.getSaleParameterization().getId());
+            stmt.setLong(14, book.getSalesParameters().getId());
             stmt.setLong(15, book.getPriceGroup().getId());
             stmt.setLong(16, book.getPublisher().getId());
             stmt.setTimestamp(17, new java.sql.Timestamp(new java.util.Date().getTime()));
@@ -95,7 +95,7 @@ public class BookDAO extends AbstractDAO {
     }
 
     @Override
-    public List<Entity> retrieve() {
+    public List<Entity> retrieve(String queryModifiers) {
         openConnection();
 
         List<Entity> books = new ArrayList<>();
@@ -115,7 +115,9 @@ public class BookDAO extends AbstractDAO {
         q.append("JOIN PRICE_GROUP pg ON (b.PRICE_GROUP_ID = pg.ID) ");
         q.append("JOIN PUBLISHERS pb ON (b.PUBLISHER_ID = pb.ID) ");
 
-        q.append("GROUP BY b.ID ");
+        q.append("WHERE ");
+        q.append(queryModifiers);
+        q.append(" GROUP BY b.ID ");
         q.append("ORDER BY b.ID ASC");
 
         try {
@@ -151,12 +153,12 @@ public class BookDAO extends AbstractDAO {
                 pb.setName(rs.getString("publishers.name"));
                 book.setPublisher(pb);
 
-                SaleParameterization sp = new SaleParameterization();
+                SalesParameters sp = new SalesParameters();
                 sp.setId(rs.getLong("sp_id"));
                 sp.setPeriodicity(rs.getInt("sp_per"));
                 sp.setMinSaleLimit(rs.getInt("sp_min"));
                 sp.setPeriodicityUnit(rs.getString("sp_unit"));
-                book.setSaleParameterization(sp);
+                book.setSalesParameters(sp);
 
                 PriceGroup pg = new PriceGroup(rs.getLong("books.price_group_id"));
                 pg.setMarkup(rs.getDouble("price_group.markup"));
@@ -221,7 +223,7 @@ public class BookDAO extends AbstractDAO {
             stmt.setDouble(11, book.getDimensions().getDepth());
             stmt.setDouble(12, book.getDimensions().getWeight());
             stmt.setLong(13, book.getAuthor().getId());
-            stmt.setLong(14, book.getSaleParameterization().getId());
+            stmt.setLong(14, book.getSalesParameters().getId());
             stmt.setLong(15, book.getPriceGroup().getId());
             stmt.setLong(16, book.getPublisher().getId());
             stmt.setTimestamp(17, new java.sql.Timestamp(new java.util.Date().getTime()));

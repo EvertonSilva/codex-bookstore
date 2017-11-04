@@ -17,7 +17,7 @@ public class Book extends Entity {
     private Dimensions dimensions;
     private Author author;
     private Publisher publisher;
-    private SaleParameterization saleParameterization;
+    private SalesParameters salesParameters;
     private List<Category> categories;
     private ChangeStatus changeStatus;
 
@@ -112,12 +112,12 @@ public class Book extends Entity {
         this.publisher = publisher;
     }
 
-    public SaleParameterization getSaleParameterization() {
-        return saleParameterization;
+    public SalesParameters getSalesParameters() {
+        return salesParameters;
     }
 
-    public void setSaleParameterization(SaleParameterization saleParameterization) {
-        this.saleParameterization = saleParameterization;
+    public void setSalesParameters(SalesParameters salesParameters) {
+        this.salesParameters = salesParameters;
     }
 
     public List<Category> getCategories() {

@@ -14,7 +14,7 @@ public class AuthorDAO implements IDAO {
     }
 
     @Override
-    public List<Entity> retrieve() {
+    public List<Entity> retrieve(String queryModifiers) {
         List<Entity> authors = new ArrayList<>();
         authors.add(new Author(1L, "DOSTOIEVKSI, Fiodor"));
         authors.add(new Author(2L, "GOGÓL, Nikolai"));

@@ -5,12 +5,9 @@ import br.com.codexbookstore.domain.Entity;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Created by everton on 27/09/17.
- */
 public interface IDAO {
     boolean create(Entity entity);
-    List<Entity> retrieve();
+    List<Entity> retrieve(String queryModifiers);
     boolean update(Entity entity);
     boolean delete(Entity entity);
 }

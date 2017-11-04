@@ -5,7 +5,7 @@ import br.com.codexbookstore.domain.Entity;
 /**
  * Created by everton on 24/09/17.
  */
-public class SaleParameterization extends Entity {
+public class SalesParameters extends Entity {
     private int minSaleLimit;
     private int periodicity;
     private String periodicityUnit;

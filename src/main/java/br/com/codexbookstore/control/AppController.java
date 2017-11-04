@@ -5,7 +5,9 @@ import br.com.codexbookstore.control.abstractFactory.FormInsertOperationFactory;
 import br.com.codexbookstore.control.operations.*;
 import br.com.codexbookstore.control.viewHelpers.IViewHelper;
 import br.com.codexbookstore.control.viewHelpers.book.CreateBookVh;
+import br.com.codexbookstore.control.viewHelpers.book.BookEditFormVh;
 import br.com.codexbookstore.control.viewHelpers.book.ListBookVh;
+import br.com.codexbookstore.control.viewHelpers.book.UpdateBookVh;
 import br.com.codexbookstore.control.viewHelpers.customer.CreateCustomerVh;
 import br.com.codexbookstore.control.viewHelpers.customer.InsertCustomerFormVh;
 
@@ -26,7 +28,8 @@ import java.util.HashMap;
  */
 @WebServlet("/")
 public class AppController extends HttpServlet {
-    private String basePath;
+    private static final long serialVersionUID = 1L;
+	private String basePath;
     private String viewsFolderPath;
     private AbstractOperationFactory operationFactory;
     private IOperation op;
@@ -52,11 +55,15 @@ public class AppController extends HttpServlet {
         // book ViewHelpers
         viewHelpers.put(basePath.concat("/books/list"), new ListBookVh());
         viewHelpers.put(basePath.concat("/books/create"), new CreateBookVh());
+        viewHelpers.put(basePath.concat("/books/edit"), new BookEditFormVh());
+        viewHelpers.put(basePath.concat("/books/update"), new CreateBookVh());
+
         // customer ViewHelpers
         viewHelpers.put(basePath.concat("/customers/new"), new InsertCustomerFormVh());
         viewHelpers.put(basePath.concat("/customers/create"), new CreateCustomerVh());
 
         commands.put("NEW", new FormInsertOperation());
+        commands.put("EDIT", new FormEditOperation());
         commands.put("CREATE", new CreateOperation());
         commands.put("RETRIEVE", new RetrieveOperation());
         commands.put("UPDATE", new UpdateOperation());

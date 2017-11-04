@@ -34,7 +34,7 @@ public class CategoryDAO extends AbstractDAO {
     }
 
     @Override
-    public List<Entity> retrieve() {
+    public List<Entity> retrieve(String queryModifiers) {
         List<Entity> categories = new ArrayList<>();
         categories.add(new Category(1L, "Romance", "Lorem ipsum"));
         categories.add(new Category(2L, "Mistery & Suspense", "Lorem ipsum"));

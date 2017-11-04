@@ -5,12 +5,10 @@ import br.com.codexbookstore.control.viewHelpers.IViewHelper;
 import br.com.codexbookstore.domain.Entity;
 import br.com.codexbookstore.domain.book.*;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CreateBookVh implements IViewHelper {
@@ -22,7 +20,7 @@ public class CreateBookVh implements IViewHelper {
         PriceGroup priceGroup;
         List<Category> categories = new ArrayList<>();
         Dimensions dimensions = new Dimensions();
-        SaleParameterization salesParameters = new SaleParameterization();
+        SalesParameters salesParameters = new SalesParameters();
 
         // get parameters from request
         try {
@@ -65,7 +63,7 @@ public class CreateBookVh implements IViewHelper {
             salesParameters.setMinSaleLimit(Integer.valueOf(request.getParameter("book-sales-min-number")));
             salesParameters.setPeriodicity(Integer.valueOf(request.getParameter("book-sales-value")));
             salesParameters.setPeriodicityUnit(request.getParameter("book-sales-period-unit"));
-            book.setSaleParameterization(salesParameters);
+            book.setSalesParameters(salesParameters);
 
         } catch (Exception e) {
             e.printStackTrace();

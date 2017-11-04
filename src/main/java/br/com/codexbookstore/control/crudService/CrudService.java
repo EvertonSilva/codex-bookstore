@@ -15,9 +15,6 @@ import br.com.codexbookstore.persistence.dao.book.BookDAO;
 import java.sql.SQLException;
 import java.util.*;
 
-/**
- * Created by everton on 24/09/17.
- */
 public class CrudService implements ICrudService {
 
     // { entity: { rules: [IStrategy, IStrategy] } }
@@ -29,6 +26,7 @@ public class CrudService implements ICrudService {
     private static final String RETRIEVE = "RETRIEVE";
     private static final String UPDATE = "UPDATE";
     private static final String INSERTFORM = "INSERTFORM";
+    private static final String EDITFORM = "EDITFORM";
 
     public CrudService() {
         // # Data retrieve
@@ -42,7 +40,7 @@ public class CrudService implements ICrudService {
         // ## Combo box for views
         List<IStrategy> booksComboBoxes = Arrays.asList(new RetrieveBookCategories(), new RetrieveAuthors());
         List<IStrategy> customerComboBoxes = Arrays.asList(new ListCountries(), new ListStates(), new ListCities());
-
+        
         // ## Book validations and rules
         List<IStrategy> createBookValidations = Arrays.asList(new BookNotBlank());
 
@@ -52,6 +50,7 @@ public class CrudService implements ICrudService {
         // # set validations by context
         Map<String, List<IStrategy>> bookValidations = new HashMap<>();
         bookValidations.put(INSERTFORM, booksComboBoxes);
+        bookValidations.put(EDITFORM, booksComboBoxes);
         bookValidations.put(CREATE, createBookValidations);
         bookValidations.put(RETRIEVE, new ArrayList<>()); // mock validations
 
@@ -100,7 +99,7 @@ public class CrudService implements ICrudService {
 
         if(!result.hasErrors()) {
             try {
-                result.putEntities(dao.retrieve());
+                result.putEntities(dao.retrieve("1 = 1"));
             } catch(RuntimeException e) {
                 result.addErrorMsg(e.getMessage());
             }
@@ -122,9 +121,23 @@ public class CrudService implements ICrudService {
     @Override
     public Result insertForm(Entity entity) {
         result = new Result();
-        Map<String, List<IStrategy>> rules = requirements.get(entity.getClass().getSimpleName());
-        List<IStrategy> validations = rules.get(INSERTFORM);
+        return result;
+    }
+
+    @Override
+    public Result editForm(Entity entity) {
+    	String entityName = entity.getClass().getSimpleName();
+    	String whereClause = "%s.id = %d";
+    	IDAO dao = daos.get(entityName);
+    	result = new Result();
+        
+        Map<String, List<IStrategy>> rules = requirements.get(entityName);
+        List<IStrategy> validations = rules.get(EDITFORM);
+
+        entity = dao.retrieve(String.format(whereClause, entityName.toLowerCase().charAt(0), entity.getId())).get(0);
         result = executeValidations(entity, validations);
+        result.setEntity(entity);
+
         return result;
     }
 

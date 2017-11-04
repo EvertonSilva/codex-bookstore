@@ -4,13 +4,13 @@ import br.com.codexbookstore.business.IStrategy;
 import br.com.codexbookstore.control.Result;
 import br.com.codexbookstore.domain.Entity;
 import br.com.codexbookstore.domain.book.Book;
-import br.com.codexbookstore.domain.book.SaleParameterization;
+import br.com.codexbookstore.domain.book.SalesParameters;
 
 public class SalesParamsNotBlank implements IStrategy {
     @Override
     public Result process(Entity entity, Result result) {
         Book book = (Book)entity;
-        SaleParameterization sp = book.getSaleParameterization();
+        SalesParameters sp = book.getSalesParameters();
 
         if(String.valueOf(sp.getMinSaleLimit()).isEmpty()) {
             result.addErrorMsg("Minimum sale limit can't be blank");
