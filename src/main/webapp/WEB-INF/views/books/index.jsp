@@ -42,8 +42,10 @@
                             <c:forEach var="book" items="${books}">
                                 <tr>
                                     <td>
-                                        <fmt:formatNumber
-                                            pattern="0000" type="number" value="${book.id}" />
+                                        <a href="<c:url value="/books/edit?id=${book.id}&operation=edit" />">
+                                            <fmt:formatNumber pattern="0000"
+                                                 type="number" value="${book.id}" />
+                                        </a>
                                     </td>
                                     <td>${book.title}</td>
                                     <td>${book.author.name}</td>
