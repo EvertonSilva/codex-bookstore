@@ -70,10 +70,10 @@ public class CrudService implements ICrudService {
 
     @Override
     public Result create(Entity entity) {
-        String klass = entity.getClass().getSimpleName();
+        String entityName = entity.getClass().getSimpleName();
         result = new Result();
-        IDAO dao = daos.get(klass);
-        Map<String, List<IStrategy>> rules = requirements.get(klass);
+        IDAO dao = daos.get(entityName);
+        Map<String, List<IStrategy>> rules = requirements.get(entityName);
         List<IStrategy> validations = rules.get(CREATE);
 
         result = executeValidations(entity, validations);
@@ -121,6 +121,13 @@ public class CrudService implements ICrudService {
     @Override
     public Result insertForm(Entity entity) {
         result = new Result();
+        String entityName = entity.getClass().getSimpleName();
+
+        Map<String, List<IStrategy>> rules = requirements.get(entityName);
+        List<IStrategy> validations = rules.get(INSERTFORM);
+
+        result = executeValidations(entity, validations);
+
         return result;
     }
 
