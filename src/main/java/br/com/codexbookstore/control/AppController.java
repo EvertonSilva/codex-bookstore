@@ -76,6 +76,10 @@ public class AppController extends HttpServlet {
         String uri = request.getRequestURI();
 
         if(uri.equals(basePath) || uri.equals(basePath.concat("/"))) {
+            op = commands.get("RETRIEVE");
+            vh = viewHelpers.get(basePath.concat("/books/list"));
+            Result result = op.execute(vh.getEntity(request));
+            request.setAttribute("books", result.getEntities("Book"));
             request.getRequestDispatcher(viewsFolderPath.concat("index.jsp")).forward(request, response);
         } else if(uri.contains("books/new")) {
             operationFactory = new FormInsertOperationFactory();
