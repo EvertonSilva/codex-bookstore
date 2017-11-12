@@ -85,3 +85,5 @@ ALTER TABLE `books_categories` ADD CONSTRAINT `books_categories_fk0` FOREIGN KEY
 
 ALTER TABLE `books_categories` ADD CONSTRAINT `books_categoriess_fk1` FOREIGN KEY (`category_id`) REFERENCES `categories`(`id`);
 
+--CREATE USER gutenberg PASSWORD 'letter4thepeople';
+--GRANT ALL ON SCHEMA PUBLIC TO gutenberg;
