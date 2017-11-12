@@ -11,23 +11,18 @@ public class StockItem extends Entity {
     private BigDecimal salePrice;
     private int quantity;
 
-    public StockItem() {
+    public StockItem(Book book, int quantity) {
+        this.book = book;
+        this.quantity = quantity;
+        calcSalePrice();
     }
 
     public Book getBook() {
         return book;
     }
 
-    public void setBook(Book book) {
-        this.book = book;
-    }
-
     public BigDecimal getPurchasePrice() {
         return purchasePrice;
-    }
-
-    public void setPurchasePrice(BigDecimal purchasePrice) {
-        this.purchasePrice = purchasePrice;
     }
 
     public BigDecimal getSalePrice() {
@@ -38,11 +33,20 @@ public class StockItem extends Entity {
         this.salePrice = salePrice;
     }
 
+    public void setPurchasePrice(BigDecimal purchasePrice) {
+        this.purchasePrice = purchasePrice;
+    }
+
     public int getQuantity() {
         return quantity;
     }
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    private void calcSalePrice() {
+        double markup = book.getPriceGroup().getMarkup();
+        salePrice = purchasePrice.multiply(BigDecimal.valueOf(markup));
     }
 }
