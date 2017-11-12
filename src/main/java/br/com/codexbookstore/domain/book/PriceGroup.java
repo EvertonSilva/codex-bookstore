@@ -14,6 +14,10 @@ public class PriceGroup extends Entity {
     }
 
     public void setMarkup(double markup) {
-        this.markup = markup;
+        this.markup = 1 + (markup / 100.0);
+    }
+
+    public double displayMarkupInPercents() {
+        return (markup - 1) * 100.0;
     }
 }
