@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
 <html>
     <head>
         <title>Codex Bookstore - Home</title>
@@ -15,6 +16,7 @@
         <style type="text/css">
             .book {
                 border: 1px solid;
+                max-width: 260px;
                 padding: 3em 1em 1em 1em;
                 position: relative;
             }
@@ -47,7 +49,7 @@
                     <div class="row">
                         <div class="column column-80">
                             <nav class="navigation">
-                                <a href="/codex-bookstore" class="navigation-link">
+                                <a href="${rootPath}" class="navigation-link">
                                     <i class="fa fa-home" aria-hidden="true"></i>
                                     Home
                                 </a>
@@ -76,11 +78,24 @@
                 </div>
                 <div class="row">
                     <c:forEach var="book" items="${books}">
-                        <div class="book">
+                        <div class="book" id="book-${book.id}">
                             <h3 class="book__title">${book.title}</h3>
                             <span class="book__author"><strong>Author:</strong> ${book.author.name}</span>
                             <span class="book__price"><strong>Price:</strong> $000,00</span>
-                            <button>Add to cart!</button>
+                            <form id="orderItem" action="${rootPath}/cart/addItem" method="post">
+                                <label for="book_id">Quantity:</label>
+                                <input type="number" id="book_quantity" name="book_quantity" value="1" min="1">
+                                <input type="hidden" id="book_id" name="book_id" value="${book.id}">
+                                <c:choose>
+                                    <c:when test="${sessionScope.containsKey(\"shopCart\")}">
+                                        <input type="hidden" value="update" name="operation">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input type="hidden" value="create" name="operation">
+                                    </c:otherwise>
+                                </c:choose>
+                                <button id="addToCart">Add to cart!</button>
+                            </form>
                         </div>
                     </c:forEach>
                 </div>
