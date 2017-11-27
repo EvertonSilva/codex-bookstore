@@ -1,6 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
+<c:choose>
+    <c:when test="${sessionScope.containsKey(\"shopCart\")}">
+        <c:set var="operation" value="update"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var="operation" value="create"/>
+    </c:otherwise>
+</c:choose>
 <html>
     <head>
         <title>Codex Bookstore - Home</title>
@@ -86,14 +94,7 @@
                                 <label for="book_id">Quantity:</label>
                                 <input type="number" id="book_quantity" name="book_quantity" value="1" min="1">
                                 <input type="hidden" id="book_id" name="book_id" value="${book.id}">
-                                <c:choose>
-                                    <c:when test="${sessionScope.containsKey(\"shopCart\")}">
-                                        <input type="hidden" value="update" name="operation">
-                                    </c:when>
-                                    <c:otherwise>
-                                        <input type="hidden" value="create" name="operation">
-                                    </c:otherwise>
-                                </c:choose>
+                                <input type="hidden" value="${operation}" name="operation">
                                 <button id="addToCart">Add to cart!</button>
                             </form>
                         </div>

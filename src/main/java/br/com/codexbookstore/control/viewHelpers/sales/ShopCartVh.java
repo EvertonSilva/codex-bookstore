@@ -13,12 +13,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class CreateCartVh implements br.com.codexbookstore.control.viewHelpers.IViewHelper {
+public class ShopCartVh implements br.com.codexbookstore.control.viewHelpers.IViewHelper {
     @Override
     public Entity getEntity(HttpServletRequest request) {
-        ShopCart cart = new ShopCart();
+        ShopCart cart = null;
         Book book = new Book();
         OrderItem item = new OrderItem();
+        HttpSession session = request.getSession();
+
+        // get shop cart in session or...
+        cart = (ShopCart) session.getAttribute("shopCart");
+
+        // instantiate a new shop cart
+        if(cart == null) {
+            cart = new ShopCart();
+        }
 
         book.setId(Long.valueOf(request.getParameter("book_id")));
         item.setBook(book);
@@ -26,7 +35,7 @@ public class CreateCartVh implements br.com.codexbookstore.control.viewHelpers.I
         item.setQuantity(Integer.valueOf(request.getParameter("book_quantity")));
         cart.addOrderItem(item);
 
-        request.getSession().setAttribute("shopCart", cart);
+        session.setAttribute("shopCart", cart);
         return cart;
     }
 
