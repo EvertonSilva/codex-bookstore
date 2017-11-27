@@ -5,10 +5,12 @@ import br.com.codexbookstore.business.book.BookNotBlank;
 import br.com.codexbookstore.business.book.views.RetrieveAuthors;
 import br.com.codexbookstore.business.book.views.RetrieveBookCategories;
 import br.com.codexbookstore.business.customer.*;
+import br.com.codexbookstore.business.sales.BookInStock;
 import br.com.codexbookstore.control.Result;
 import br.com.codexbookstore.domain.book.Book;
 import br.com.codexbookstore.domain.Entity;
 import br.com.codexbookstore.domain.customer.Customer;
+import br.com.codexbookstore.domain.sale.ShopCart;
 import br.com.codexbookstore.persistence.dao.IDAO;
 import br.com.codexbookstore.persistence.dao.book.BookDAO;
 
@@ -35,19 +37,24 @@ public class CrudService implements ICrudService {
         // # Entities
         String bookEntity = Book.class.getSimpleName();
         String customerEntity = Customer.class.getSimpleName();
+        String shopCartEntity = ShopCart.class.getSimpleName();
 
         // # Validations and Business rules
         // ## Combo box for views
         List<IStrategy> booksComboBoxes = Arrays.asList(new RetrieveBookCategories(), new RetrieveAuthors());
         List<IStrategy> customerComboBoxes = Arrays.asList(new ListCountries(), new ListStates(), new ListCities());
         
-        // ## Book validations and rules
+        // ## Book validations and business rules
         List<IStrategy> createBookValidations = Arrays.asList(new BookNotBlank());
 
-        // ## Customer validations and rules
+        // ## Customer validations and business rules
         List<IStrategy> createCustomerValidations = Arrays.asList(new CustomerNotBlank(), new CreditCardValidation(), new PasswordValitation());
 
+        // ## ShopCart validations and business rules
+        List<IStrategy> shopCartStrategies = Arrays.asList(new BookInStock());
+
         // # set validations by context
+        // book crud
         Map<String, List<IStrategy>> bookValidations = new HashMap<>();
         bookValidations.put(INSERTFORM, booksComboBoxes);
         bookValidations.put(EDITFORM, booksComboBoxes);
@@ -55,9 +62,14 @@ public class CrudService implements ICrudService {
         bookValidations.put(RETRIEVE, new ArrayList<>());
         bookValidations.put(UPDATE, createBookValidations);
 
+        // customer crud
         Map<String, List<IStrategy>> customerValidations = new HashMap<>();
         customerValidations.put(INSERTFORM, customerComboBoxes);
         customerValidations.put(CREATE, createCustomerValidations);
+
+        // shopCart
+        Map<String, List<IStrategy>> shopCartValidations = new HashMap<>();
+        shopCartValidations.put(CREATE, shopCartStrategies);
 
         // # persistence layer
         daos = new HashMap<>();
@@ -67,6 +79,7 @@ public class CrudService implements ICrudService {
         requirements = new HashMap<>();
         requirements.put(bookEntity, bookValidations);
         requirements.put(customerEntity, customerValidations);
+        requirements.put(shopCartEntity, shopCartValidations);
     }
 
     @Override
@@ -79,7 +92,7 @@ public class CrudService implements ICrudService {
 
         result = executeValidations(entity, validations);
 
-        if(!result.hasErrors()) { // break any validations?
+        if(!result.hasErrors() && dao != null) { // break any validation?
             if(!dao.create(entity)) { // persistence errors?
                 result.addErrorMsg("Error!!!");
             }

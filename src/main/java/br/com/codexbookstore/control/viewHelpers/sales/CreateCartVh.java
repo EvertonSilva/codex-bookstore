@@ -26,14 +26,14 @@ public class CreateCartVh implements br.com.codexbookstore.control.viewHelpers.I
         item.setQuantity(Integer.valueOf(request.getParameter("book_quantity")));
         cart.addOrderItem(item);
 
+        request.getSession().setAttribute("shopCart", cart);
         return cart;
     }
 
     @Override
     public void setView(Result result, HttpServletRequest request, HttpServletResponse response) {
         try {
-            HttpSession session = request.getSession();
-            response.sendRedirect(request.getContextPath());
+            response.sendRedirect(request.getHeader("referer"));
         } catch (IOException e) {
             e.printStackTrace();
         }
