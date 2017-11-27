@@ -11,7 +11,15 @@ public class ShopCart extends Entity {
     public ShopCart() {
     }
 
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
     public void addOrderItem(OrderItem item) {
         orderItems.add(item);
+    }
+
+    public OrderItem getOrderItemAt(int index) {
+        return orderItems.get(index);
     }
 }

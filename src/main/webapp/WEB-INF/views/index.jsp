@@ -65,7 +65,7 @@
                         </div>
                         <div class="column">
                             <div class="cart">
-                                <a href="#">
+                                <a href="${rootPath}/cart/items?operation=retrieve">
                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                     <span>Your Cart</span>
                                 </a>

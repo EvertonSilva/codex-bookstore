@@ -10,6 +10,7 @@ import br.com.codexbookstore.control.viewHelpers.book.ListBookVh;
 import br.com.codexbookstore.control.viewHelpers.book.UpdateBookVh;
 import br.com.codexbookstore.control.viewHelpers.customer.CreateCustomerVh;
 import br.com.codexbookstore.control.viewHelpers.customer.InsertCustomerFormVh;
+import br.com.codexbookstore.control.viewHelpers.sales.ListShopCartVh;
 import br.com.codexbookstore.control.viewHelpers.sales.ShopCartVh;
 
 import javax.servlet.ServletConfig;
@@ -65,6 +66,7 @@ public class AppController extends HttpServlet {
 
         // shopcart ViewHelpers
         viewHelpers.put(basePath.concat("/cart/addItem"), new ShopCartVh());
+        viewHelpers.put(basePath.concat("/cart/items"), new ListShopCartVh());
 
         commands.put("NEW", new FormInsertOperation());
         commands.put("EDIT", new FormEditOperation());

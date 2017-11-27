@@ -71,6 +71,7 @@ public class CrudService implements ICrudService {
         Map<String, List<IStrategy>> shopCartValidations = new HashMap<>();
         shopCartValidations.put(CREATE, shopCartStrategies);
         shopCartValidations.put(UPDATE, shopCartStrategies);
+        shopCartValidations.put(RETRIEVE, new ArrayList<>());
 
         // # persistence layer
         daos = new HashMap<>();
@@ -112,7 +113,7 @@ public class CrudService implements ICrudService {
 
         result = executeValidations(entity, validations);
 
-        if(!result.hasErrors()) {
+        if(!result.hasErrors() && dao != null) {
             try {
                 result.putEntities(dao.retrieve("1 = 1"));
             } catch(RuntimeException e) {
