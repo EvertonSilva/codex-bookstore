@@ -80,6 +80,7 @@
                                 </tr>
                             </c:forEach>
                         </table>
+                        <a href="#" class="button button-outline">Checkout</a>
                     </div>
                 </div>
             </div>
