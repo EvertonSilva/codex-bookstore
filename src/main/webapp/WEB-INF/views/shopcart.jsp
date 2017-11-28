@@ -57,7 +57,7 @@
                 </div>
                 <div class="row">
                     <div class="column">
-                        <h3>Filters</h3>
+                        <h3></h3>
                     </div>
                     <div class="column column-80">
                         <table class="shopcart">
@@ -65,12 +65,18 @@
                                 <th>Book title</th>
                                 <th>Quantity</th>
                                 <th>Subtotal</th>
+                                <th>actions</th>
                             </tr>
-                            <c:forEach var="cartItem" items="${cartItems}">
+                            <c:forEach var="cartItem" items="${cartItems}" varStatus="it">
                                 <tr class="shopcart__item">
                                     <td>${cartItem.book.title}</td>
                                     <td>${cartItem.quantity}</td>
                                     <td>R$ 000,00</td>
+                                    <td>
+                                        <a href="${rootPath}/cart/removeItem?operation=update&item=${it.index}" title="remove">
+                                            <i class="fa fa-close" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </table>

@@ -22,4 +22,8 @@ public class ShopCart extends Entity {
     public OrderItem getOrderItemAt(int index) {
         return orderItems.get(index);
     }
+
+    public void removeItem(int index) {
+        orderItems.remove(index);
+    }
 }

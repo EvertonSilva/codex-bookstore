@@ -4,6 +4,7 @@ import br.com.codexbookstore.control.abstractFactory.AbstractOperationFactory;
 import br.com.codexbookstore.control.abstractFactory.FormInsertOperationFactory;
 import br.com.codexbookstore.control.operations.*;
 import br.com.codexbookstore.control.viewHelpers.IViewHelper;
+import br.com.codexbookstore.control.viewHelpers.sales.ShopCartRemoveItemVh;
 import br.com.codexbookstore.control.viewHelpers.book.CreateBookVh;
 import br.com.codexbookstore.control.viewHelpers.book.BookEditFormVh;
 import br.com.codexbookstore.control.viewHelpers.book.ListBookVh;
@@ -66,6 +67,7 @@ public class AppController extends HttpServlet {
 
         // shopcart ViewHelpers
         viewHelpers.put(basePath.concat("/cart/addItem"), new ShopCartVh());
+        viewHelpers.put(basePath.concat("/cart/removeItem"), new ShopCartRemoveItemVh());
         viewHelpers.put(basePath.concat("/cart/items"), new ListShopCartVh());
 
         commands.put("NEW", new FormInsertOperation());
