@@ -11,9 +11,11 @@ import br.com.codexbookstore.control.Result;
 import br.com.codexbookstore.domain.book.Book;
 import br.com.codexbookstore.domain.Entity;
 import br.com.codexbookstore.domain.customer.Customer;
+import br.com.codexbookstore.domain.sale.Order;
 import br.com.codexbookstore.domain.sale.ShopCart;
 import br.com.codexbookstore.persistence.dao.IDAO;
 import br.com.codexbookstore.persistence.dao.book.BookDAO;
+import br.com.codexbookstore.persistence.dao.sale.OrderDAO;
 
 import java.sql.SQLException;
 import java.util.*;
@@ -39,6 +41,7 @@ public class CrudService implements ICrudService {
         String bookEntity = Book.class.getSimpleName();
         String customerEntity = Customer.class.getSimpleName();
         String shopCartEntity = ShopCart.class.getSimpleName();
+        String orderEntity = Order.class.getSimpleName();
 
         // # Validations and Business rules
         // ## Combo box for views
@@ -53,6 +56,9 @@ public class CrudService implements ICrudService {
 
         // ## ShopCart validations and business rules
         List<IStrategy> shopCartStrategies = Arrays.asList(new BookInStock(), new UpdateCartTotalValue());
+
+        // ## Order validations
+        List<IStrategy> orderStrategies = new ArrayList<>(); // mockup
 
         // # set validations by context
         // book crud
@@ -74,15 +80,21 @@ public class CrudService implements ICrudService {
         shopCartValidations.put(UPDATE, shopCartStrategies);
         shopCartValidations.put(RETRIEVE, new ArrayList<>());
 
+        // orders
+        Map<String, List<IStrategy>> ordersValidations = new HashMap<>();
+        ordersValidations.put(CREATE, orderStrategies);
+
         // # persistence layer
         daos = new HashMap<>();
         daos.put(bookEntity, new BookDAO());
+        daos.put(orderEntity, new OrderDAO());
 
         // # all requirements
         requirements = new HashMap<>();
         requirements.put(bookEntity, bookValidations);
         requirements.put(customerEntity, customerValidations);
         requirements.put(shopCartEntity, shopCartValidations);
+        requirements.put(orderEntity, ordersValidations);
     }
 
     @Override

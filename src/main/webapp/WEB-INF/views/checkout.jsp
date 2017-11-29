@@ -4,13 +4,14 @@
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
 <html>
     <head>
-        <title>Codex Bookstore - Shopping Cart</title>
+        <title>Checkout</title>
         <!-- Google Fonts -->
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
         <!-- CSS Reset -->
         <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
         <!-- Milligram CSS minified -->
         <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+        <%-- font awesome --%>
         <link rel="stylesheet" href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css"
               integrity="sha384-dNpIIXE8U05kAbPhy3G1cz+yZmTzA6CY8Vg/u2L9xRnHjJiAK76m2BIEaSEV+/aU"
               crossorigin="anonymous">
@@ -37,7 +38,7 @@
                         </div>
                         <div class="column">
                             <div class="cart">
-                                <a href="#">
+                                <a href="${rootPath}/cart/items?operation=retrieve">
                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                     <span>Your Cart</span>
                                 </a>
@@ -54,41 +55,18 @@
             </div>
             <div class="main-content container">
                 <div class="row">
-                    <h1>Shopping Cart</h1>
+                    <h1>Checkout Page</h1>
                 </div>
                 <div class="row">
-                    <div class="column">
-                        <h3></h3>
-                    </div>
+                    <div class="column"></div>
                     <div class="column column-80">
-                        <table class="shopcart">
-                            <tr>
-                                <th>Book title</th>
-                                <th>Quantity</th>
-                                <th>Subtotal</th>
-                                <th>actions</th>
-                            </tr>
-                            <c:forEach var="cartItem" items="${cartItems}" varStatus="it">
-                                <tr class="shopcart__item">
-                                    <td>${cartItem.book.title}</td>
-                                    <td>${cartItem.quantity}</td>
-                                    <td><fmt:formatNumber type="currency" value="${cartItem.subTotal}"/></td>
-                                    <td>
-                                        <a href="${rootPath}/cart/removeItem?operation=update&item=${it.index}" title="remove">
-                                            <i class="fa fa-close" aria-hidden="true"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </table>
-                        <div class="shopCart-total">
-                            <span>Total: </span>
-                            <span>
-                                <strong><fmt:formatNumber type="currency" value="${sessionScope.shopCart.total}" /></strong>
-                            </span>
-                            <span>&nbsp;</span>
-                            <a href="${rootPath}/order/checkout?operation=create" class="button button-outline">Checkout</a>
-                        </div>
+                        <h2>Purchase details</h2>
+                        <section>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eligendi enim expedita labore
+                                laboriosam minus neque odio vitae voluptatem voluptatibus.1
+                            </p>
+                        </section>
                     </div>
                 </div>
             </div>
