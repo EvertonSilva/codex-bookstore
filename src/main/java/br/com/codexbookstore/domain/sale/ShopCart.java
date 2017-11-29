@@ -34,6 +34,7 @@ public class ShopCart extends Entity {
     }
 
     public void updateCartTotal() {
+        total = BigDecimal.valueOf(0);
         for(OrderItem item : orderItems) {
             total = total.add(item.getSubTotal());
         }
