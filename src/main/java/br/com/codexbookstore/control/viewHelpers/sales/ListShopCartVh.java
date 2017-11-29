@@ -20,7 +20,7 @@ public class ListShopCartVh implements IViewHelper {
         if(cart == null) {
             cart = new ShopCart();
         }
-
+        session.setAttribute("shopCart", cart);
         return cart;
     }
 
