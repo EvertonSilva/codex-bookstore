@@ -28,14 +28,15 @@
                 border: 1px solid;
                 margin: 0 10px;
                 max-width: 260px;
-                padding: 3em 1em 1em 1em;
+                padding: 6em 1em 1em 1em;
                 position: relative;
             }
             .book__title {
                 background-color: rebeccapurple;
                 color: #fff;
                 left: 0;
-                padding: 1% 2%;
+                min-height: 78px;
+                padding: 1% 0 1% 6%;
                 position: absolute;
                 text-transform: capitalize;
                 top: 0;
