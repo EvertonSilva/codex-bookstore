@@ -7,10 +7,13 @@ import java.math.BigDecimal;
 
 public class Stock extends Entity {
     private int quantity;
+    private int blockQuantity;
     private BigDecimal purchasePrice;
     private Book book;
 
-    public Stock() {}
+    public Stock() {
+        blockQuantity = 0;
+    }
 
     public Stock(Book book) {
         this.book = book;
@@ -31,5 +34,13 @@ public class Stock extends Entity {
     public BigDecimal getSalePrice() {
         double markup = book.getPriceGroup().getMarkup();
         return purchasePrice.multiply(BigDecimal.valueOf(markup));
+    }
+
+    public void setBlockQuantity(int blockQuantity) {
+        this.blockQuantity = blockQuantity;
+    }
+
+    public int getAvailable() {
+        return quantity - blockQuantity;
     }
 }

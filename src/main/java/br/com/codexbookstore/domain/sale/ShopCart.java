@@ -19,7 +19,6 @@ public class ShopCart extends Entity {
 
     public void addOrderItem(OrderItem item) {
         orderItems.add(item);
-        updateCartTotal();
     }
 
     public OrderItem getOrderItemAt(int index) {
