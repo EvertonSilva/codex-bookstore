@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
 <c:choose>
     <c:when test="${sessionScope.containsKey(\"shopCart\")}">
@@ -91,7 +92,12 @@
                         <div class="book" id="book-${book.id}">
                             <h3 class="book__title">${book.title}</h3>
                             <span class="book__author"><strong>Author:</strong> ${book.author.name}</span>
-                            <span class="book__price"><strong>Price:</strong> $000,00</span>
+                            <span class="book__price">
+                                <strong>Price:</strong>
+                                <span>
+                                    <fmt:formatNumber type="currency" value="${book.stock.salePrice}"/>
+                                </span>
+                            </span>
                             <form id="orderItem" action="${rootPath}/cart/addItem" method="post">
                                 <label for="book_id">Quantity:</label>
                                 <input type="number" id="book_quantity" name="book_quantity" value="1" min="1">
