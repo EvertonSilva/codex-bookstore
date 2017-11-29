@@ -43,4 +43,8 @@ public class Stock extends Entity {
     public int getAvailable() {
         return quantity - blockQuantity;
     }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
 }

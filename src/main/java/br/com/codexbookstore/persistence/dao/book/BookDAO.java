@@ -173,10 +173,11 @@ public class BookDAO extends AbstractDAO {
                 Arrays.stream(rs.getString("catIDs").split(", "))
                         .forEach(_id -> book.getCategories().forEach( c -> c.setId(Long.valueOf(_id))));
 
-                Stock stock = new Stock();
+                Stock stock;
                 String stockQuery = "book_id = ";
                 stockQuery = stockQuery.concat(String.valueOf(book.getId()));
                 stock = (Stock) stockDAO.retrieve(stockQuery).get(0);
+                stock.setBook(book);
                 book.setStock(stock);
 
                 books.add(book);

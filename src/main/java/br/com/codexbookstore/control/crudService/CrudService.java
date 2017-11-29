@@ -6,6 +6,7 @@ import br.com.codexbookstore.business.book.views.RetrieveAuthors;
 import br.com.codexbookstore.business.book.views.RetrieveBookCategories;
 import br.com.codexbookstore.business.customer.*;
 import br.com.codexbookstore.business.sales.BookInStock;
+import br.com.codexbookstore.business.sales.UpdateCartTotalValue;
 import br.com.codexbookstore.control.Result;
 import br.com.codexbookstore.domain.book.Book;
 import br.com.codexbookstore.domain.Entity;
@@ -51,7 +52,7 @@ public class CrudService implements ICrudService {
         List<IStrategy> createCustomerValidations = Arrays.asList(new CustomerNotBlank(), new CreditCardValidation(), new PasswordValitation());
 
         // ## ShopCart validations and business rules
-        List<IStrategy> shopCartStrategies = Arrays.asList(new BookInStock());
+        List<IStrategy> shopCartStrategies = Arrays.asList(new BookInStock(), new UpdateCartTotalValue());
 
         // # set validations by context
         // book crud

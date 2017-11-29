@@ -33,7 +33,7 @@ public class ShopCart extends Entity {
         return total;
     }
 
-    private void updateCartTotal() {
+    public void updateCartTotal() {
         for(OrderItem item : orderItems) {
             total = total.add(item.getSubTotal());
         }
