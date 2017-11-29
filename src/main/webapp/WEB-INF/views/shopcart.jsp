@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
 <html>
     <head>
@@ -71,7 +72,7 @@
                                 <tr class="shopcart__item">
                                     <td>${cartItem.book.title}</td>
                                     <td>${cartItem.quantity}</td>
-                                    <td>R$ 000,00</td>
+                                    <td><fmt:formatNumber type="currency" value="${cartItem.subTotal}"/></td>
                                     <td>
                                         <a href="${rootPath}/cart/removeItem?operation=update&item=${it.index}" title="remove">
                                             <i class="fa fa-close" aria-hidden="true"></i>
@@ -80,7 +81,14 @@
                                 </tr>
                             </c:forEach>
                         </table>
-                        <a href="#" class="button button-outline">Checkout</a>
+                        <div class="shopCart-total">
+                            <span>Total: </span>
+                            <span>
+                                <strong><fmt:formatNumber type="currency" value="${sessionScope.shopCart.total}" /></strong>
+                            </span>
+                            <span>&nbsp;</span>
+                            <a href="#" class="button button-outline">Checkout</a>
+                        </div>
                     </div>
                 </div>
             </div>
