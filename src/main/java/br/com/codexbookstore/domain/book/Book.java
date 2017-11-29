@@ -1,7 +1,9 @@
 package br.com.codexbookstore.domain.book;
 
 import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.stock.Stock;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +22,7 @@ public class Book extends Entity {
     private SalesParameters salesParameters;
     private List<Category> categories;
     private ChangeStatus changeStatus;
+    private Stock stock;
 
     public Book() {
         categories = new ArrayList<>();
@@ -146,5 +149,13 @@ public class Book extends Entity {
 
     public String getStatus() {
         return isEnabled() ? "enabled" : "disabled";
+    }
+
+    public Stock getStock() {
+        return stock;
+    }
+
+    public void setStock(Stock stock) {
+        this.stock = stock;
     }
 }

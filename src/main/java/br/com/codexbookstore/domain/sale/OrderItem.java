@@ -3,6 +3,8 @@ package br.com.codexbookstore.domain.sale;
 import br.com.codexbookstore.domain.Entity;
 import br.com.codexbookstore.domain.book.Book;
 
+import java.math.BigDecimal;
+
 public class OrderItem extends Entity {
     private Book book;
     private int quantity;
@@ -24,5 +26,9 @@ public class OrderItem extends Entity {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public BigDecimal getSubTotal() {
+        return book.getStock().getSalePrice().multiply(BigDecimal.valueOf(quantity));
     }
 }
