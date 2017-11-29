@@ -27,7 +27,6 @@ public class ShopCart extends Entity {
 
     public void removeItem(int index) {
         orderItems.remove(index);
-        updateCartTotal();
     }
 
     public BigDecimal getTotal() {

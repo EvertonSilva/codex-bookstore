@@ -2,6 +2,7 @@ package br.com.codexbookstore.persistence.dao.book;
 
 import br.com.codexbookstore.domain.Entity;
 import br.com.codexbookstore.domain.book.*;
+import br.com.codexbookstore.domain.stock.Stock;
 import br.com.codexbookstore.persistence.dao.AbstractDAO;
 
 import java.sql.PreparedStatement;
@@ -15,10 +16,12 @@ import java.util.List;
 public class BookDAO extends AbstractDAO {
     private SalesParamsDAO salesParamsDAO;
     private CategoryDAO categoryDAO;
+    private StockDAO stockDAO;
 
     public BookDAO() {
         salesParamsDAO = new SalesParamsDAO(true);
         categoryDAO = new CategoryDAO();
+        stockDAO = new StockDAO();
     }
 
     @Override
@@ -169,6 +172,12 @@ public class BookDAO extends AbstractDAO {
 
                 Arrays.stream(rs.getString("catIDs").split(", "))
                         .forEach(_id -> book.getCategories().forEach( c -> c.setId(Long.valueOf(_id))));
+
+                Stock stock = new Stock();
+                String stockQuery = "book_id = ";
+                stockQuery = stockQuery.concat(String.valueOf(book.getId()));
+                stock = (Stock) stockDAO.retrieve(stockQuery).get(0);
+                book.setStock(stock);
 
                 books.add(book);
             }

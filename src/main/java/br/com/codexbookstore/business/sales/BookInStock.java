@@ -22,13 +22,11 @@ public class BookInStock implements IStrategy {
             Long bookId = item.getBook().getId();
             Book book = (Book) bookDAO.retrieve("b.id = ".concat(String.valueOf(bookId))).get(0);
             bookStock = book.getStock();
+            item.setBook(book);
 
             if(bookStock.getAvailable() == 0) { //book out of stock?
                 cart.removeItem(i);
                 result.addErrorMsg("Book out of Stock");
-            } else {
-                cart.getOrderItemAt(i).setBook(book);
-                bookStock.setBlockQuantity(item.getQuantity());
             }
         }
         return result;
