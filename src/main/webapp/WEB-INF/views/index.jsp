@@ -18,12 +18,14 @@
         <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
         <!-- Milligram CSS minified -->
         <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+        <%-- font awesome --%>
         <link rel="stylesheet" href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css"
               integrity="sha384-dNpIIXE8U05kAbPhy3G1cz+yZmTzA6CY8Vg/u2L9xRnHjJiAK76m2BIEaSEV+/aU"
               crossorigin="anonymous">
         <style type="text/css">
             .book {
                 border: 1px solid;
+                margin: 0 10px;
                 max-width: 260px;
                 padding: 3em 1em 1em 1em;
                 position: relative;
