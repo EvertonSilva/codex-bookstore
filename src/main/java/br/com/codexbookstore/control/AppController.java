@@ -56,6 +56,9 @@ public class AppController extends HttpServlet {
         viewHelpers = new HashMap<>();
         commands = new HashMap<>();
 
+        // homepage
+        viewHelpers.put(basePath.concat("/"), new ListBookVh());
+
         // book ViewHelpers
         viewHelpers.put(basePath.concat("/books/list"), new ListBookVh());
         viewHelpers.put(basePath.concat("/books/create"), new CreateBookVh());
@@ -86,20 +89,15 @@ public class AppController extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String uri = request.getRequestURI();
+        String operation = request.getParameter("operation");
 
-        if(uri.equals(basePath) || uri.equals(basePath.concat("/"))) {
-            op = commands.get("RETRIEVE");
-            vh = viewHelpers.get(basePath.concat("/books/list"));
-            Result result = op.execute(vh.getEntity(request));
-            request.setAttribute("books", result.getEntities("Book"));
-            request.getRequestDispatcher(viewsFolderPath.concat("index.jsp")).forward(request, response);
-        } else if(uri.contains("books/new")) {
+        if(uri.contains("books/new")) {
             operationFactory = new FormInsertOperationFactory();
             op = operationFactory.defineOperation();
             vh = operationFactory.defineViewHelper();
         } else {
             vh = viewHelpers.get(uri);
-            op = commands.get(request.getParameter("operation").toUpperCase());
+            op = operation == null ? commands.get("RETRIEVE") : commands.get(operation.toUpperCase());
         }
 
         Result result = op.execute(vh.getEntity(request));
