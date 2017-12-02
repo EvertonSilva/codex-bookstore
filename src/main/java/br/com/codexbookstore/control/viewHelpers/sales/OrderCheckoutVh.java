@@ -39,7 +39,7 @@ public class OrderCheckoutVh implements IViewHelper {
     @Override
     public void setView(Result result, HttpServletRequest request, HttpServletResponse response) {
         try {
-            request.getRequestDispatcher("/WEB-INF/views/checkout.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/sale/checkout.jsp").forward(request, response);
         } catch (ServletException | IOException e) {
             e.printStackTrace();
         }
