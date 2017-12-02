@@ -10,10 +10,10 @@
         <!-- Google Fonts -->
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
         <!-- CSS Reset -->
-        <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+        <link rel="stylesheet" href="${rootPath}/assets/css/lib/normalize.css">
         <!-- Milligram CSS minified -->
-        <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
-        <%-- font awesome --%>
+        <link rel="stylesheet" href="${rootPath}/assets/css/lib/milligram.min.css">
+        <!-- font awesome -->
         <link rel="stylesheet" href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css"
               integrity="sha384-dNpIIXE8U05kAbPhy3G1cz+yZmTzA6CY8Vg/u2L9xRnHjJiAK76m2BIEaSEV+/aU"
               crossorigin="anonymous">

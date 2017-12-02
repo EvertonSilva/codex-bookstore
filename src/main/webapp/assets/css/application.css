@@ -1,0 +1,28 @@
+.book {
+    border: 1px solid;
+    margin: 0 10px;
+    max-width: 260px;
+    padding: 6em 1em 1em 1em;
+    position: relative;
+}
+.book__title {
+    background-color: rebeccapurple;
+    color: #fff;
+    left: 0;
+    min-height: 78px;
+    padding: 1% 0 1% 6%;
+    position: absolute;
+    text-transform: capitalize;
+    top: 0;
+    width: 100%;
+}
+.book__author,
+.book__price {
+    display: block;
+    margin: 0.7em 0;
+}
+.top-bar {
+    background-color: #ddd;
+    padding: 1.5% 0;
+    margin-bottom: 2em;
+}
