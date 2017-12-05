@@ -1,3 +1,7 @@
+fieldset {
+    border: 1px solid #ccc;
+    padding: 1% 2%;
+}
 .book {
     border: 1px solid;
     margin: 0 10px;

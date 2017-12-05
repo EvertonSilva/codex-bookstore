@@ -18,19 +18,26 @@ public class OrderCheckoutVh implements IViewHelper {
     @Override
     public Entity getEntity(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        // create a new Order
-        Order order = new Order();
 
-        // get user from session
-        User user = (User) session.getAttribute("user");
-        order.setUser(user);
+        // get Order from session or create a new one
+        Order order = (Order) session.getAttribute("order");
 
-        // get OrderItem from cart
-        ShopCart cart = (ShopCart) session.getAttribute("shopCart");
-        order.setOrderItems(cart.getOrderItems());
+        if(order == null) {
+            order = new Order();
 
-        // set date
-        order.setOrderDate(new Date());
+            // get user from session
+            User user = (User) session.getAttribute("user");
+            order.setUser(user);
+
+            // get OrderItem from cart
+            ShopCart cart = (ShopCart) session.getAttribute("shopCart");
+            order.setOrderItems(cart.getOrderItems());
+
+            // set date
+            order.setOrderDate(new Date());
+
+            session.setAttribute("order", order);
+        }
 
         // return the order
         return order;
