@@ -74,9 +74,8 @@ public class CreateCustomerVh implements IViewHelper {
             // authentication
             String passwd = SecurePassword.hashPassword(request.getParameter("password"));
             String confirmPasswd = SecurePassword.hashPassword(request.getParameter("pwd-confirm"));
-            user.setLogin(request.getParameter("email"));
+            user.setEmail(request.getParameter("email"));
             user.setPassword(passwd);
-            user.setConfirmPasswd(confirmPasswd);
 
             customer.setUser(user);
 

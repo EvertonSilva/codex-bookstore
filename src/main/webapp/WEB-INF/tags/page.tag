@@ -42,8 +42,10 @@
                         </div>
                         <div class="column">
                             <div class="user-info">
-                                <i class="fa fa-user-circle" aria-hidden="true"></i>
-                                <span>Guest</span>
+                                <a href="${rootPath}/login?operation=new">
+                                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                    <span>Login</span>
+                                </a>
                             </div>
                         </div>
                     </div>

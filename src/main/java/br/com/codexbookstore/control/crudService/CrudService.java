@@ -8,6 +8,7 @@ import br.com.codexbookstore.business.customer.*;
 import br.com.codexbookstore.business.sales.BookInStock;
 import br.com.codexbookstore.business.sales.UpdateCartTotalValue;
 import br.com.codexbookstore.control.Result;
+import br.com.codexbookstore.domain.User;
 import br.com.codexbookstore.domain.book.Book;
 import br.com.codexbookstore.domain.Entity;
 import br.com.codexbookstore.domain.customer.Customer;
@@ -42,6 +43,7 @@ public class CrudService implements ICrudService {
         String customerEntity = Customer.class.getSimpleName();
         String shopCartEntity = ShopCart.class.getSimpleName();
         String orderEntity = Order.class.getSimpleName();
+        String userEntity = User.class.getSimpleName();
 
         // # Validations and Business rules
         // ## Combo box for views
@@ -59,6 +61,9 @@ public class CrudService implements ICrudService {
 
         // ## Order validations
         List<IStrategy> orderStrategies = new ArrayList<>(); // mockup
+
+        // ## Login validations
+        List<IStrategy> loginStrategies = new ArrayList<>();
 
         // # set validations by context
         // book crud
@@ -84,6 +89,10 @@ public class CrudService implements ICrudService {
         Map<String, List<IStrategy>> ordersValidations = new HashMap<>();
         ordersValidations.put(CREATE, orderStrategies);
 
+        // login
+        Map<String, List<IStrategy>> loginValidations = new HashMap<>();
+        loginValidations.put(INSERTFORM, loginStrategies);
+
         // # persistence layer
         daos = new HashMap<>();
         daos.put(bookEntity, new BookDAO());
@@ -95,6 +104,7 @@ public class CrudService implements ICrudService {
         requirements.put(customerEntity, customerValidations);
         requirements.put(shopCartEntity, shopCartValidations);
         requirements.put(orderEntity, ordersValidations);
+        requirements.put(userEntity, loginValidations);
     }
 
     @Override
