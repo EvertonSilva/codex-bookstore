@@ -18,7 +18,9 @@ public class ShopCart extends Entity {
     }
 
     public void addOrderItem(OrderItem item) {
-        orderItems.add(item);
+        if(!isBookOnList(item)) {
+            orderItems.add(item);
+        }
     }
 
     public OrderItem getOrderItemAt(int index) {
@@ -38,5 +40,20 @@ public class ShopCart extends Entity {
         for(OrderItem item : orderItems) {
             total = total.add(item.getSubTotal());
         }
+    }
+
+    private boolean isBookOnList(OrderItem item) {
+
+        for(int i = 0, max = orderItems.size(); i < max; i++) {
+            OrderItem it = orderItems.get(i);
+            if(it.getBook().getTitle().equals(item.getBook().getTitle())) { // is item book already on the list?
+                int currQty = it.getQuantity();
+                it.setQuantity(currQty + item.getQuantity());
+                orderItems.set(i, it);
+                return true;
+            }
+        }
+
+        return false;
     }
 }
