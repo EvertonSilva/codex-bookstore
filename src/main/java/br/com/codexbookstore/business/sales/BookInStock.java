@@ -16,26 +16,31 @@ public class BookInStock implements IStrategy {
         BookDAO bookDAO = new BookDAO();
         OrderItem item = null;
         Stock bookStock = null;
+        int index = 0;
 
-        for(int i = 0, max = cart.getOrderItems().size(); i < max; i++) {
-            item = cart.getOrderItemAt(i);
-            Long bookId = item.getBook().getId();
-            Book book = (Book) bookDAO.retrieve("b.id = ".concat(String.valueOf(bookId))).get(0);
-            bookStock = book.getStock();
-            item.setBook(book);
+        // get index of last item on cart
+        index = cart.getOrderItems().size() - 1;
 
-            if(bookStock.getAvailable() == 0) { //book out of stock?
-                cart.removeItem(i);
-                result.addErrorMsg("Book out of Stock");
-                break;
-            }
+        // retrieve last item on cart
+        item = cart.getOrderItems().get(index);
 
-            if(item.getQuantity() > bookStock.getAvailable()) {
-                cart.removeItem(i);
-                result.addErrorMsg("Quantity overflow");
-                break;
-            }
+        // get book id
+        Long bookId = item.getBook().getId();
+
+        // retrieve book from database
+        Book book = (Book) bookDAO.retrieve("b.id = ".concat(String.valueOf(bookId))).get(0);
+
+        // get book stock
+        bookStock = book.getStock();
+
+        // update book object with all fields filled
+        item.setBook(book);
+
+        if(bookStock.getAvailable() == 0) { //book out of stock?
+            cart.removeItem(index);
+            result.addErrorMsg("Book out of Stock");
         }
+
         return result;
     }
 }
