@@ -86,6 +86,7 @@ public class AppController extends HttpServlet {
         commands.put("CREATE", new CreateOperation());
         commands.put("RETRIEVE", new RetrieveOperation());
         commands.put("UPDATE", new UpdateOperation());
+        commands.put("DELETE", new DeleteOperation());
 
     }
 

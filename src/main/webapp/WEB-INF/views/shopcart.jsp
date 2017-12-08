@@ -28,7 +28,7 @@
                             <td>${cartItem.quantity}</td>
                             <td><fmt:formatNumber type="currency" value="${cartItem.subTotal}"/></td>
                             <td>
-                                <a href="${rootPath}/cart/removeItem?operation=update&item=${it.index}" title="remove">
+                                <a href="${rootPath}/cart/removeItem?operation=delete&item=${it.index}" title="remove">
                                     <i class="fa fa-close" aria-hidden="true"></i>
                                 </a>
                             </td>

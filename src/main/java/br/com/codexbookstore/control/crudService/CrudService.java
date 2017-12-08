@@ -31,6 +31,7 @@ public class CrudService implements ICrudService {
     private static final String CREATE = "CREATE";
     private static final String RETRIEVE = "RETRIEVE";
     private static final String UPDATE = "UPDATE";
+    private static final String DELETE = "DELETE";
     private static final String INSERTFORM = "INSERTFORM";
     private static final String EDITFORM = "EDITFORM";
 
@@ -83,6 +84,7 @@ public class CrudService implements ICrudService {
         Map<String, List<IStrategy>> shopCartValidations = new HashMap<>();
         shopCartValidations.put(CREATE, shopCartStrategies);
         shopCartValidations.put(UPDATE, shopCartStrategies);
+        shopCartValidations.put(DELETE, Arrays.asList(new UpdateCartTotalValue()));
         shopCartValidations.put(RETRIEVE, new ArrayList<>());
 
         // orders
@@ -168,6 +170,20 @@ public class CrudService implements ICrudService {
 
     @Override
     public Result delete(Entity entity) {
+        String entityName = entity.getClass().getSimpleName();
+        result = new Result();
+        IDAO dao = daos.get(entityName);
+        Map<String, List<IStrategy>> rules = requirements.get(entityName);
+        List<IStrategy> validations = rules.get(DELETE);
+
+        result = executeValidations(entity, validations);
+
+        if(!result.hasErrors() && dao != null) {
+            if(!dao.delete(entity)) {
+                result.addErrorMsg("Error !!!");
+            }
+        }
+
         return null;
     }
 
