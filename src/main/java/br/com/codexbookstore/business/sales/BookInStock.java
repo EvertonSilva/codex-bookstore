@@ -37,8 +37,14 @@ public class BookInStock implements IStrategy {
         item.setBook(book);
 
         if(bookStock.getAvailable() == 0) { //book out of stock?
-            cart.removeItem(index);
             result.addErrorMsg("Book out of Stock");
+        } else {
+            ValidBookQuantity quantity = new ValidBookQuantity();
+            result = quantity.process(item, result);
+        }
+
+        if(result.hasErrors()) {
+            cart.removeItem(index);
         }
 
         return result;
