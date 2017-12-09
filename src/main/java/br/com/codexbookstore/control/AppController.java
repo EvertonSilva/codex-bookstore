@@ -34,11 +34,7 @@ import java.util.HashMap;
 @WebServlet("/")
 public class AppController extends HttpServlet {
     private static final long serialVersionUID = 1L;
-	private String basePath;
-    private String viewsFolderPath;
     private AbstractOperationFactory operationFactory;
-    private IOperation op;
-    private IViewHelper vh;
     private HashMap<String, IViewHelper> viewHelpers;
     private HashMap<String, IOperation> commands;
 
@@ -52,8 +48,7 @@ public class AppController extends HttpServlet {
 
     public AppController() {
         operationFactory = null;
-        basePath = "/codex-bookstore";
-        viewsFolderPath = "/WEB-INF/views/";
+        String basePath = "/codex-bookstore";
         viewHelpers = new HashMap<>();
         commands = new HashMap<>();
 
@@ -96,6 +91,8 @@ public class AppController extends HttpServlet {
         String uri = request.getRequestURI();
         String operation = request.getParameter("operation");
 
+        IOperation op;
+        IViewHelper vh;
         if(uri.contains("books/new")) {
             operationFactory = new FormInsertOperationFactory();
             op = operationFactory.defineOperation();
