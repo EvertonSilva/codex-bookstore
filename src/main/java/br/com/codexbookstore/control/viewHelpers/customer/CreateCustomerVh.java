@@ -48,16 +48,8 @@ public class CreateCustomerVh implements IViewHelper {
 
             // address
             address.setPostalCode(request.getParameter("postal-code"));
-            address.setAddressType(request.getParameter("address-type"));
-            address.setPublicPlace(request.getParameter("public-place"));
             address.setNumber(request.getParameter("number"));
             address.setDistrict(request.getParameter("district"));
-            address.setCountry(new Country(Long.valueOf(request.getParameter("country"))));
-            address.setState(new State(Long.valueOf(request.getParameter("state"))));
-            address.setAlias(request.getParameter("note"));
-
-            customer.setChargeAddress(address);
-            customer.addDeliveryAddress(address);
 
             // credit card
             creditCard.setCardNumber(request.getParameter("card-number"));
