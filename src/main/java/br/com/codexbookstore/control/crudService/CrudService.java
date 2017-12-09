@@ -50,23 +50,23 @@ public class CrudService implements ICrudService {
         String userEntity = User.class.getSimpleName();
 
         // # Validations and Business rules
-        // ## Combo box for views
+        // Combo box for views
         List<IStrategy> booksComboBoxes = Arrays.asList(new RetrieveBookCategories(), new RetrieveAuthors());
         List<IStrategy> customerComboBoxes = Arrays.asList(new ListCountries(), new ListStates(), new ListCities());
         
-        // ## Book validations and business rules
+        // Book validations and business rules
         List<IStrategy> createBookValidations = Arrays.asList(new BookNotBlank());
 
-        // ## Customer validations and business rules
+        // Customer validations and business rules
         List<IStrategy> createCustomerValidations = Arrays.asList(new CustomerNotBlank(), new CreditCardValidation(), new PasswordValitation());
 
-        // ## ShopCart validations and business rules
+        // ShopCart validations and business rules
         List<IStrategy> itemStrategies = Arrays.asList(new BookInStock(), new ValidBookQuantity());
 
-        // ## Order validations
+        // Order validations
         List<IStrategy> orderStrategies = new ArrayList<>(); // mockup
 
-        // ## Login validations
+        // Login validations
         List<IStrategy> loginStrategies = new ArrayList<>();
 
         // # set validations by context
