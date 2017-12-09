@@ -6,12 +6,15 @@ public class Address extends Entity {
     private String postalCode;
     private String district;
     private String number;
-    private String addressType;
-    private String publicPlace;
-    private String note;
     private Country country;
     private State state;
     private City city;
+    private String alias;
+    private AddressType addressType;
+    private PublicPlace publicPlace;
+
+    // TODO: add another class HomeType
+    // private HomeType homeType
 
     public String getPostalCode() {
         return postalCode;
@@ -35,22 +38,6 @@ public class Address extends Entity {
 
     public void setNumber(String number) {
         this.number = number;
-    }
-
-    public String getAddressType() {
-        return addressType;
-    }
-
-    public String getPublicPlace() {
-        return publicPlace;
-    }
-
-    public void setPublicPlace(String publicPlace) {
-        this.publicPlace = publicPlace;
-    }
-
-    public void setAddressType(String addressType) {
-        this.addressType = addressType;
     }
 
     public Country getCountry() {
@@ -77,11 +64,27 @@ public class Address extends Entity {
         this.city = city;
     }
 
-    public String getNote() {
-        return note;
+    public String getAlias() {
+        return alias;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
+    public AddressType getAddressType() {
+        return addressType;
+    }
+
+    public void setAddressType(AddressType addressType) {
+        this.addressType = addressType;
+    }
+
+    public PublicPlace getPublicPlace() {
+        return publicPlace;
+    }
+
+    public void setPublicPlace(PublicPlace publicPlace) {
+        this.publicPlace = publicPlace;
     }
 }

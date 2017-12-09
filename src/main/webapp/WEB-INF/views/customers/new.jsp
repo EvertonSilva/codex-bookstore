@@ -112,8 +112,8 @@
                                 <option value="1">Suzano</option>
                             </select>
 
-                            <label for="note">Note:</label>
-                            <textarea name="note" id="note" cols="30" rows="10">Insert here any observation...</textarea>
+                            <label for="alias">Address alias:</label>
+                            <input type="text" name="alias" id="alias" />
                         </div>
                     </fieldset>
                     <fieldset>

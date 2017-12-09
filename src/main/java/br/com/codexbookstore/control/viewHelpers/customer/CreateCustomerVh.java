@@ -54,7 +54,7 @@ public class CreateCustomerVh implements IViewHelper {
             address.setDistrict(request.getParameter("district"));
             address.setCountry(new Country(Long.valueOf(request.getParameter("country"))));
             address.setState(new State(Long.valueOf(request.getParameter("state"))));
-            address.setNote(request.getParameter("note"));
+            address.setAlias(request.getParameter("note"));
 
             customer.setChargeAddress(address);
             customer.addDeliveryAddress(address);
