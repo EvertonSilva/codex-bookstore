@@ -38,8 +38,8 @@
                 <div class="shopCart-total">
                     <span>Total: </span>
                     <span>
-                                <strong><fmt:formatNumber type="currency" value="${sessionScope.shopCart.total}" /></strong>
-                            </span>
+                        <strong><fmt:formatNumber type="currency" value="${sessionScope.shopCart.total}" /></strong>
+                    </span>
                     <span>&nbsp;</span>
                     <a href="${rootPath}/order/checkout?operation=create" class="button button-outline">Checkout</a>
                 </div>
