@@ -45,6 +45,7 @@ public class ShopCartVh implements br.com.codexbookstore.control.viewHelpers.IVi
             ShopCart cart = (ShopCart) session.getAttribute("shopCart");
 
             cart.addOrderItem((OrderItem) result.getEntities("OrderItem").get(0));
+            cart.updateCartTotal();
             response.sendRedirect(request.getHeader("referer"));
         } catch (IOException e) {
             e.printStackTrace();
