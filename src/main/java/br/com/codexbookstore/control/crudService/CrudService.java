@@ -7,12 +7,14 @@ import br.com.codexbookstore.business.book.views.RetrieveBookCategories;
 import br.com.codexbookstore.business.customer.*;
 import br.com.codexbookstore.business.sales.BookInStock;
 import br.com.codexbookstore.business.sales.UpdateCartTotalValue;
+import br.com.codexbookstore.business.sales.ValidBookQuantity;
 import br.com.codexbookstore.control.Result;
 import br.com.codexbookstore.domain.User;
 import br.com.codexbookstore.domain.book.Book;
 import br.com.codexbookstore.domain.Entity;
 import br.com.codexbookstore.domain.customer.Customer;
 import br.com.codexbookstore.domain.sale.Order;
+import br.com.codexbookstore.domain.sale.OrderItem;
 import br.com.codexbookstore.domain.sale.ShopCart;
 import br.com.codexbookstore.persistence.dao.IDAO;
 import br.com.codexbookstore.persistence.dao.book.BookDAO;
@@ -43,6 +45,7 @@ public class CrudService implements ICrudService {
         String bookEntity = Book.class.getSimpleName();
         String customerEntity = Customer.class.getSimpleName();
         String shopCartEntity = ShopCart.class.getSimpleName();
+        String itemEntity = OrderItem.class.getSimpleName();
         String orderEntity = Order.class.getSimpleName();
         String userEntity = User.class.getSimpleName();
 
@@ -58,7 +61,7 @@ public class CrudService implements ICrudService {
         List<IStrategy> createCustomerValidations = Arrays.asList(new CustomerNotBlank(), new CreditCardValidation(), new PasswordValitation());
 
         // ## ShopCart validations and business rules
-        List<IStrategy> shopCartStrategies = Arrays.asList(new BookInStock(), new UpdateCartTotalValue());
+        List<IStrategy> itemStrategies = Arrays.asList(new BookInStock(), new ValidBookQuantity());
 
         // ## Order validations
         List<IStrategy> orderStrategies = new ArrayList<>(); // mockup
@@ -82,10 +85,11 @@ public class CrudService implements ICrudService {
 
         // shopCart
         Map<String, List<IStrategy>> shopCartValidations = new HashMap<>();
-        shopCartValidations.put(CREATE, shopCartStrategies);
-        shopCartValidations.put(UPDATE, shopCartStrategies);
         shopCartValidations.put(DELETE, Arrays.asList(new UpdateCartTotalValue()));
         shopCartValidations.put(RETRIEVE, new ArrayList<>());
+
+        Map<String, List<IStrategy>> itemValidations = new HashMap<>();
+        itemValidations.put(UPDATE, itemStrategies);
 
         // orders
         Map<String, List<IStrategy>> ordersValidations = new HashMap<>();
@@ -105,6 +109,7 @@ public class CrudService implements ICrudService {
         requirements.put(bookEntity, bookValidations);
         requirements.put(customerEntity, customerValidations);
         requirements.put(shopCartEntity, shopCartValidations);
+        requirements.put(itemEntity, itemValidations);
         requirements.put(orderEntity, ordersValidations);
         requirements.put(userEntity, loginValidations);
     }
