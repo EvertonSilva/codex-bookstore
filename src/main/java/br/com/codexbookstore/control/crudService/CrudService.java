@@ -8,6 +8,9 @@ import br.com.codexbookstore.business.customer.*;
 import br.com.codexbookstore.business.sales.BookInStock;
 import br.com.codexbookstore.business.sales.UpdateCartTotalValue;
 import br.com.codexbookstore.business.sales.ValidBookQuantity;
+import br.com.codexbookstore.business.sales.order.RetrieveAddresses;
+import br.com.codexbookstore.business.sales.order.RetrieveCreditCards;
+import br.com.codexbookstore.business.sales.order.RetrieveExchangeCoupons;
 import br.com.codexbookstore.control.Result;
 import br.com.codexbookstore.domain.User;
 import br.com.codexbookstore.domain.book.Book;
@@ -64,7 +67,7 @@ public class CrudService implements ICrudService {
         List<IStrategy> itemStrategies = Arrays.asList(new BookInStock(), new ValidBookQuantity());
 
         // Order validations
-        List<IStrategy> orderStrategies = new ArrayList<>(); // mockup
+        List<IStrategy> orderCreateStrategies = Arrays.asList(new RetrieveAddresses(), new RetrieveCreditCards(), new RetrieveExchangeCoupons());
 
         // Login validations
         List<IStrategy> loginStrategies = new ArrayList<>();
@@ -93,7 +96,7 @@ public class CrudService implements ICrudService {
 
         // orders
         Map<String, List<IStrategy>> ordersValidations = new HashMap<>();
-        ordersValidations.put(CREATE, orderStrategies);
+        ordersValidations.put(INSERTFORM, orderCreateStrategies);
 
         // login
         Map<String, List<IStrategy>> loginValidations = new HashMap<>();

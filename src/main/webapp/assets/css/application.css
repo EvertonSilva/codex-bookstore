@@ -2,6 +2,9 @@ fieldset {
     border: 1px solid #ccc;
     padding: 1% 2%;
 }
+.clear {
+    clear: both;
+}
 .book {
     border: 1px solid;
     margin: 0 10px;
@@ -29,4 +32,13 @@ fieldset {
     background-color: #ddd;
     padding: 1.5% 0;
     margin-bottom: 2em;
+}
+
+.order-summary__itemqty:after {
+    content: "x";
+    font-style: italic;
+    font-size: 0.9em;
+}
+#promo-code {
+    width: 65%;
 }
