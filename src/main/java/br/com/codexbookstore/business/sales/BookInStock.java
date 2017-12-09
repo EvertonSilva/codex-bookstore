@@ -12,17 +12,9 @@ import br.com.codexbookstore.persistence.dao.book.BookDAO;
 public class BookInStock implements IStrategy {
     @Override
     public Result process(Entity entity, Result result) {
-        ShopCart cart = (ShopCart) entity;
+        OrderItem item = (OrderItem) entity;
         BookDAO bookDAO = new BookDAO();
-        OrderItem item = null;
         Stock bookStock = null;
-        int index = 0;
-
-        // get index of last item on cart
-        index = cart.getOrderItems().size() - 1;
-
-        // retrieve last item on cart
-        item = cart.getOrderItems().get(index);
 
         // get book id
         Long bookId = item.getBook().getId();
@@ -39,12 +31,7 @@ public class BookInStock implements IStrategy {
         if(bookStock.getAvailable() == 0) { //book out of stock?
             result.addErrorMsg("Book out of Stock");
         } else {
-            ValidBookQuantity quantity = new ValidBookQuantity();
-            result = quantity.process(item, result);
-        }
-
-        if(result.hasErrors()) {
-            cart.removeItem(index);
+            result.setEntity(item);
         }
 
         return result;
