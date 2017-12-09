@@ -5,7 +5,6 @@ import br.com.codexbookstore.control.Result;
 import br.com.codexbookstore.domain.Entity;
 import br.com.codexbookstore.domain.book.Book;
 import br.com.codexbookstore.domain.sale.OrderItem;
-import br.com.codexbookstore.domain.sale.ShopCart;
 import br.com.codexbookstore.domain.stock.Stock;
 import br.com.codexbookstore.persistence.dao.book.BookDAO;
 
@@ -14,7 +13,7 @@ public class BookInStock implements IStrategy {
     public Result process(Entity entity, Result result) {
         OrderItem item = (OrderItem) entity;
         BookDAO bookDAO = new BookDAO();
-        Stock bookStock = null;
+        Stock bookStock;
 
         // get book id
         Long bookId = item.getBook().getId();

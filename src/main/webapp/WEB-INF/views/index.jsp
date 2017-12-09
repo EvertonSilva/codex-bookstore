@@ -3,14 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
-<c:choose>
-    <c:when test="${sessionScope.containsKey(\"shopCart\")}">
-        <c:set var="operation" value="update"/>
-    </c:when>
-    <c:otherwise>
-        <c:set var="operation" value="create"/>
-    </c:otherwise>
-</c:choose>
+<c:set var="operation" value="update"/>
 
 <t:page>
     <jsp:attribute name="title">Home</jsp:attribute>
