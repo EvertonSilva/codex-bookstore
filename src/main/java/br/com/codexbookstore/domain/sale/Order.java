@@ -2,6 +2,7 @@ package br.com.codexbookstore.domain.sale;
 
 import br.com.codexbookstore.domain.Entity;
 import br.com.codexbookstore.domain.User;
+import br.com.codexbookstore.domain.customer.Customer;
 import br.com.codexbookstore.domain.location.Address;
 
 import java.math.BigDecimal;
@@ -9,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Order extends Entity {
-    private User user;
+    private Customer customer;
     private List<OrderItem> orderItems;
     private Date orderDate;
 
@@ -24,20 +25,20 @@ public class Order extends Entity {
         this.orderDate = orderDate;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public List<OrderItem> getOrderItems() {
         return orderItems;
     }
 
     public void setOrderItems(List<OrderItem> orderItems) {
         this.orderItems = orderItems;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public BigDecimal getTotal() {

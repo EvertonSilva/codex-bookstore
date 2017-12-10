@@ -5,16 +5,13 @@ import br.com.codexbookstore.control.abstractFactory.FormInsertOperationFactory;
 import br.com.codexbookstore.control.operations.*;
 import br.com.codexbookstore.control.viewHelpers.IViewHelper;
 import br.com.codexbookstore.control.viewHelpers.login.LoginVh;
-import br.com.codexbookstore.control.viewHelpers.sales.OrderCheckoutVh;
-import br.com.codexbookstore.control.viewHelpers.sales.ShopCartRemoveItemVh;
+import br.com.codexbookstore.control.viewHelpers.sales.*;
 import br.com.codexbookstore.control.viewHelpers.book.CreateBookVh;
 import br.com.codexbookstore.control.viewHelpers.book.BookEditFormVh;
 import br.com.codexbookstore.control.viewHelpers.book.ListBookVh;
 import br.com.codexbookstore.control.viewHelpers.book.UpdateBookVh;
 import br.com.codexbookstore.control.viewHelpers.customer.CreateCustomerVh;
 import br.com.codexbookstore.control.viewHelpers.customer.InsertCustomerFormVh;
-import br.com.codexbookstore.control.viewHelpers.sales.ListShopCartVh;
-import br.com.codexbookstore.control.viewHelpers.sales.ShopCartVh;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -71,7 +68,8 @@ public class AppController extends HttpServlet {
         viewHelpers.put(basePath.concat("/cart/items"), new ListShopCartVh());
 
         // order viewHelper
-        viewHelpers.put(basePath.concat("/order/checkout"), new OrderCheckoutVh());
+        // viewHelpers.put(basePath.concat("/order/checkout"), new OrderCheckoutVh());
+        viewHelpers.put(basePath.concat("/order/checkout"), new OrderCheckoutPageVh());
 
         // login
         viewHelpers.put(basePath.concat("/login"), new LoginVh());

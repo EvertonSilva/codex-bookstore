@@ -10,6 +10,7 @@ import br.com.codexbookstore.business.sales.UpdateCartTotalValue;
 import br.com.codexbookstore.business.sales.ValidBookQuantity;
 import br.com.codexbookstore.business.sales.order.RetrieveAddresses;
 import br.com.codexbookstore.business.sales.order.RetrieveCreditCards;
+import br.com.codexbookstore.business.sales.order.RetrieveCustomer;
 import br.com.codexbookstore.business.sales.order.RetrieveExchangeCoupons;
 import br.com.codexbookstore.control.Result;
 import br.com.codexbookstore.domain.User;
@@ -67,7 +68,7 @@ public class CrudService implements ICrudService {
         List<IStrategy> itemStrategies = Arrays.asList(new BookInStock(), new ValidBookQuantity());
 
         // Order validations
-        List<IStrategy> orderCreateStrategies = Arrays.asList(new RetrieveAddresses(), new RetrieveCreditCards(), new RetrieveExchangeCoupons());
+        List<IStrategy> orderCreateStrategies = Arrays.asList(new RetrieveCustomer());
 
         // Login validations
         List<IStrategy> loginStrategies = new ArrayList<>();
