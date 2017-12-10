@@ -1,6 +1,6 @@
 package br.com.codexbookstore.domain.location;
 
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 
-public class City extends Entity {
+public class City extends DomainEntity {
 }

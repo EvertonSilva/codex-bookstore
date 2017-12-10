@@ -1,14 +1,14 @@
 package br.com.codexbookstore.control;
 
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 
 import java.util.*;
 
 public class Result {
 
-    private Map<String, List<Entity>> entities;
+    private Map<String, List<DomainEntity>> entities;
     private StringBuilder errors;
-    private List<Entity> tmpList;
+    private List<DomainEntity> tmpList;
 
     public Result() {
         entities = new HashMap<>();
@@ -30,22 +30,22 @@ public class Result {
         return errors.length() > 0;
     }
 
-    public void putEntities(List<Entity> entities) {
+    public void putEntities(List<DomainEntity> entities) {
         String key = entityName(entities.get(0));
         this.entities.put(key, entities);
     }
 
-    public List<Entity> getEntities(String key) {
+    public List<DomainEntity> getEntities(String key) {
         return this.entities.get(key);
     }
 
-    public void setEntity(Entity entity) {
-        String key = entityName(entity);
-        tmpList.add(entity); // TODO: change this
+    public void setEntity(DomainEntity domainEntity) {
+        String key = entityName(domainEntity);
+        tmpList.add(domainEntity); // TODO: change this
         this.entities.put(key, tmpList);
     }
 
-    private String entityName(Entity entity) {
-        return entity.getClass().getSimpleName();
+    private String entityName(DomainEntity domainEntity) {
+        return domainEntity.getClass().getSimpleName();
     }
 }

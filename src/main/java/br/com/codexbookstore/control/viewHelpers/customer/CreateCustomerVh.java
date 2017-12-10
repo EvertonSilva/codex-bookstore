@@ -2,15 +2,13 @@ package br.com.codexbookstore.control.viewHelpers.customer;
 
 import br.com.codexbookstore.control.Result;
 import br.com.codexbookstore.control.viewHelpers.IViewHelper;
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 import br.com.codexbookstore.domain.Phone;
 import br.com.codexbookstore.domain.User;
 import br.com.codexbookstore.domain.customer.CreditCard;
 import br.com.codexbookstore.domain.customer.Customer;
 import br.com.codexbookstore.domain.customer.Gender;
 import br.com.codexbookstore.domain.location.Address;
-import br.com.codexbookstore.domain.location.Country;
-import br.com.codexbookstore.domain.location.State;
 import br.com.codexbookstore.utils.SecurePassword;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +20,7 @@ import java.util.Date;
 
 public class CreateCustomerVh implements IViewHelper {
     @Override
-    public Entity getEntity(HttpServletRequest request) {
+    public DomainEntity getEntity(HttpServletRequest request) {
         Customer customer = new Customer();
         Phone phone = new Phone();
         Address address = new Address();

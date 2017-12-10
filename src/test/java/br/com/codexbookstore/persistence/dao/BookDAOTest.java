@@ -1,6 +1,6 @@
 package br.com.codexbookstore.persistence.dao;
 
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 import br.com.codexbookstore.domain.book.*;
 import br.com.codexbookstore.persistence.dao.book.BookDAO;
 import org.junit.After;
@@ -41,7 +41,7 @@ public class BookDAOTest {
 
     @Test
     public void testRetrieveBooks() throws Exception {
-        List<Entity> books;
+        List<DomainEntity> books;
         books = dao.retrieve("1 = 1");
 
         assertNotNull(books);

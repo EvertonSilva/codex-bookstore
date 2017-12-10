@@ -1,10 +1,14 @@
 package br.com.codexbookstore.domain;
 
-/**
- * Created by everton on 24/09/17.
- */
-public class Entity {
+import javax.persistence.*;
+
+@MappedSuperclass
+public class DomainEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
     private boolean enabled;
 
     public Long getId() {

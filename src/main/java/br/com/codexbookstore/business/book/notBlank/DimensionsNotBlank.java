@@ -2,14 +2,14 @@ package br.com.codexbookstore.business.book.notBlank;
 
 import br.com.codexbookstore.business.IStrategy;
 import br.com.codexbookstore.control.Result;
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 import br.com.codexbookstore.domain.book.Book;
 import br.com.codexbookstore.domain.book.Dimensions;
 
 public class DimensionsNotBlank implements IStrategy {
     @Override
-    public Result process(Entity entity, Result result) {
-        Book book = (Book)entity;
+    public Result process(DomainEntity domainEntity, Result result) {
+        Book book = (Book) domainEntity;
         Dimensions dimensions = book.getDimensions();
 
         if(String.valueOf(dimensions.getWidth()).isEmpty()) {

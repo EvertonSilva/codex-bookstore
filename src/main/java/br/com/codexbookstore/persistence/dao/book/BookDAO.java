@@ -1,6 +1,6 @@
 package br.com.codexbookstore.persistence.dao.book;
 
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 import br.com.codexbookstore.domain.book.*;
 import br.com.codexbookstore.domain.stock.Stock;
 import br.com.codexbookstore.persistence.dao.AbstractDAO;
@@ -25,12 +25,12 @@ public class BookDAO extends AbstractDAO {
     }
 
     @Override
-    public boolean create(Entity entity) {
+    public boolean create(DomainEntity domainEntity) {
         openConnection();
 
         boolean result = false;
 
-        Book book = (Book) entity;
+        Book book = (Book) domainEntity;
         SalesParameters saleParams = book.getSalesParameters();
 
         String query = "INSERT INTO " +
@@ -98,10 +98,10 @@ public class BookDAO extends AbstractDAO {
     }
 
     @Override
-    public List<Entity> retrieve(String queryModifiers) {
+    public List<DomainEntity> retrieve(String queryModifiers) {
         openConnection();
 
-        List<Entity> books = new ArrayList<>();
+        List<DomainEntity> books = new ArrayList<>();
         StringBuilder q = new StringBuilder();
         q.append("SELECT b.*, a.id, a.name, ");
         q.append("sp.id as sp_id, sp.MIN_SALE_LIMIT sp_min, sp.PERIODICITY as sp_per, sp.PERIODICITY_UNIT as sp_unit, ");
@@ -190,10 +190,10 @@ public class BookDAO extends AbstractDAO {
     }
 
     @Override
-    public boolean update(Entity entity) {
+    public boolean update(DomainEntity domainEntity) {
         openConnection();
         boolean result = false;
-        Book book = (Book) entity;
+        Book book = (Book) domainEntity;
         StringBuilder query = new StringBuilder();
         query.append("UPDATE books SET ");
         query.append("enabled = ?, ");
@@ -264,7 +264,7 @@ public class BookDAO extends AbstractDAO {
     }
 
     @Override
-    public boolean delete(Entity entity) {
+    public boolean delete(DomainEntity domainEntity) {
         return false;
     }
 

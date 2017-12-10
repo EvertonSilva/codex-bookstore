@@ -1,6 +1,6 @@
 package br.com.codexbookstore.domain.customer;
 
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 import br.com.codexbookstore.domain.Phone;
 import br.com.codexbookstore.domain.User;
 import br.com.codexbookstore.domain.location.Address;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Customer extends Entity {
+public class Customer extends DomainEntity {
     private String identificationDoc;
     private String name;
     private Date dob;

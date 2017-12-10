@@ -1,8 +1,8 @@
 package br.com.codexbookstore.domain.location;
 
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 
-public class AddressType extends Entity {
+public class AddressType extends DomainEntity {
     private String name;
 
     public String getName() {

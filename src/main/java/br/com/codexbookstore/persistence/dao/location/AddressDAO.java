@@ -1,6 +1,6 @@
 package br.com.codexbookstore.persistence.dao.location;
 
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 import br.com.codexbookstore.domain.location.Address;
 import br.com.codexbookstore.persistence.dao.AbstractDAO;
 
@@ -14,15 +14,15 @@ public class AddressDAO extends AbstractDAO {
 
 
     @Override
-    public boolean create(Entity entity) {
+    public boolean create(DomainEntity domainEntity) {
         return false;
     }
 
     @Override
-    public List<Entity> retrieve(String queryModifiers) {
+    public List<DomainEntity> retrieve(String queryModifiers) {
         openConnection();
 
-        List<Entity> addressList = new ArrayList<>();
+        List<DomainEntity> addressList = new ArrayList<>();
         StringBuilder q = new StringBuilder();
         q.append("SELECT * FROM addresses");
 
@@ -49,12 +49,12 @@ public class AddressDAO extends AbstractDAO {
     }
 
     @Override
-    public boolean update(Entity entity) {
+    public boolean update(DomainEntity domainEntity) {
         return false;
     }
 
     @Override
-    public boolean delete(Entity entity) {
+    public boolean delete(DomainEntity domainEntity) {
         return false;
     }
 }

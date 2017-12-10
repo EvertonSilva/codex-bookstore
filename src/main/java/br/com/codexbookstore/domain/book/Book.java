@@ -1,13 +1,12 @@
 package br.com.codexbookstore.domain.book;
 
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 import br.com.codexbookstore.domain.stock.Stock;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Book extends Entity {
+public class Book extends DomainEntity {
     private String title;
     private String edition;
     private String synopsis;

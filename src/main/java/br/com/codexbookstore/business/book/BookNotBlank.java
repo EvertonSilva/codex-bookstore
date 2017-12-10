@@ -4,7 +4,7 @@ import br.com.codexbookstore.business.IStrategy;
 import br.com.codexbookstore.business.book.notBlank.DimensionsNotBlank;
 import br.com.codexbookstore.business.book.notBlank.SalesParamsNotBlank;
 import br.com.codexbookstore.control.Result;
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 import br.com.codexbookstore.domain.book.Book;
 
 import java.util.Arrays;
@@ -12,8 +12,8 @@ import java.util.List;
 
 public class BookNotBlank implements IStrategy {
     @Override
-    public Result process(Entity entity, Result result) {
-        Book book = (Book) entity;
+    public Result process(DomainEntity domainEntity, Result result) {
+        Book book = (Book) domainEntity;
         List<IStrategy> notBlankValidations =
                 Arrays.asList(new SalesParamsNotBlank(), new DimensionsNotBlank());
 

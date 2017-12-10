@@ -2,7 +2,7 @@ package br.com.codexbookstore.control.viewHelpers.sales;
 
 import br.com.codexbookstore.control.Result;
 import br.com.codexbookstore.control.viewHelpers.IViewHelper;
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 import br.com.codexbookstore.domain.sale.ShopCart;
 
 import javax.servlet.ServletException;
@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class ListShopCartVh implements IViewHelper {
     @Override
-    public Entity getEntity(HttpServletRequest request) {
+    public DomainEntity getEntity(HttpServletRequest request) {
         HttpSession session = request.getSession();
         ShopCart cart = (ShopCart) session.getAttribute("shopCart");
 

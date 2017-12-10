@@ -1,13 +1,13 @@
 package br.com.codexbookstore.control.crudService;
 
 import br.com.codexbookstore.control.Result;
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 
 public interface ICrudService {
-    Result create(Entity entity);
-    Result retrieve(Entity entity);
-    Result update(Entity entity);
-    Result delete(Entity entity);
-    Result insertForm(Entity entity);
-    Result editForm(Entity entity);
+    Result create(DomainEntity domainEntity);
+    Result retrieve(DomainEntity domainEntity);
+    Result update(DomainEntity domainEntity);
+    Result delete(DomainEntity domainEntity);
+    Result insertForm(DomainEntity domainEntity);
+    Result editForm(DomainEntity domainEntity);
 }

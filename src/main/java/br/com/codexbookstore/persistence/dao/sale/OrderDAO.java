@@ -1,28 +1,28 @@
 package br.com.codexbookstore.persistence.dao.sale;
 
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 import br.com.codexbookstore.persistence.dao.AbstractDAO;
 
 import java.util.List;
 
 public class OrderDAO extends AbstractDAO {
     @Override
-    public boolean create(Entity entity) {
+    public boolean create(DomainEntity domainEntity) {
         return false;
     }
 
     @Override
-    public List<Entity> retrieve(String queryModifiers) {
+    public List<DomainEntity> retrieve(String queryModifiers) {
         return null;
     }
 
     @Override
-    public boolean update(Entity entity) {
+    public boolean update(DomainEntity domainEntity) {
         return false;
     }
 
     @Override
-    public boolean delete(Entity entity) {
+    public boolean delete(DomainEntity domainEntity) {
         return false;
     }
 }

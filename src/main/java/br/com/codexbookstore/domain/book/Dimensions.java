@@ -1,11 +1,11 @@
 package br.com.codexbookstore.domain.book;
 
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 
 /**
  * Created by everton on 24/09/17.
  */
-public class Dimensions extends Entity {
+public class Dimensions extends DomainEntity {
     private double depth;
     private double height;
     private double weight;

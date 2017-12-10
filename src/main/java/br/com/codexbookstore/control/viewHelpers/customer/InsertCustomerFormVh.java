@@ -1,7 +1,7 @@
 package br.com.codexbookstore.control.viewHelpers.customer;
 
 import br.com.codexbookstore.control.Result;
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 import br.com.codexbookstore.domain.customer.Customer;
 
 import javax.servlet.ServletException;
@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class InsertCustomerFormVh implements br.com.codexbookstore.control.viewHelpers.IViewHelper {
     @Override
-    public Entity getEntity(HttpServletRequest request) {
+    public DomainEntity getEntity(HttpServletRequest request) {
         return new Customer();
     }
 

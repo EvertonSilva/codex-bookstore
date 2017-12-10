@@ -1,7 +1,17 @@
 package br.com.codexbookstore.domain;
 
-public class User extends Entity {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "users")
+public class User extends DomainEntity {
+
+    @Column
     private String email;
+
+    @Column
     private String password;
 
     public User() {

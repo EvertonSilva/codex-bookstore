@@ -1,11 +1,11 @@
 package br.com.codexbookstore.domain.book;
 
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 
 /**
  * Created by everton on 24/09/17.
  */
-public abstract class AbstractCategory extends Entity {
+public abstract class AbstractCategory extends DomainEntity {
     private String name;
     private String description;
 

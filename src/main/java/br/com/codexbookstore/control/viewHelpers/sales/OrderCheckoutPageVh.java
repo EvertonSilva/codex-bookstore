@@ -2,7 +2,7 @@ package br.com.codexbookstore.control.viewHelpers.sales;
 
 import br.com.codexbookstore.control.Result;
 import br.com.codexbookstore.control.viewHelpers.IViewHelper;
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 import br.com.codexbookstore.domain.customer.Customer;
 import br.com.codexbookstore.domain.sale.Order;
 
@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class OrderCheckoutPageVh implements IViewHelper {
     @Override
-    public Entity getEntity(HttpServletRequest request) {
+    public DomainEntity getEntity(HttpServletRequest request) {
         HttpSession session = request.getSession();
         Order order = new Order();
         Long customerId = (Long) session.getAttribute("customerId");

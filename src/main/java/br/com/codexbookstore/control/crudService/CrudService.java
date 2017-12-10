@@ -8,14 +8,11 @@ import br.com.codexbookstore.business.customer.*;
 import br.com.codexbookstore.business.sales.BookInStock;
 import br.com.codexbookstore.business.sales.UpdateCartTotalValue;
 import br.com.codexbookstore.business.sales.ValidBookQuantity;
-import br.com.codexbookstore.business.sales.order.RetrieveAddresses;
-import br.com.codexbookstore.business.sales.order.RetrieveCreditCards;
 import br.com.codexbookstore.business.sales.order.RetrieveCustomer;
-import br.com.codexbookstore.business.sales.order.RetrieveExchangeCoupons;
 import br.com.codexbookstore.control.Result;
+import br.com.codexbookstore.domain.DomainEntity;
 import br.com.codexbookstore.domain.User;
 import br.com.codexbookstore.domain.book.Book;
-import br.com.codexbookstore.domain.Entity;
 import br.com.codexbookstore.domain.customer.Customer;
 import br.com.codexbookstore.domain.sale.Order;
 import br.com.codexbookstore.domain.sale.OrderItem;
@@ -24,7 +21,6 @@ import br.com.codexbookstore.persistence.dao.IDAO;
 import br.com.codexbookstore.persistence.dao.book.BookDAO;
 import br.com.codexbookstore.persistence.dao.sale.OrderDAO;
 
-import java.sql.SQLException;
 import java.util.*;
 
 public class CrudService implements ICrudService {
@@ -119,17 +115,17 @@ public class CrudService implements ICrudService {
     }
 
     @Override
-    public Result create(Entity entity) {
-        String entityName = entity.getClass().getSimpleName();
+    public Result create(DomainEntity domainEntity) {
+        String entityName = domainEntity.getClass().getSimpleName();
         result = new Result();
         IDAO dao = daos.get(entityName);
         Map<String, List<IStrategy>> rules = requirements.get(entityName);
         List<IStrategy> validations = rules.get(CREATE);
 
-        result = executeValidations(entity, validations);
+        result = executeValidations(domainEntity, validations);
 
         if(!result.hasErrors() && dao != null) { // break any validation?
-            if(!dao.create(entity)) { // persistence errors?
+            if(!dao.create(domainEntity)) { // persistence errors?
                 result.addErrorMsg("Error!!!");
             }
         }
@@ -138,14 +134,14 @@ public class CrudService implements ICrudService {
     }
 
     @Override
-    public Result retrieve(Entity entity) {
-        String entityName = entity.getClass().getSimpleName();
+    public Result retrieve(DomainEntity domainEntity) {
+        String entityName = domainEntity.getClass().getSimpleName();
         result = new Result();
         IDAO dao = daos.get(entityName);
         Map<String, List<IStrategy>> rules = requirements.get(entityName);
         List<IStrategy> validations = rules.get(RETRIEVE);
 
-        result = executeValidations(entity, validations);
+        result = executeValidations(domainEntity, validations);
 
         if(!result.hasErrors() && dao != null) {
             try {
@@ -159,17 +155,17 @@ public class CrudService implements ICrudService {
     }
 
     @Override
-    public Result update(Entity entity) {
-        String entityName = entity.getClass().getSimpleName();
+    public Result update(DomainEntity domainEntity) {
+        String entityName = domainEntity.getClass().getSimpleName();
         result = new Result();
         IDAO dao = daos.get(entityName);
         Map<String, List<IStrategy>> rules = requirements.get(entityName);
         List<IStrategy> validations = rules.get(UPDATE);
 
-        result = executeValidations(entity, validations);
+        result = executeValidations(domainEntity, validations);
 
         if(!result.hasErrors() && dao != null) {
-            if(!dao.update(entity)) {
+            if(!dao.update(domainEntity)) {
                 result.addErrorMsg("Error!!!");
             }
         }
@@ -178,17 +174,17 @@ public class CrudService implements ICrudService {
     }
 
     @Override
-    public Result delete(Entity entity) {
-        String entityName = entity.getClass().getSimpleName();
+    public Result delete(DomainEntity domainEntity) {
+        String entityName = domainEntity.getClass().getSimpleName();
         result = new Result();
         IDAO dao = daos.get(entityName);
         Map<String, List<IStrategy>> rules = requirements.get(entityName);
         List<IStrategy> validations = rules.get(DELETE);
 
-        result = executeValidations(entity, validations);
+        result = executeValidations(domainEntity, validations);
 
         if(!result.hasErrors() && dao != null) {
-            if(!dao.delete(entity)) {
+            if(!dao.delete(domainEntity)) {
                 result.addErrorMsg("Error !!!");
             }
         }
@@ -197,21 +193,21 @@ public class CrudService implements ICrudService {
     }
 
     @Override
-    public Result insertForm(Entity entity) {
+    public Result insertForm(DomainEntity domainEntity) {
         result = new Result();
-        String entityName = entity.getClass().getSimpleName();
+        String entityName = domainEntity.getClass().getSimpleName();
 
         Map<String, List<IStrategy>> rules = requirements.get(entityName);
         List<IStrategy> validations = rules.get(INSERTFORM);
 
-        result = executeValidations(entity, validations);
+        result = executeValidations(domainEntity, validations);
 
         return result;
     }
 
     @Override
-    public Result editForm(Entity entity) {
-    	String entityName = entity.getClass().getSimpleName();
+    public Result editForm(DomainEntity domainEntity) {
+    	String entityName = domainEntity.getClass().getSimpleName();
     	String whereClause = "%s.id = %d";
     	IDAO dao = daos.get(entityName);
     	result = new Result();
@@ -219,19 +215,19 @@ public class CrudService implements ICrudService {
         Map<String, List<IStrategy>> rules = requirements.get(entityName);
         List<IStrategy> validations = rules.get(EDITFORM);
 
-        entity = dao.retrieve(String.format(whereClause, entityName.toLowerCase().charAt(0), entity.getId())).get(0);
-        result = executeValidations(entity, validations);
-        result.setEntity(entity);
+        domainEntity = dao.retrieve(String.format(whereClause, entityName.toLowerCase().charAt(0), domainEntity.getId())).get(0);
+        result = executeValidations(domainEntity, validations);
+        result.setEntity(domainEntity);
 
         return result;
     }
 
-    private Result executeValidations(Entity entity, List<IStrategy> validations) {
+    private Result executeValidations(DomainEntity domainEntity, List<IStrategy> validations) {
         for(IStrategy validation : validations) {
-            result = validation.process(entity, result);
+            result = validation.process(domainEntity, result);
 
             if(result.hasErrors()) {
-                result.setEntity(entity);
+                result.setEntity(domainEntity);
                 break;
             }
         }

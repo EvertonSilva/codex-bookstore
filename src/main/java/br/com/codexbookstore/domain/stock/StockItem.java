@@ -1,7 +1,7 @@
 package br.com.codexbookstore.domain.stock;
 
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 
-public class StockItem extends Entity {
+public class StockItem extends DomainEntity {
 
 }

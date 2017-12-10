@@ -1,12 +1,12 @@
 package br.com.codexbookstore.domain.sale;
 
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShopCart extends Entity {
+public class ShopCart extends DomainEntity {
     private List<OrderItem> orderItems = new ArrayList<>();
     private BigDecimal total = new BigDecimal(0);
 

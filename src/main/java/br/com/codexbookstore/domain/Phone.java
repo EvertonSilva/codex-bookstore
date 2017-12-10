@@ -1,6 +1,6 @@
 package br.com.codexbookstore.domain;
 
-public class Phone extends Entity {
+public class Phone extends DomainEntity {
     private String areaCode;
     private String number;
 

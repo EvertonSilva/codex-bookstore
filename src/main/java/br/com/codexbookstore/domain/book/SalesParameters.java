@@ -1,11 +1,11 @@
 package br.com.codexbookstore.domain.book;
 
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 
 /**
  * Created by everton on 24/09/17.
  */
-public class SalesParameters extends Entity {
+public class SalesParameters extends DomainEntity {
     private int minSaleLimit;
     private int periodicity;
     private String periodicityUnit;

@@ -1,7 +1,7 @@
 package br.com.codexbookstore.control.viewHelpers;
 
 import br.com.codexbookstore.control.Result;
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface IViewHelper {
 
-    Entity getEntity(HttpServletRequest request);
+    DomainEntity getEntity(HttpServletRequest request);
 
     void setView(Result result, HttpServletRequest request, HttpServletResponse response);
 }

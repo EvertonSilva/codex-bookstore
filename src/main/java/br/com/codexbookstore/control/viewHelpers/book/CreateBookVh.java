@@ -2,7 +2,7 @@ package br.com.codexbookstore.control.viewHelpers.book;
 
 import br.com.codexbookstore.control.Result;
 import br.com.codexbookstore.control.viewHelpers.IViewHelper;
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 import br.com.codexbookstore.domain.book.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +13,7 @@ import java.util.List;
 
 public class CreateBookVh implements IViewHelper {
     @Override
-    public Entity getEntity(HttpServletRequest request) {
+    public DomainEntity getEntity(HttpServletRequest request) {
         Book book = new Book();
         Author author;
         Publisher publisher;

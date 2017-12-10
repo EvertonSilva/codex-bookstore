@@ -1,7 +1,7 @@
 package br.com.codexbookstore.persistence.dao.book;
 
+import br.com.codexbookstore.domain.DomainEntity;
 import br.com.codexbookstore.domain.book.Category;
-import br.com.codexbookstore.domain.Entity;
 import br.com.codexbookstore.persistence.dao.AbstractDAO;
 
 import java.sql.PreparedStatement;
@@ -11,9 +11,9 @@ import java.util.List;
 
 public class CategoryDAO extends AbstractDAO {
     @Override
-    public boolean create(Entity entity) {
+    public boolean create(DomainEntity domainEntity) {
         openConnection();
-        Category category = (Category) entity;
+        Category category = (Category) domainEntity;
         String query = "INSERT INTO categories (name, description, cretead_at, updated_at) VALUES (?,?,?,?)";
 
         try {
@@ -34,8 +34,8 @@ public class CategoryDAO extends AbstractDAO {
     }
 
     @Override
-    public List<Entity> retrieve(String queryModifiers) {
-        List<Entity> categories = new ArrayList<>();
+    public List<DomainEntity> retrieve(String queryModifiers) {
+        List<DomainEntity> categories = new ArrayList<>();
         categories.add(new Category(1L, "Romance", "Lorem ipsum"));
         categories.add(new Category(2L, "Mistery & Suspense", "Lorem ipsum"));
         categories.add(new Category(3L, "Terror", "Lorem ipsum"));
@@ -44,12 +44,12 @@ public class CategoryDAO extends AbstractDAO {
     }
 
     @Override
-    public boolean update(Entity entity) {
+    public boolean update(DomainEntity domainEntity) {
         return false;
     }
 
     @Override
-    public boolean delete(Entity entity) {
+    public boolean delete(DomainEntity domainEntity) {
         return false;
     }
 }

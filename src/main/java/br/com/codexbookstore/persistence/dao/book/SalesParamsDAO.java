@@ -1,6 +1,6 @@
 package br.com.codexbookstore.persistence.dao.book;
 
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 import br.com.codexbookstore.domain.book.SalesParameters;
 import br.com.codexbookstore.persistence.dao.AbstractDAO;
 
@@ -18,14 +18,14 @@ public class SalesParamsDAO extends AbstractDAO {
     }
 
     @Override
-    public boolean create(Entity entity) {
+    public boolean create(DomainEntity domainEntity) {
         if(isTransational) {
             conn = super.getTransaction();
         } else {
             openConnection();
         }
 
-        SalesParameters saleParams = (SalesParameters) entity;
+        SalesParameters saleParams = (SalesParameters) domainEntity;
         String query = "INSERT INTO sales_parametrization (min_sale_limit, periodicity, periodicity_unit, created_at, updated_at)" +
                 "VALUES (?,?,?,?,?)";
 
@@ -42,7 +42,7 @@ public class SalesParamsDAO extends AbstractDAO {
             rs = stmt.getGeneratedKeys();
 
             if(rs.next()) {
-                entity.setId(rs.getLong(1));
+                domainEntity.setId(rs.getLong(1));
             }
 
             if(!isTransational) {
@@ -59,17 +59,17 @@ public class SalesParamsDAO extends AbstractDAO {
     }
 
     @Override
-    public List<Entity> retrieve(String queryModifiers) {
+    public List<DomainEntity> retrieve(String queryModifiers) {
         return null;
     }
 
     @Override
-    public boolean update(Entity entity) {
+    public boolean update(DomainEntity domainEntity) {
         return false;
     }
 
     @Override
-    public boolean delete(Entity entity) {
+    public boolean delete(DomainEntity domainEntity) {
         return false;
     }
 }

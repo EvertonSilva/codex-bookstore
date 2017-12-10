@@ -1,13 +1,12 @@
 package br.com.codexbookstore.persistence.dao;
 
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface IDAO {
-    boolean create(Entity entity);
-    List<Entity> retrieve(String queryModifiers);
-    boolean update(Entity entity);
-    boolean delete(Entity entity);
+    boolean create(DomainEntity domainEntity);
+    List<DomainEntity> retrieve(String queryModifiers);
+    boolean update(DomainEntity domainEntity);
+    boolean delete(DomainEntity domainEntity);
 }

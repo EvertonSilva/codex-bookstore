@@ -1,15 +1,13 @@
 package br.com.codexbookstore.domain.sale;
 
-import br.com.codexbookstore.domain.Entity;
-import br.com.codexbookstore.domain.User;
+import br.com.codexbookstore.domain.DomainEntity;
 import br.com.codexbookstore.domain.customer.Customer;
-import br.com.codexbookstore.domain.location.Address;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-public class Order extends Entity {
+public class Order extends DomainEntity {
     private Customer customer;
     private List<OrderItem> orderItems;
     private Date orderDate;

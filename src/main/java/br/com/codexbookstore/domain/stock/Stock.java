@@ -1,11 +1,11 @@
 package br.com.codexbookstore.domain.stock;
 
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 import br.com.codexbookstore.domain.book.Book;
 
 import java.math.BigDecimal;
 
-public class Stock extends Entity {
+public class Stock extends DomainEntity {
     private int quantity;
     private int blockQuantity;
     private BigDecimal purchasePrice;

@@ -1,8 +1,8 @@
 package br.com.codexbookstore.domain.book;
 
-import br.com.codexbookstore.domain.Entity;
+import br.com.codexbookstore.domain.DomainEntity;
 
-public class PriceGroup extends Entity {
+public class PriceGroup extends DomainEntity {
     private double markup;
 
     public PriceGroup(Long id) {
