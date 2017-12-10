@@ -1,28 +1,29 @@
 package br.com.codexbookstore.persistence.dao.customer;
 
 import br.com.codexbookstore.domain.DomainEntity;
+import br.com.codexbookstore.domain.customer.Customer;
+import br.com.codexbookstore.persistence.SessionBuilder;
 import br.com.codexbookstore.persistence.dao.AbstractDAO;
+import org.hibernate.Session;
 
 import java.util.List;
 
-public class CustomerDAO extends AbstractDAO {
-    @Override
-    public boolean create(DomainEntity domainEntity) {
-        return false;
+public class CustomerDAO {
+    private Session session;
+
+    public CustomerDAO() {
+        SessionBuilder sessionBuilder = new SessionBuilder();
+        session = sessionBuilder.getInstance();
     }
 
-    @Override
-    public List<DomainEntity> retrieve(String queryModifiers) {
-        return null;
+    @SuppressWarnings("unchecked")
+    public List<DomainEntity> findAll() {
+        return session.createCriteria(Customer.class).list();
     }
 
-    @Override
-    public boolean update(DomainEntity domainEntity) {
-        return false;
-    }
-
-    @Override
-    public boolean delete(DomainEntity domainEntity) {
-        return false;
+    public Customer findById(Long id) {
+        assert session.isConnected();
+        assert session.isOpen();
+        return session.get(Customer.class, 1L);
     }
 }

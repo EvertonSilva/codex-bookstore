@@ -1,5 +1,6 @@
 CREATE TABLE `credit_cards` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `enabled` BOOLEAN NOT NULL DEFAULT FALSE,
   `card_number` varchar(50) NOT NULL,
   `card_holder` varchar(50) NOT NULL,
   `security_code` varchar(3) NOT NULL,

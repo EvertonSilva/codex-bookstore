@@ -1,6 +1,7 @@
 package br.com.codexbookstore.domain;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @MappedSuperclass
 public class DomainEntity {
@@ -10,6 +11,14 @@ public class DomainEntity {
 
     @Column
     private boolean enabled;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at")
+    private Date createdAt;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updated_at")
+    private Date updatedAt;
 
     public Long getId() {
         return id;

@@ -40,9 +40,9 @@ public class CreateCustomerVh implements IViewHelper {
             customer.setGender(gender);
 
             // contact info
-            phone.setAreaCode(request.getParameter("area-code"));
-            phone.setNumber(request.getParameter("phone-number"));
-            customer.setPhone(phone);
+//            phone.setAreaCode(request.getParameter("area-code"));
+//            phone.setNumber(request.getParameter("phone-number"));
+//            customer.setPhone(phone);
 
             // address
             address.setPostalCode(request.getParameter("postal-code"));
@@ -58,8 +58,6 @@ public class CreateCustomerVh implements IViewHelper {
             cardExpiration.append("/");
             cardExpiration.append(request.getParameter("expire-year"));
             creditCard.setExpirationDate(cardExpiration.toString());
-
-            customer.addCreditCard(creditCard);
 
             // authentication
             String passwd = SecurePassword.hashPassword(request.getParameter("password"));

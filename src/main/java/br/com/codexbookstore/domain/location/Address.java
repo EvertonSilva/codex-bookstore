@@ -1,27 +1,52 @@
 package br.com.codexbookstore.domain.location;
 
 import br.com.codexbookstore.domain.DomainEntity;
+import br.com.codexbookstore.domain.customer.Customer;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "addresses")
 public class Address extends DomainEntity {
-    private String postalCode;
-    private String district;
-    private String number;
-    private Country country;
-    private State state;
-    private City city;
+    @Column
     private String alias;
-    private AddressType addressType;
-    private PublicPlace publicPlace;
 
-    // TODO: add another class HomeType
-    // private HomeType homeType
+    @Column
+    private String district;
 
-    public String getPostalCode() {
-        return postalCode;
+    @Column
+    private String number;
+
+    @Column(name = "postal_code")
+    private String postalCode;
+
+    @Column(name = "public_place_name")
+    private String publicPlaceName;
+
+    @Column(name = "public_place_type")
+    private String publicPlaceType;
+
+    @Column
+    @ManyToMany(mappedBy = "addresses", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    private List<Customer> customers;
+
+    @Column
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinTable(name = "addresses_to_address_types",
+            joinColumns = {@JoinColumn(name = "address_id")},
+            inverseJoinColumns = {@JoinColumn(name = "address_type_id")})
+    private List<AddressType> addressTypes;
+
+    public Address() {
     }
 
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 
     public String getDistrict() {
@@ -40,51 +65,27 @@ public class Address extends DomainEntity {
         this.number = number;
     }
 
-    public Country getCountry() {
-        return country;
+    public String getPostalCode() {
+        return postalCode;
     }
 
-    public void setCountry(Country country) {
-        this.country = country;
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
-    public State getState() {
-        return state;
+    public String getPublicPlaceName() {
+        return publicPlaceName;
     }
 
-    public void setState(State state) {
-        this.state = state;
+    public void setPublicPlaceName(String publicPlaceName) {
+        this.publicPlaceName = publicPlaceName;
     }
 
-    public City getCity() {
-        return city;
+    public String getPublicPlaceType() {
+        return publicPlaceType;
     }
 
-    public void setCity(City city) {
-        this.city = city;
-    }
-
-    public String getAlias() {
-        return alias;
-    }
-
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
-
-    public AddressType getAddressType() {
-        return addressType;
-    }
-
-    public void setAddressType(AddressType addressType) {
-        this.addressType = addressType;
-    }
-
-    public PublicPlace getPublicPlace() {
-        return publicPlace;
-    }
-
-    public void setPublicPlace(PublicPlace publicPlace) {
-        this.publicPlace = publicPlace;
+    public void setPublicPlaceType(String publicPlaceType) {
+        this.publicPlaceType = publicPlaceType;
     }
 }

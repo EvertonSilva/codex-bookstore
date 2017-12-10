@@ -1,34 +1,43 @@
 package br.com.codexbookstore.domain.customer;
 
 import br.com.codexbookstore.domain.DomainEntity;
-import br.com.codexbookstore.domain.Phone;
 import br.com.codexbookstore.domain.User;
 import br.com.codexbookstore.domain.location.Address;
 
-import java.util.ArrayList;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+@Entity
+@Table(name = "customers")
 public class Customer extends DomainEntity {
+    @Column(name = "identification_doc")
     private String identificationDoc;
+
+    @Column
     private String name;
+
+    @Temporal(TemporalType.DATE)
+    @Column
     private Date dob;
-    private Phone phone;
+
+    @Column
+    private String phone;
+
+    @Column
     private Gender gender;
-    private List<CreditCard> creditCardList = new ArrayList<>();
-    private List<Address> deliveryAddressList = new ArrayList<>();
-    private Address chargeAddress;
+
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @JoinTable(name = "customers_addresses",
+            joinColumns = {@JoinColumn(name = "customer_id")},
+            inverseJoinColumns = {@JoinColumn(name = "address_id")})
+    private List<Address> addresses;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Customer() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getIdentificationDoc() {
@@ -39,12 +48,28 @@ public class Customer extends DomainEntity {
         this.identificationDoc = identificationDoc;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Date getDob() {
         return dob;
     }
 
     public void setDob(Date dob) {
         this.dob = dob;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Gender getGender() {
@@ -55,28 +80,12 @@ public class Customer extends DomainEntity {
         this.gender = gender;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public List<Address> getAddresses() {
+        return addresses;
     }
 
-    public void setPhone(Phone phone) {
-        this.phone = phone;
-    }
-
-    public Address getChargeAddress() {
-        return chargeAddress;
-    }
-
-    public void setChargeAddress(Address chargeAddress) {
-        this.chargeAddress = chargeAddress;
-    }
-
-    public void addDeliveryAddress(Address address) {
-        this.deliveryAddressList.add(address);
-    }
-
-    public void addCreditCard(CreditCard card) {
-        this.creditCardList.add(card);
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
     }
 
     public User getUser() {

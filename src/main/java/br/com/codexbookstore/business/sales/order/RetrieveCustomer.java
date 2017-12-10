@@ -11,12 +11,10 @@ public class RetrieveCustomer implements IStrategy {
 
     @Override
     public Result process(DomainEntity domainEntity, Result result) {
-        CustomerDAO dao = new CustomerDAO();
         Order order = (Order) domainEntity;
-        Long customerId = order.getCustomer().getId();
-        Customer customer = (Customer) dao.retrieve("customer.id = ".concat(customerId.toString())).get(0);
-
-        result.setEntity(customer);
+        CustomerDAO dao = new CustomerDAO();
+        Long id = order.getCustomer().getId();
+        order.setCustomer(dao.findById(id));
         return result;
     }
 }

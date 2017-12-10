@@ -2,7 +2,7 @@
     <session-factory>
         <!-- Database connection setting -->
         <property name="connection.driver_class">org.h2.Driver</property>
-        <property name="connection.url">jdbc:h2:file:./src/main/resources/data/codex</property>
+        <property name="connection.url">jdbc:h2:./src/main/resources/data/codex;MODE=MySQL;AUTO_SERVER=TRUE</property>
         <property name="hibernate.connection.username">sa</property>
         <property name="hibernate.connection.password"></property>
 
@@ -16,7 +16,10 @@
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
 
-        <!-- Names the annotadomainEntitytity classes -->
+        <!-- Names the annotadomainEntity classes -->
         <mapping class="br.com.codexbookstore.domain.User" />
+        <mapping class="br.com.codexbookstore.domain.customer.Customer" />
+        <mapping class="br.com.codexbookstore.domain.location.Address" />
+        <mapping class="br.com.codexbookstore.domain.location.AddressType" />
     </session-factory>
 </hibernate-configuration>

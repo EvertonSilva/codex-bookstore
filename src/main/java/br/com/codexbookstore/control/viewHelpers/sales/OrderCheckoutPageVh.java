@@ -17,15 +17,8 @@ public class OrderCheckoutPageVh implements IViewHelper {
     public DomainEntity getEntity(HttpServletRequest request) {
         HttpSession session = request.getSession();
         Order order = new Order();
-        Long customerId = (Long) session.getAttribute("customerId");
         Customer customer = new Customer();
-
-        // TODO: remove ths conditional when login has done
-        if(customerId != null) {
-            customer.setId(customerId);
-        } else {
-            customer.setId(1L); // just while login has be disabled
-        }
+        customer.setId(1L);
 
         order.setCustomer(customer);
 
