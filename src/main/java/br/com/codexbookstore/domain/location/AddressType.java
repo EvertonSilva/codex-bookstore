@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Entity
-@Table(name = "address_type")
+@Table(name = "address_types")
 public class AddressType extends DomainEntity {
     @Column
     private String name;

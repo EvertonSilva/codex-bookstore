@@ -1,13 +1,13 @@
 <hibernate-configuration>
     <session-factory>
         <!-- Database connection setting -->
-        <property name="connection.driver_class">org.h2.Driver</property>
-        <property name="connection.url">jdbc:h2:./src/main/resources/data/codex;MODE=MySQL;AUTO_SERVER=TRUE</property>
-        <property name="hibernate.connection.username">sa</property>
-        <property name="hibernate.connection.password"></property>
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/codexbooks</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">senha123</property>
 
         <!-- SQL dialect -->
-        <property name="dialect">org.hibernate.dialect.H2Dialect</property>
+        <property name="dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
 
         <!-- Update the database schema on startup -->
         <property name="hbm2ddl.auto">update</property>
@@ -16,10 +16,18 @@
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
 
-        <!-- Names the annotadomainEntity classes -->
+        <!-- Entity classes -->
         <mapping class="br.com.codexbookstore.domain.User" />
+        <mapping class="br.com.codexbookstore.domain.book.Author"/>
+        <mapping class="br.com.codexbookstore.domain.book.PriceGroup"/>
+        <mapping class="br.com.codexbookstore.domain.book.SalesParameters"/>
+        <mapping class="br.com.codexbookstore.domain.book.Publisher"/>
+        <mapping class="br.com.codexbookstore.domain.book.Book"/>
+        <mapping class="br.com.codexbookstore.domain.book.Category"/>
+        <mapping class="br.com.codexbookstore.domain.book.Dimensions"/>
         <mapping class="br.com.codexbookstore.domain.customer.Customer" />
         <mapping class="br.com.codexbookstore.domain.location.Address" />
         <mapping class="br.com.codexbookstore.domain.location.AddressType" />
+        <mapping class="br.com.codexbookstore.domain.stock.Stock" />
     </session-factory>
 </hibernate-configuration>

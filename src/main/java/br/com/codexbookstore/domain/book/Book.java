@@ -3,29 +3,66 @@ package br.com.codexbookstore.domain.book;
 import br.com.codexbookstore.domain.DomainEntity;
 import br.com.codexbookstore.domain.stock.Stock;
 
-import java.util.ArrayList;
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table(name = "books")
 public class Book extends DomainEntity {
+    @Column
     private String title;
+
+    @Column
     private String edition;
+
+    @Column
     private String synopsis;
+
+    @Column
     private String isbn;
+
+    @Column
     private String barcode;
+
+    @Column(name = "publishyear")
     private String publishYear;
+
+    @Column(name = "numberofpages")
     private int numberOfPages;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "price_group_id")
     private PriceGroup priceGroup;
+
+    @Transient
     private Dimensions dimensions;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "author_id")
     private Author author;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "publisher_id")
     private Publisher publisher;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "sales_parameters_id")
     private SalesParameters salesParameters;
+
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinTable(name = "books_categories",
+            joinColumns = {@JoinColumn(name = "book_id")},
+            inverseJoinColumns = {@JoinColumn(name = "category_id")})
     private List<Category> categories;
+
+    @Transient
     private ChangeStatus changeStatus;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "book")
     private Stock stock;
 
-    public Book() {
-        categories = new ArrayList<>();
-    }
+    public Book() { }
+
     public String getTitle() {
         return title;
     }
@@ -138,6 +175,7 @@ public class Book extends DomainEntity {
         categories.add(category);
     }
 
+
     public ChangeStatus getChangeStatus() {
         return changeStatus;
     }
@@ -145,6 +183,7 @@ public class Book extends DomainEntity {
     public void setChangeStatus(ChangeStatus changeStatus) {
         this.changeStatus = changeStatus;
     }
+
 
     public String getStatus() {
         return isEnabled() ? "enabled" : "disabled";

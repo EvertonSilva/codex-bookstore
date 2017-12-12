@@ -18,35 +18,36 @@ public class StockDAO extends AbstractDAO {
 
     @Override
     public List<DomainEntity> retrieve(String queryModifiers) {
-        openConnection();
-
-        List<DomainEntity> stockList = new ArrayList<>();
-        StringBuilder query = new StringBuilder();
-
-        query.append("SELECT * FROM stocks ");
-        query.append("WHERE ");
-        query.append(queryModifiers);
-
-        try {
-            ResultSet rs = null;
-            PreparedStatement stmt = conn.prepareStatement(query.toString());
-            rs = stmt.executeQuery();
-
-            while(rs.next()) {
-                Stock stock = new Stock();
-
-                stock.setId(rs.getLong("id"));
-                stock.setQuantity(rs.getInt("quantity"));
-                stock.setPurchasePrice(rs.getBigDecimal("purchase_price"));
-
-                stockList.add(stock);
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        return stockList;
+//        openConnection();
+//
+//        List<DomainEntity> stockList = new ArrayList<>();
+//        StringBuilder query = new StringBuilder();
+//
+//        query.append("SELECT * FROM stocks ");
+//        query.append("WHERE ");
+//        query.append(queryModifiers);
+//
+//        try {
+//            ResultSet rs = null;
+//            PreparedStatement stmt = conn.prepareStatement(query.toString());
+//            rs = stmt.executeQuery();
+//
+//            while(rs.next()) {
+//                Stock stock = new Stock();
+//
+//                stock.setId(rs.getLong("id"));
+//                stock.setQuantity(rs.getInt("quantity"));
+//                stock.setPurchasePrice(rs.getBigDecimal("purchase_price"));
+//
+//                stockList.add(stock);
+//            }
+//
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        return stockList;
+        return null;
     }
 
     @Override

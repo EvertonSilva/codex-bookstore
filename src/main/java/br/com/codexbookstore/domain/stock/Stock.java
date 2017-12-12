@@ -3,13 +3,24 @@ package br.com.codexbookstore.domain.stock;
 import br.com.codexbookstore.domain.DomainEntity;
 import br.com.codexbookstore.domain.book.Book;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 
+@Entity
+@Table(name = "stocks")
 public class Stock extends DomainEntity {
-    private int quantity;
-    private int blockQuantity;
-    private BigDecimal purchasePrice;
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "book_id")
     private Book book;
+
+    @Column
+    private int quantity;
+
+    @Transient
+    private int blockQuantity;
+
+    @Column(name = "purchase_price")
+    private BigDecimal purchasePrice;
 
     public Stock() {
         blockQuantity = 0;
@@ -32,7 +43,7 @@ public class Stock extends DomainEntity {
     }
 
     public BigDecimal getSalePrice() {
-        double markup = book.getPriceGroup().getMarkup();
+        double markup = 1 + (book.getPriceGroup().getMarkup() / 100);
         return purchasePrice.multiply(BigDecimal.valueOf(markup));
     }
 

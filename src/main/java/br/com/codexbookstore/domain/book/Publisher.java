@@ -2,9 +2,11 @@ package br.com.codexbookstore.domain.book;
 
 import br.com.codexbookstore.domain.DomainEntity;
 
-/**
- * Created by everton on 24/09/17.
- */
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "publishers")
 public class Publisher extends DomainEntity {
     private String name;
 

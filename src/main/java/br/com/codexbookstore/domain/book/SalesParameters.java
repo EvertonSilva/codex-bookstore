@@ -2,12 +2,21 @@ package br.com.codexbookstore.domain.book;
 
 import br.com.codexbookstore.domain.DomainEntity;
 
-/**
- * Created by everton on 24/09/17.
- */
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "sales_parametrization")
 public class SalesParameters extends DomainEntity {
+
+    @Column(name = "min_sale_limit")
     private int minSaleLimit;
+
+    @Column
     private int periodicity;
+
+    @Column(name = "periodicity_unit")
     private String periodicityUnit;
 
     public int getMinSaleLimit() {

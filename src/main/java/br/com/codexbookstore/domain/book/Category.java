@@ -1,8 +1,18 @@
 package br.com.codexbookstore.domain.book;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import java.util.Collection;
+
+@Entity
+@Table(name = "categories")
 public class Category extends AbstractCategory {
     private String name;
     private String description;
+
+    @ManyToMany(mappedBy = "categories")
+    private Collection<Book> books;
 
     public Category() {
     }
@@ -50,5 +60,13 @@ public class Category extends AbstractCategory {
     @Override
     public int hashCode() {
         return name != null ? name.hashCode() : 0;
+    }
+
+    public Collection<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Collection<Book> books) {
+        this.books = books;
     }
 }
