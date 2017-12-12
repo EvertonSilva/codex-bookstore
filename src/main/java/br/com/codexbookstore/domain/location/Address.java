@@ -31,12 +31,9 @@ public class Address extends DomainEntity {
     @ManyToMany(mappedBy = "addresses", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     private List<Customer> customers;
 
-    @Column
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-    @JoinTable(name = "addresses_to_address_types",
-            joinColumns = {@JoinColumn(name = "address_id")},
-            inverseJoinColumns = {@JoinColumn(name = "address_type_id")})
-    private List<AddressType> addressTypes;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id")
+    private AddressType addressTypes;
 
     public Address() {
     }

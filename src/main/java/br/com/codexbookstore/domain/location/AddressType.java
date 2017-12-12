@@ -14,10 +14,6 @@ public class AddressType extends DomainEntity {
     @Column
     private String name;
 
-    @Column
-    @ManyToMany(mappedBy = "addressTypes")
-    private List<Address> addressList;
-
     public String getName() {
         return name;
     }

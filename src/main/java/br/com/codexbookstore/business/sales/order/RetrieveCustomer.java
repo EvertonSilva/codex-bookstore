@@ -15,6 +15,9 @@ public class RetrieveCustomer implements IStrategy {
         CustomerDAO dao = new CustomerDAO();
         Long id = order.getCustomer().getId();
         order.setCustomer(dao.findById(id));
+
+        result.setEntity(order);
+
         return result;
     }
 }

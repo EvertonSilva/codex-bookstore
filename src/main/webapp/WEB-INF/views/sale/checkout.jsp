@@ -39,14 +39,19 @@
                     <div class="row">
                         <div class="column">
                             <select name="ship-address" id="ship-address">
-                                <option value="1">Home</option>
-                                <option value="2" selected="selected">Work</option>
-                                <option value="3">Parents house</option>
+                                <c:forEach var="address" items="${customerAddresses}">
+                                    <option value="${address.id}">
+                                        <c:choose>
+                                            <c:when test="${address.alias != null}">${address.alias}</c:when>
+                                            <c:otherwise>${address.publicPlaceName}</c:otherwise>
+                                        </c:choose>
+                                    </option>
+                                </c:forEach>
                             </select>
-                            <div class="current-address">
-                                <h4>Current delivery address:</h4>
-                                <p>2400 Bayshore Pkwy, Mountain View <br> CA 94043, EUA</p>
-                            </div>
+                            <%--<div class="current-address">--%>
+                                <%--<h4>Current delivery address:</h4>--%>
+                                <%--<p>2400 Bayshore Pkwy, Mountain View <br> CA 94043, EUA</p>--%>
+                            <%--</div>--%>
                         </div>
                         <button class="button-outline float-right">New Address</button>
                     </div>
