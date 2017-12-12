@@ -2,6 +2,9 @@ fieldset {
     border: 1px solid #ccc;
     padding: 1% 2%;
 }
+select[multiple] {
+    height: auto;
+}
 .clear {
     clear: both;
 }

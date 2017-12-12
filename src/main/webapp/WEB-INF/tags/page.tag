@@ -55,5 +55,13 @@
                 <jsp:doBody/>
             </div>
         </div>
+        <script type="text/javascript">
+            (function () {
+                var btn = document.querySelector("#newBook");
+                btn.onclick = function () {
+                    window.location = "http://localhost:8080/codex-bookstore/books/new";
+                }
+            }());
+        </script>
     </body>
 </html>

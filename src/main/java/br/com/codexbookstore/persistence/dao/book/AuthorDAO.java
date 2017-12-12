@@ -2,34 +2,35 @@ package br.com.codexbookstore.persistence.dao.book;
 
 import br.com.codexbookstore.domain.DomainEntity;
 import br.com.codexbookstore.domain.book.Author;
-import br.com.codexbookstore.persistence.dao.IDAO;
+import br.com.codexbookstore.persistence.dao.AbstractDAO;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class AuthorDAO implements IDAO {
+public class AuthorDAO extends AbstractDAO {
+
     @Override
-    public boolean create(DomainEntity domainEntity) {
+    public Long save(DomainEntity entity) {
+        return null;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<DomainEntity> findAll() {
+        return session.createCriteria(Author.class).list();
+    }
+
+    @Override
+    public DomainEntity findById(Long id) {
+        return null;
+    }
+
+    @Override
+    public boolean update(DomainEntity entity) {
         return false;
     }
 
     @Override
-    public List<DomainEntity> retrieve(String queryModifiers) {
-        List<DomainEntity> authors = new ArrayList<>();
-        authors.add(new Author(1L, "DOSTOIEVKSI, Fiodor"));
-        authors.add(new Author(2L, "GOGÓL, Nikolai"));
-        authors.add(new Author(3L, "TOLSTÓI, Liev"));
-
-        return authors;
-    }
-
-    @Override
-    public boolean update(DomainEntity domainEntity) {
-        return false;
-    }
-
-    @Override
-    public boolean delete(DomainEntity domainEntity) {
+    public boolean delete(DomainEntity entity) {
         return false;
     }
 }

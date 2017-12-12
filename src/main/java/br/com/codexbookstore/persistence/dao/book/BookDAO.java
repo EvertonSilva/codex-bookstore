@@ -3,44 +3,68 @@ package br.com.codexbookstore.persistence.dao.book;
 
 import br.com.codexbookstore.domain.DomainEntity;
 import br.com.codexbookstore.domain.book.Book;
-import br.com.codexbookstore.persistence.SessionBuilder;
-import br.com.codexbookstore.persistence.dao.IDAO;
-import org.hibernate.Session;
+import br.com.codexbookstore.persistence.dao.AbstractDAO;
+import com.sun.java.browser.plugin2.DOM;
 
+import java.sql.SQLException;
 import java.util.List;
 
-public class BookDAO implements IDAO {
-    private Session session;
+public class BookDAO extends AbstractDAO {
+
 
     public BookDAO() {
-        SessionBuilder sessionBuilder = new SessionBuilder();
-        session = sessionBuilder.getInstance();
     }
 
     @Override
-    public boolean create(DomainEntity domainEntity) {
-        Long id = (Long) session.save(castBook(domainEntity));
-        return id != null; // id == null -> save fails!
+    public Long save(DomainEntity entity) {
+        Book book = (Book) entity;
+        Long id = null;
+        try {
+            session.getTransaction().begin();
+            id = (Long) session.save(book);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+        }
+        return id;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<DomainEntity> retrieve(String queryModifiers) {
-        List<DomainEntity> books = session.createCriteria(Book.class).list();
-        return books;
+    public List<DomainEntity> findAll() {
+        return session.createCriteria(Book.class).list();
     }
 
     @Override
-    public boolean update(DomainEntity domainEntity) {
-        return false;
+    public DomainEntity findById(Long id) {
+        return session.get(Book.class, id);
     }
 
     @Override
-    public boolean delete(DomainEntity domainEntity) {
-        return false;
+    public boolean update(DomainEntity entity) {
+        Book book = (Book) entity;
+        try {
+            session.getTransaction().begin();
+            session.update(book);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
-    private Book castBook(DomainEntity entity) {
-        return (Book) entity;
+    @Override
+    public boolean delete(DomainEntity entity) {
+        Book book = (Book) entity;
+        try {
+            session.getTransaction().begin();
+            session.delete(book);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }

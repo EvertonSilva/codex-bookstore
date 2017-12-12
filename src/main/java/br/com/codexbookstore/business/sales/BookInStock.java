@@ -19,7 +19,7 @@ public class BookInStock implements IStrategy {
         Long bookId = item.getBook().getId();
 
         // retrieve book from database
-        Book book = (Book) bookDAO.retrieve("b.id = ".concat(String.valueOf(bookId))).get(0);
+        Book book = (Book) bookDAO.findById(bookId);
 
         // get book stock
         bookStock = book.getStock();

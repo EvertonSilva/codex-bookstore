@@ -15,7 +15,7 @@ public class RetrieveBookCategories implements IStrategy {
     @Override
     public Result process(DomainEntity domainEntity, Result result) {
         IDAO dao = new CategoryDAO();
-        List<DomainEntity> categories = dao.retrieve("");
+        List<DomainEntity> categories = dao.findAll();
         result.putEntities(categories);
         return result;
     }

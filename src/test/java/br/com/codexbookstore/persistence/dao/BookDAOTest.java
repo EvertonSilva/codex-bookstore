@@ -30,19 +30,19 @@ public class BookDAOTest {
     @Test
     public void testValidInsert() throws Exception {
         validBook();
-        assertTrue(dao.create(book));
+        assertTrue(dao.save(book) != null);
     }
 
     @Test
     public void testInvalidInsert() throws Exception {
         invalidBook();
-        assertFalse(dao.create(book));
+        assertFalse(dao.save(book) == null);
     }
 
     @Test
     public void testRetrieveBooks() throws Exception {
         List<DomainEntity> books;
-        books = dao.retrieve("1 = 1");
+        books = dao.findAll();
 
         assertNotNull(books);
         assertTrue(books.size() >= 0);
@@ -51,7 +51,7 @@ public class BookDAOTest {
     @Test
     public void testUpdateBook() throws Exception {
         // get the first book at database
-        Book book = (Book) dao.retrieve("").get(0);
+        Book book = (Book) dao.findById(1L);
 
         // change some data
         book.setTitle("White Nights");
@@ -60,7 +60,7 @@ public class BookDAOTest {
         dao.update(book);
 
         // retrieve data after update
-        String newTitle = ((Book) dao.retrieve("").get(0)).getTitle();
+        String newTitle = ((Book) dao.findById(1L)).getTitle();
 
         assertEquals("White Nights", newTitle);
     }

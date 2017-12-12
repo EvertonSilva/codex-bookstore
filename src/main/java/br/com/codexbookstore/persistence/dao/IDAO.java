@@ -5,8 +5,11 @@ import br.com.codexbookstore.domain.DomainEntity;
 import java.util.List;
 
 public interface IDAO {
-    boolean create(DomainEntity domainEntity);
-    List<DomainEntity> retrieve(String queryModifiers);
-    boolean update(DomainEntity domainEntity);
-    boolean delete(DomainEntity domainEntity);
+
+    Long save(DomainEntity entity);
+    List<DomainEntity> findAll();
+    DomainEntity findById(Long id);
+    boolean update(DomainEntity entity);
+    boolean delete(DomainEntity entity);
+
 }

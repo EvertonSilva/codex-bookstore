@@ -125,7 +125,8 @@ public class CrudService implements ICrudService {
         result = executeValidations(domainEntity, validations);
 
         if(!result.hasErrors() && dao != null) { // break any validation?
-            if(!dao.create(domainEntity)) { // persistence errors?
+            Long id = dao.save(domainEntity);
+            if(null == id) { // persistence errors?
                 result.addErrorMsg("Error!!!");
             }
         }
@@ -145,7 +146,7 @@ public class CrudService implements ICrudService {
 
         if(!result.hasErrors() && dao != null) {
             try {
-                result.putEntities(dao.retrieve("1 = 1"));
+                result.putEntities(dao.findAll());
             } catch(RuntimeException e) {
                 result.addErrorMsg(e.getMessage());
             }
@@ -208,14 +209,15 @@ public class CrudService implements ICrudService {
     @Override
     public Result editForm(DomainEntity domainEntity) {
     	String entityName = domainEntity.getClass().getSimpleName();
-    	String whereClause = "%s.id = %d";
+    	Long id = domainEntity.getId();
     	IDAO dao = daos.get(entityName);
     	result = new Result();
         
         Map<String, List<IStrategy>> rules = requirements.get(entityName);
         List<IStrategy> validations = rules.get(EDITFORM);
 
-        domainEntity = dao.retrieve(String.format(whereClause, entityName.toLowerCase().charAt(0), domainEntity.getId())).get(0);
+        domainEntity = dao.findById(id);
+
         result = executeValidations(domainEntity, validations);
         result.setEntity(domainEntity);
 
