@@ -61,12 +61,15 @@
                     <form action="#">
                         <fieldset>
                             <legend>Credit Cards</legend>
-                            <label for="credit-card">Your cards</label>
-                            <select name="credit-card" id="credit-card">
-                                <option value="1">Card 1</option>
-                                <option value="2">Card 2</option>
-                                <option value="3">Card 3</option>
-                            </select>
+                            <h5>Your cards</h5>
+                            <p>Select one or more credit cards to purchase</p>
+                            <c:forEach var="card" items="${customerCards}">
+                                <label for="card-${card.id}">
+                                    <input type="checkbox" name="credit-card"
+                                           id="card-${card.id}" value="${card.id}">
+                                        ${card.company.name}
+                                </label>
+                            </c:forEach>
                         </fieldset>
 
                         <fieldset>
@@ -74,9 +77,10 @@
 
                             <label for="exchange-voucher">Exchange vouchers</label>
                             <select name="exchange-voucher" id="exchange-voucher">
-                                <option value="1">Coupon 1 - $10,00</option>
-                                <option value="2">Coupon 2 - $20,00</option>
-                                <option value="3">Coupon 3 - $15,00</option>
+                                <option value="">none</option>
+                                <%--<option value="1">Coupon 1 - $10,00</option>--%>
+                                <%--<option value="2">Coupon 2 - $20,00</option>--%>
+                                <%--<option value="3">Coupon 3 - $15,00</option>--%>
                             </select>
                         </fieldset>
 

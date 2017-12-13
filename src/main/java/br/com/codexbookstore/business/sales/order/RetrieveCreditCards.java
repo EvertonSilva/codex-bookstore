@@ -7,6 +7,7 @@ import br.com.codexbookstore.domain.DomainEntity;
 public class RetrieveCreditCards implements IStrategy {
     @Override
     public Result process(DomainEntity domainEntity, Result result) {
+
         return result;
     }
 }
