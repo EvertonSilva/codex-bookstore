@@ -1,11 +1,24 @@
 package br.com.codexbookstore.domain.customer;
 
-public class CreditCard {
+import br.com.codexbookstore.domain.DomainEntity;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "credit_cards")
+public class CreditCard extends DomainEntity {
     private String cardNumber;
     private String namePrinted;
     private String securityCode;
-    private String company;
     private String expirationDate;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
+    private CreditCardCompany company;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
     public CreditCard() {
     }
@@ -40,5 +53,13 @@ public class CreditCard {
 
     public void setExpirationDate(String expirationDate) {
         this.expirationDate = expirationDate;
+    }
+
+    public CreditCardCompany getCompany() {
+        return company;
+    }
+
+    public void setCompany(CreditCardCompany company) {
+        this.company = company;
     }
 }

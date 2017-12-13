@@ -33,6 +33,9 @@ public class Customer extends DomainEntity {
             inverseJoinColumns = {@JoinColumn(name = "address_id")})
     private List<Address> addresses;
 
+    @OneToMany(mappedBy = "customer", targetEntity = CreditCard.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<CreditCard> cards;
+
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
@@ -94,5 +97,9 @@ public class Customer extends DomainEntity {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<CreditCard> getCards() {
+        return cards;
     }
 }

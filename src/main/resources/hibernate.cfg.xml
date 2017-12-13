@@ -10,7 +10,7 @@
         <property name="dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
 
         <!-- Update the database schema on startup -->
-        <property name="hbm2ddl.auto">update</property>
+        <property name="hbm2ddl.auto">create-drop</property>
 
         <!-- Show the queries prepared by Hibernate -->
         <property name="show_sql">true</property>
@@ -26,6 +26,8 @@
         <mapping class="br.com.codexbookstore.domain.book.Category"/>
         <mapping class="br.com.codexbookstore.domain.book.Dimensions"/>
         <mapping class="br.com.codexbookstore.domain.customer.Customer" />
+        <mapping class="br.com.codexbookstore.domain.customer.CreditCard" />
+        <mapping class="br.com.codexbookstore.domain.customer.CreditCardCompany" />
         <mapping class="br.com.codexbookstore.domain.location.Address" />
         <mapping class="br.com.codexbookstore.domain.location.AddressType" />
         <mapping class="br.com.codexbookstore.domain.stock.Stock" />

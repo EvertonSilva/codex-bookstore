@@ -34,7 +34,7 @@ public class Book extends DomainEntity {
     @JoinColumn(name = "price_group_id")
     private PriceGroup priceGroup;
 
-    @Transient
+    @Embedded
     private Dimensions dimensions;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)

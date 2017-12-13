@@ -2,12 +2,18 @@ package br.com.codexbookstore.domain.book;
 
 import br.com.codexbookstore.domain.DomainEntity;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
-public class Dimensions extends DomainEntity {
-
+@Embeddable
+public class Dimensions {
+    @Column
     private double depth;
+    @Column
     private double height;
+    @Column
     private double weight;
+    @Column
     private double width;
 
     public Dimensions() {
